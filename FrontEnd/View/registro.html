@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
+<link rel="stylesheet" href="/FrontEnd/View/css/style.css">
+  <title>Registro</title>
+</head>
+
+<body class="auth-page">
+  <div class="auth-box">
+    <h1 class="auth-title">Crear Cuenta</h1>
+    <p class="auth-subtitle">Unete a la familia culinaria</p>
+
+    <form id="registerForm" class="auth-form">
+      <div class="form-field">
+        <label for="registerName">Nombre completo</label>
+        <input id="registerName" type="text" placeholder="Tu nombre" minlength="2" maxlength="120" required>
+      </div>
+
+      <div class="form-field">
+        <label for="registerEmail">Correo</label>
+        <input id="registerEmail" type="email" placeholder="correo@ejemplo.com" required>
+      </div>
+
+      <div class="form-field">
+        <label for="registerPassword">Contrasena</label>
+        <input id="registerPassword" type="password" placeholder="********" minlength="8" required>
+      </div>
+
+      <p id="registerMessage" style="display:none; margin: 8px 0;"></p>
+
+      <button class="btn" style="width:100%" type="submit">Registrarme</button>
+
+      <div class="auth-alt">
+        Ya tienes cuenta?
+        <a href="Login.html">Inicia sesion</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="/FrontEnd/View/JS/auth.js" defer></script>
+</body>
+</html>
+
+
+
+

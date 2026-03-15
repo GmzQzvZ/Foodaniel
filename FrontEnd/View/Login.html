@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
+<link rel="stylesheet" href="/FrontEnd/View/css/style.css">
+  <title>Login</title>
+</head>
+
+<body class="auth-page">
+  <div class="auth-box">
+    <h1 class="auth-title">Iniciar Sesion</h1>
+    <p class="auth-subtitle">Bienvenido de nuevo</p>
+
+    <form id="loginForm" class="auth-form">
+      <div class="form-field">
+        <label for="loginEmail">Correo</label>
+        <input id="loginEmail" type="email" placeholder="tu@correo.com" required>
+      </div>
+
+      <div class="form-field">
+        <label for="loginPassword">Contrasena</label>
+        <input id="loginPassword" type="password" placeholder="********" minlength="8" required>
+      </div>
+
+      <p id="loginMessage" style="display:none; margin: 8px 0;"></p>
+
+      <button class="btn" style="width:100%" type="submit">Ingresar</button>
+
+      <div class="auth-alt">
+        <a href="recovery.html">Olvidaste tu contrasena?</a><br>
+        No tienes cuenta?
+        <a href="registro.html">Registrate aqui</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="/FrontEnd/View/JS/auth.js" defer></script>
+</body>
+</html>
+
+
+
+

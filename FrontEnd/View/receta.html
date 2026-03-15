@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Foodaniell - Detalle de receta</title>
+  <meta name="description" content="Detalle de receta Foodaniell." />
+  <link rel="stylesheet" href="/FrontEnd/View/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/FrontEnd/View/index.html" class="site-header__brand">
+        <i class="ti ti-chef-hat" style="color: #f28f3b;"></i>
+        <span class="site-header__title">Foodaniell</span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="/FrontEnd/View/index.html">Inicio</a></li>
+          <li class="site-nav__item site-nav__item--submenu">
+            <button class="site-nav__link site-nav__link--active site-nav__submenu-toggle" type="button" aria-expanded="false">
+              Contenido
+              <i class="ti ti-chevron-down" aria-hidden="true"></i>
+            </button>
+            <ul class="site-submenu">
+              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html">Videos</a></li>
+              <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/Recetas.html">Recetas</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html">Libros</a></li>
+            </ul>
+          </li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/About.html">Acerca de</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/Contacto.html">Contacto</a></li>
+          <li>
+            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/Login.html">
+              <i class="ti ti-login"></i>
+              <span>Login</span>
+            </a>
+          </li>
+          <li>
+            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/registro.html">
+              <i class="ti ti-user-circle"></i>
+              <span>Register</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section--light">
+      <div class="container">
+        <div id="recipeDetailEmpty" class="recipe-detail-empty" style="display:none;">
+          <h1 class="section__title">Receta no encontrada</h1>
+          <p class="section__subtitle">No existe informacion para la receta seleccionada.</p>
+          <a href="/FrontEnd/View/Recetas.html" class="btn">Volver a recetas</a>
+        </div>
+
+        <article id="recipeDetailContent" class="recipe-detail" style="display:none;">
+          <div class="recipe-detail__media">
+            <img id="recipeDetailImage" src="/FrontEnd/img/90fc53c9.svg" alt="Imagen de receta" />
+          </div>
+          <div class="recipe-detail__info">
+            <h1 id="recipeDetailTitle" class="section__title">Receta</h1>
+            <p class="recipe-detail__time"><strong>Tiempo:</strong> <span id="recipeDetailTime"></span></p>
+
+            <h3>Ingredientes</h3>
+            <p id="recipeDetailIngredients" class="recipe-detail__text"></p>
+
+            <h3>Paso a paso</h3>
+            <p id="recipeDetailSteps" class="recipe-detail__text"></p>
+
+            <div id="recipeDetailNotesWrap">
+              <h3>Notas</h3>
+              <p id="recipeDetailNotes" class="recipe-detail__text"></p>
+            </div>
+
+            <a href="/FrontEnd/View/Recetas.html" class="btn btn--outline">Volver a recetas</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>© Foodaniell - Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/FrontEnd/View/JS/main.js" defer></script>
+</body>
+</html>
+
+
+

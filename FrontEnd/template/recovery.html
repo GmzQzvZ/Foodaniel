@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Recuperación de Cuenta</title>
+<style>
+  body { margin:0; padding:0; background:#0d0d0d; font-family:Arial,Helvetica,sans-serif; color:#fff; }
+  .email-container { max-width:520px; margin:24px auto; background:#111; border:1px solid #222; border-radius:14px; overflow:hidden; }
+  .header { padding:24px; background:linear-gradient(135deg,#111,#333); text-align:center; }
+  .content { padding:24px; color:#e5e7eb; line-height:1.6; }
+  .button { display:inline-block; margin:18px 0; padding:12px 18px; background:#ff8c3c; color:#111 !important; font-weight:700; text-decoration:none; border-radius:8px; }
+  .footer { padding:16px 24px; color:#9ca3af; font-size:12px; border-top:1px solid #222; }
+</style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header"><h1>Recupera tu acceso</h1></div>
+    <div class="content">
+      <p>Hola {{CLIENT_NAME}},</p>
+      <p>Recibimos una solicitud para restablecer tu contraseña.</p>
+      <p>Haz clic en el siguiente botón para continuar:</p>
+      <a href="{{RESET_LINK}}" class="button">Restablecer contraseña</a>
+      <p>Si no solicitaste este cambio, puedes ignorar este correo.</p>
+    </div>
+    <div class="footer">© {{YEAR}} Foodaniell. Todos los derechos reservados.</div>
+  </div>
+</body>
+</html>

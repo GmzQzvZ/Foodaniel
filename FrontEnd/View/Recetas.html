@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Foodaniell - Recetas</title>
+  <meta name="description" content="Recetas caseras fáciles y deliciosas de Foodaniell." />
+  <link rel="stylesheet" href="/FrontEnd/View/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+</head>
+
+<!-- ===== LOADING SCREEN =====
+<div id="loading-screen">
+  <h1 class="bg-title">FOODANIElL</h1>
+  <div class="loading-text">
+    Cargando experiencias deliciosas
+    <span class="dots">
+      <span>.</span><span>.</span><span>.</span>
+    </span>
+  </div>
+</div> -->
+
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/FrontEnd/View/index.html" class="site-header__brand">
+        <i class="ti ti-chef-hat" style="color: #f28f3b;" alt="Foodaniell" class="site-header__logo"></i>
+        <span class="site-header__title" href="/FrontEnd/View/index.html">Foodaniell</span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="/FrontEnd/View/index.html">Inicio</a></li>
+          <li class="site-nav__item site-nav__item--submenu">
+            <button class="site-nav__link site-nav__link--active site-nav__submenu-toggle" type="button" aria-expanded="false">
+              Contenido
+              <i class="ti ti-chevron-down" aria-hidden="true"></i>
+            </button>
+            <ul class="site-submenu">
+              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html">Videos</a></li>
+              <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/Recetas.html">Recetas</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html">Libros</a></li>
+            </ul>
+          </li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/About.html">Acerca de</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/Contacto.html">Contacto</a></li>
+
+          <!-- Login -->
+          <li>
+            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/Login.html">
+              <i class="ti ti-login"></i>
+              <span>Login</span>
+            </a>
+          </li>
+
+          <!-- Register -->
+          <li>
+            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/registro.html">
+              <i class="ti ti-user-circle"></i>
+              <span>Register</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section hero--recipes">
+      <div class="container">
+        <h1 class="section__title">Recetas</h1>
+        <p class="section__subtitle">
+          Una colección de ideas para cocinar en casa, con ingredientes sencillos y resultados
+          llenos de sabor.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="container">
+        <div class="recipe-grid">
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 1" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Receta de ejemplo 1</h2>
+              <p class="recipe-card__text">
+                Una receta sencilla para comenzar: perfecta para una comida rápida entre semana.
+              </p>
+              <a href="#" class="btn btn--outline">Ver receta</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 2" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Receta de ejemplo 2</h2>
+              <p class="recipe-card__text">
+                Ideal para compartir en familia, con ingredientes fáciles de encontrar.
+              </p>
+              <a href="#" class="btn btn--outline">Ver receta</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 3" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Receta de ejemplo 3</h2>
+              <p class="recipe-card__text">
+                Un plato un poco más elaborado para cuando quieras sorprender a tus invitados.
+              </p>
+              <a href="#" class="btn btn--outline">Ver receta</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 4" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Receta de ejemplo 4</h2>
+              <p class="recipe-card__text">
+                Perfecta para una cena ligera, con sabores frescos y equilibrados.
+              </p>
+              <a href="#" class="btn btn--outline">Ver receta</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 5" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Receta de ejemplo 5</h2>
+              <p class="recipe-card__text">
+                Una opción rápida para cuando tienes poco tiempo pero muchas ganas de comer bien.
+              </p>
+              <a href="#" class="btn btn--outline">Ver receta</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 6" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Receta de ejemplo 6</h2>
+              <p class="recipe-card__text">
+                Para ocasiones especiales, con un toque diferente y muy sabroso.
+              </p>
+              <a href="#" class="btn btn--outline">Ver receta</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section__title">Perfección del diseño</h2>
+        <p class="section__subtitle">
+          Cada receta está pensada para ser clara y fácil de seguir. Poco a poco podrás adaptar
+          las preparaciones a tu gusto y estilo de vida, encontrando tu propia forma de cocinar.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>© Foodaniell - Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/FrontEnd/View/JS/main.js" defer></script>
+</body>
+</html>
+
+
+

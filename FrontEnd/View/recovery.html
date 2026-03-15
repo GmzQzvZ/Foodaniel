@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
+  <link rel="stylesheet" href="/FrontEnd/View/css/style.css" />
+  <title>Recuperar Contrasena</title>
+</head>
+<body class="auth-page">
+  <div class="auth-box">
+    <h1 class="auth-title" id="recoveryTitle">Recuperar contrasena</h1>
+    <p class="auth-subtitle" id="recoverySubtitle">Ingresa tu correo para enviarte un enlace.</p>
+
+    <form id="recoveryForm" class="auth-form">
+      <div class="form-field" id="recoveryEmailGroup">
+        <label for="recoveryEmail">Correo</label>
+        <input id="recoveryEmail" type="email" placeholder="correo@ejemplo.com" />
+      </div>
+
+      <div class="form-field" id="recoveryPasswordGroup" style="display:none;">
+        <label for="recoveryPassword">Nueva contrasena</label>
+        <input id="recoveryPassword" type="password" minlength="8" placeholder="********" />
+      </div>
+
+      <div class="form-field" id="recoveryConfirmGroup" style="display:none;">
+        <label for="recoveryPasswordConfirm">Confirmar contrasena</label>
+        <input id="recoveryPasswordConfirm" type="password" minlength="8" placeholder="********" />
+      </div>
+
+      <p id="recoveryMessage" style="display:none; margin: 8px 0;"></p>
+
+      <button id="recoverySubmit" class="btn" style="width:100%" type="submit">Enviar enlace</button>
+
+      <div class="auth-alt">
+        <span id="recoveryAltText">Recordaste tu contrasena?</span>
+        <a id="recoveryAltLink" href="Login.html">Iniciar sesion</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="/FrontEnd/View/JS/auth.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+# Node artifacts
+node_modules/
+BackEnd/node_modules/
+FrontEnd/admin/node_modules/
+FrontEnd/View/node_modules/
+
+# Environment overrides
+*.env
+*.env.*
+BackEnd/.env
+BackEnd/.env.*
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+
+# Platform files
+.DS_Store
+Thumbs.db
+
+# Build & cache
+FrontEnd/admin/build/
+FrontEnd/View/dist/
+tmp/
+
+# Uploaded media
+asset/uploads/
+

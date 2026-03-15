@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Foodaniell - Contacto</title>
+  <meta name="description" content="Ponte en contacto con Foodaniell para dudas, sugerencias o colaboraciones." />
+  <link rel="stylesheet" href="/FrontEnd/View/css/style.css"/>
+  <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+</head>
+
+<!-- ===== LOADING SCREEN =====
+<div id="loading-screen">
+  <h1 class="bg-title">FOODANIElL</h1>
+  <div class="loading-text">
+    Cargando experiencias deliciosas
+    <span class="dots">
+      <span>.</span><span>.</span><span>.</span>
+    </span>
+  </div>
+</div> -->
+
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/FrontEnd/View/index.html" class="site-header__brand">
+        <i class="ti ti-chef-hat" style="color: #f28f3b;" alt="Foodaniell" class="site-header__logo"></i>
+        <span class="site-header__title" href="/FrontEnd/View/index.html">Foodaniell</span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="/FrontEnd/View/index.html">Inicio</a></li>
+          <li class="site-nav__item site-nav__item--submenu">
+            <button class="site-nav__link site-nav__submenu-toggle" type="button" aria-expanded="false">
+              Contenido
+              <i class="ti ti-chevron-down" aria-hidden="true"></i>
+            </button>
+            <ul class="site-submenu">
+              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html">Videos</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html">Recetas</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html">Libros</a></li>
+            </ul>
+          </li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/About.html">Acerca de</a></li>
+          <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/Contacto.html">Contacto</a></li>
+
+          <!-- Login -->
+          <li>
+            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/Login.html">
+              <i class="ti ti-login"></i>
+              <span>Login</span>
+            </a>
+          </li>
+
+          <!-- Register -->
+          <li>
+            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/registro.html">
+              <i class="ti ti-user-circle"></i>
+              <span>Register</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section Contacto">
+      <div class="container">
+        <h1 class="section__title">Contáctanos</h1>
+        <p class="section__subtitle">
+          ¿Tienes una duda que se te quemó, una idea con buen aroma o una propuesta que podría convertirse en el plato estrella?
+        </p>
+        <p>Cuéntame! Prometo no dejar tu mensaje <b>Sa fuego lento⬝.</b></p>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="container contact-layout">
+        <div class="contact-info">
+          <h2>Información de contacto</h2>
+          <p>
+            ¿Tienes una duda que necesita sazón, una sugerencia para mejorar la receta o una propuesta de colaboración digna de un menú gourmet?
+          </p>
+          <p>Escríbeme y estaré encantado de leerte.</p>
+          <p>
+            <a href="mailto:contacto@foodaniell.com">contacto@foodaniell.com</a>
+          </p>
+
+          <div class="social-buttons">
+            <a href="#" class="social-btn fb">
+              <i class="ti ti-brand-facebook"></i>
+            </a>
+
+            <a href="#" class="social-btn tk">
+              <i class="ti ti-brand-tiktok"></i>
+            </a>
+
+            <a href="#" class="social-btn ig">
+              <i class="ti ti-brand-instagram"></i>
+            </a>
+
+            <a href="#" class="social-btn yt">
+              <i class="ti ti-brand-youtube"></i>
+            </a>
+          </div>
+          
+        </div>
+
+        <form id="contact-form" class="contact-form contact" novalidate>
+          <div class="form-field">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" placeholder="Introduce tu nombre" required />
+          </div>
+
+          <div class="form-field">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" placeholder="Introduce un correo válido" required />
+          </div>
+
+          <div class="form-field">
+            <label for="recipe-type">Tipo de Solicitud</label>
+              <select id="recipe-type" name="recipe-type" required>
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="nutritional">Asesoria Nutriconal</option>
+              </select>
+          </div>
+
+          <div class="form-field">
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" rows="4" placeholder="Escribe tu mensaje" required></textarea>
+          </div>
+
+          <button type="submit" class="btn">Enviar</button>
+          <p class="form-message form-message--ok"></p>
+          <p class="form-message form-message--error"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>© Foodaniell - Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/FrontEnd/View/JS/main.js" defer></script>
+</body>
+</html>
+
+
+

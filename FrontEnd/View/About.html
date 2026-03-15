@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Foodaniell - Acerca de</title>
+  <meta name="description" content="Conoce más sobre Foodaniell y la persona detrás de las recetas." />
+  <link rel="stylesheet" href="/FrontEnd/View/css/style.css"/>
+  <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+</head>
+
+<!-- ===== LOADING SCREEN =====
+<div id="loading-screen">
+  <h1 class="bg-title">FOODANIElL</h1>
+  <div class="loading-text">
+    Cargando experiencias deliciosas
+    <span class="dots">
+      <span>.</span><span>.</span><span>.</span>
+    </span>
+  </div>
+</div> -->
+
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/FrontEnd/View/index.html" class="site-header__brand">
+        <i class="ti ti-chef-hat" style="color: #f28f3b;" alt="Foodaniell" class="site-header__logo"></i>
+        <span class="site-header__title" href="/FrontEnd/View/index.html">Foodaniell</span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="/FrontEnd/View/index.html">Inicio</a></li>
+          <li class="site-nav__item site-nav__item--submenu">
+            <button class="site-nav__link site-nav__submenu-toggle" type="button" aria-expanded="false">
+              Contenido
+              <i class="ti ti-chevron-down" aria-hidden="true"></i>
+            </button>
+            <ul class="site-submenu">
+              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html">Videos</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html">Recetas</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html">Libros</a></li>
+            </ul>
+          </li>
+          <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/About.html">Acerca de</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/Contacto.html">Contacto</a></li>
+
+          <!-- Login -->
+          <li>
+            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/Login.html">
+              <i class="ti ti-login"></i>
+              <span>Login</span>
+            </a>
+          </li>
+
+          <!-- Register -->
+          <li>
+            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/registro.html">
+              <i class="ti ti-user-circle"></i>
+              <span>Register</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section--light">
+      <div class="container about-layout about-layout--text">
+        <div class="about-text">
+          <h1>Sobre Foodaniell</h1>
+          <p>
+            Ayudo a personas que quieren comer y cocinar mejor sin convertir su cocina en un laboratorio ni su vida en un concurso gastronómico.
+            Traduzco técnicas de la cocina profesional a procesos simples, prácticos y fáciles de aplicar en casa.
+            Mi enfoque combina gastronomía, estilo de vida y creatividad para que cocinar sea algo natural, elegante y posible en el día a día.
+            No va de ser chef, va de comprender esos pequeños detalles que elevan cualquier plato.
+            Cocina cercana, resultados que se notan y soluciones pensadas para la vida real.
+          </p>
+          <p>
+            En Foodaniell encontrarás recetas paso a paso, ideas de presentación y algunos
+            trucos que he ido aprendiendo con el tiempo. Gracias por formar parte de esta
+            aventura culinaria.
+          </p>
+          
+          <h4>Redes Sociales:</h4>
+
+          <div class="social-buttons">
+            <a href="#" class="social-btn fb">
+              <i class="ti ti-brand-facebook"></i>
+            </a>
+
+            <a href="#" class="social-btn tk">
+              <i class="ti ti-brand-tiktok"></i>
+            </a>
+
+            <a href="#" class="social-btn ig">
+              <i class="ti ti-brand-instagram"></i>
+            </a>
+
+            <a href="#" class="social-btn yt">
+              <i class="ti ti-brand-youtube"></i>
+            </a>
+
+          </div><br>
+
+          <!-- <a href="/FrontEnd/View/Recetas.html" class="btn btn--outline">Ver recetas</a> -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="container about-videos">
+      <div class="about-photo">
+          <iframe
+              src="https://www.youtube.com/embed/-MmcMA03eUs?enablejsapi=1&mute=1"
+              title="YouTube video"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen>
+          </iframe>
+      </div>
+      <div class="about-photo">
+          <iframe
+              src="https://www.youtube.com/embed/_RvCFsOZac8?enablejsapi=1&mute=1"
+              title="YouTube video"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen>
+          </iframe>
+      </div>
+      <div class="about-photo">
+          <iframe
+              src="https://www.youtube.com/embed/RrRJnPst-SI?enablejsapi=1&mute=1"
+              title="YouTube video"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen>
+          </iframe>
+      </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p> Foodaniell - Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/FrontEnd/View/JS/main.js" defer></script>
+</body>
+</html>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+
+

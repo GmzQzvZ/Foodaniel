@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
+<title>Foodaniell | Admin</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/FrontEnd/admin/css/style-ad.css" />
+  <link rel="stylesheet" href="/FrontEnd/admin/css/dashboard.css" />
+</head>
+
+<body class="admin-dashboard-body">
+  <div class="md-layout">
+    <aside class="md-sidebar" aria-label="Menú de administración">
+      <div class="md-sidebar__brand">
+        <div class="md-brand">
+          <div class="md-brand__logo">
+            <i class="ti ti-chef-hat"></i>
+          </div>
+          <div class="md-brand__text">
+            <div class="md-brand__title">Foodaniell</div>
+            <div class="md-brand__subtitle">Admin</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="md-sidebar__nav">
+        <button class="nav-btn md-nav-btn" type="button" data-section="dashboard">
+          <i class="ti ti-layout-dashboard"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-btn md-nav-btn" type="button" data-section="libros">
+          <i class="ti ti-book"></i>
+          <span>Libros</span>
+        </button>
+        <button class="nav-btn md-nav-btn" type="button" data-section="recetas">
+          <i class="ti ti-chef-hat"></i>
+          <span>Recetas</span>
+        </button>
+        <button class="nav-btn md-nav-btn" type="button" data-section="videos">
+          <i class="ti ti-video"></i>
+          <span>Videos</span>
+        </button>
+        <button class="nav-btn md-nav-btn" type="button" data-section="usuarios">
+          <i class="ti ti-users"></i>
+          <span>Usuarios</span>
+        </button>
+        <button class="nav-btn md-nav-btn" type="button" data-section="sugerencias">
+          <i class="ti ti-chef-hat"></i>
+          <span>Sugerencias</span>
+        </button>
+        <button class="nav-btn md-nav-btn" type="button" data-section="contacto">
+          <i class="ti ti-users"></i>
+          <span>Contacto</span>
+        </button>
+      </nav>
+
+      <div class="md-sidebar__footer">
+        <button class="md-logout" id="logoutBtn" type="button">
+          <i class="ti ti-logout"></i>
+          <span>Cerrar sesión</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="md-main">
+      <header class="md-topbar">
+        <div class="md-topbar__left">
+          <div class="md-page-title">
+            <div class="md-page-title__h">Dashboard</div>
+            <div class="md-page-title__p">Resumen general</div>
+          </div>
+        </div>
+        <div class="md-topbar__right">
+          <button class="md-icon-btn" id="notificationsBtn" type="button" aria-label="Notificaciones">
+            <i class="ti ti-bell"></i>
+            <span class="md-noti-badge" id="notificationsBadge" style="display:none;">0</span>
+          </button>
+          <div class="md-noti-panel" id="notificationsPanel" style="display:none;">
+            <div class="md-noti-panel__title">Nuevas notificaciones</div>
+            <ul class="md-noti-list" id="notificationsList"></ul>
+          </div>
+        </div>
+      </header>
+
+
+      <main class="md-content">
+        <section id="section-dashboard" class="crud-section">
+          <div class="md-kpis">
+            <article class="md-kpi md-kpi--primary">
+              <div class="md-kpi__icon"><i class="ti ti-clipboard-list"></i></div>
+              <div class="md-kpi__body">
+                <div class="md-kpi__label">Recetas</div>
+                <div class="md-kpi__value" id="kpiRecetas">0</div>
+                <div class="md-kpi__hint">Total creadas</div>
+              </div>
+            </article>
+            <article class="md-kpi md-kpi--success">
+              <div class="md-kpi__icon"><i class="ti ti-video"></i></div>
+              <div class="md-kpi__body">
+                <div class="md-kpi__label">Videos</div>
+                <div class="md-kpi__value" id="kpiVideos">0</div>
+                <div class="md-kpi__hint">Total cargados</div>
+              </div>
+            </article>
+            <article class="md-kpi md-kpi--info">
+              <div class="md-kpi__icon"><i class="ti ti-book"></i></div>
+              <div class="md-kpi__body">
+                <div class="md-kpi__label">Libros</div>
+                <div class="md-kpi__value" id="kpiLibros">0</div>
+                <div class="md-kpi__hint">Total registrados</div>
+              </div>
+            </article>
+            <article class="md-kpi md-kpi--danger">
+              <div class="md-kpi__icon"><i class="ti ti-users"></i></div>
+              <div class="md-kpi__body">
+                <div class="md-kpi__label">Usuarios</div>
+                <div class="md-kpi__value" id="kpiUsuarios">0</div>
+                <div class="md-kpi__hint">Rol user</div>
+              </div>
+            </article>
+          </div>
+
+          <div class="md-panels">
+            <section class="md-panel md-panel--accent">
+              <header class="md-panel__header">
+                <div>
+                  <div class="md-panel__title">Website Views</div>
+                  <div class="md-panel__subtitle">Rendimiento (demo)</div>
+                </div>
+                <span class="md-pill">altimos 7 días</span>
+              </header>
+              <div class="md-chart-placeholder"></div>
+            </section>
+            <section class="md-panel md-panel--success">
+              <header class="md-panel__header">
+                <div>
+                  <div class="md-panel__title">Daily Sales</div>
+                  <div class="md-panel__subtitle">Ventas (demo)</div>
+                </div>
+                <span class="md-pill">Mes</span>
+              </header>
+              <div class="md-chart-placeholder"></div>
+            </section>
+            <section class="md-panel">
+              <header class="md-panel__header">
+                <div>
+                  <div class="md-panel__title">Completed Tasks</div>
+                  <div class="md-panel__subtitle">Tareas (demo)</div>
+                </div>
+                <span class="md-pill">Hoy</span>
+              </header>
+              <div class="md-todo">
+                <form class="md-todo__form" id="todoForm">
+                  <input class="md-todo__input" id="todoInput" type="text" placeholder="Agregar nueva tarea..." autocomplete="off" />
+                  <button class="md-todo__add" id="todoAdd" type="submit">Agregar</button>
+                </form>
+                <div class="md-todo__list" id="todoList"></div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section id="section-libros" class="crud-section">
+        <h2>Libros</h2>
+        <p class="crud-description">Crea, edita y elimina libros (se guardan en tu navegador).</p>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <button class="btn-add" id="btnNuevoLibro" type="button">Nuevo libro</button>
+        </div>
+
+        <table class="crud-table" id="tablaLibros">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Título</th>
+              <th>Descripción</th>
+              <th>Link de compra</th>
+              <th>Precio</th>
+              <th>Público</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+        <section id="section-recetas" class="crud-section">
+        <h2>Recetas</h2>
+        <p class="crud-description">Crea, edita, consulta y elimina recetas.</p>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <button class="btn-add" id="btnNuevaReceta" type="button">Nueva receta</button>
+        </div>
+
+        <table class="crud-table" id="tablaRecetas">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Título</th>
+              <th>Tiempo</th>
+              <th>Ingredientes</th>
+              <th>Público</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+        <section id="section-videos" class="crud-section">
+        <h2>Videos</h2>
+        <p class="crud-description">Guarda videos (URL de YouTube) para mostrarlos en el sitio.</p>
+
+        <form class="crud-form" id="formVideos">
+          <input type="hidden" id="videoId" />
+          <div class="form-group">
+            <label for="videoTitulo">Título</label>
+            <input id="videoTitulo" type="text" placeholder="Ej: Cómo hacer pizza" required />
+          </div>
+          <div class="form-group">
+            <label for="videoUrl">URL de YouTube</label>
+            <input id="videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." required />
+          </div>
+          <div class="form-group">
+            <label for="videoDescripcion">Descripcion</label>
+            <textarea id="videoDescripcion" rows="3" placeholder="Breve descripcion del video"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="videoPublico">Público</label>
+            <label class="md-checkbox">
+              <input id="videoPublico" type="checkbox" />
+              <span>Visible en el sitio</span>
+            </label>
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <div>
+              <button class="btn-send" type="submit">Guardar</button>
+              <button class="btn-closed" id="videoCancelar" type="button">Cancelar</button>
+            </div>
+          </div>
+        </form>
+
+        <table class="crud-table" id="tablaVideos">
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>URL</th>
+              <th>Descripcion</th>
+              <th>Público</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="section-usuarios" class="crud-section">
+        <h2>Usuarios</h2>
+        <p class="crud-description">Administra usuarios y controla quiénes desean recibir correos.</p>
+
+        <form class="crud-form" id="formUsuarios">
+          <input type="hidden" id="usuarioId" />
+          <div class="form-group">
+            <label for="usuarioNombre">Nombre</label>
+            <input id="usuarioNombre" type="text" placeholder="Ej: Juan Pérez" required />
+          </div>
+          <div class="form-group">
+            <label for="usuarioEmail">Correo</label>
+            <input id="usuarioEmail" type="email" placeholder="correo@dominio.com" required />
+          </div>
+          <div class="form-group">
+            <label for="usuarioRole">Rol</label>
+            <select id="usuarioRole">
+              <option value="user">user</option>
+              <option value="admin">admin</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="usuarioRecibeCorreos">Recibe correos</label>
+            <label class="md-checkbox">
+              <input id="usuarioRecibeCorreos" type="checkbox" />
+              <span>Sí, desea recibir correos</span>
+            </label>
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <div>
+              <button class="btn-send" type="submit">Guardar</button>
+              <button class="btn-closed" id="usuarioCancelar" type="button">Cancelar</button>
+            </div>
+          </div>
+        </form>
+
+        <table class="crud-table" id="tablaUsuarios">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Rol</th>
+              <th>Recibe correos</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <h3 style="margin-top:20px;">Enviar correo masivo</h3>
+        <p class="crud-description">Envía un correo a todos los usuarios que tienen activo "Recibe correos".</p>
+        <form class="crud-form" id="formCorreos">
+          <div class="form-group">
+            <label for="correoAsunto">Asunto</label>
+            <input id="correoAsunto" type="text" placeholder="Ej: Nuevo contenido disponible" required />
+          </div>
+          <div class="form-group">
+            <label for="correoMensaje">Mensaje</label>
+            <textarea id="correoMensaje" rows="5" placeholder="Escribe el mensaje que recibirán los usuarios..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <div>
+              <button class="btn-send" type="submit">Enviar correos</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <p id="correoFeedback" style="display:none; margin:0; color:#166534; font-weight:600;"></p>
+          </div>
+        </form>
+      </section>
+
+      <section id="section-sugerencias" class="crud-section">
+        <h2>Sugerencias</h2>
+        <p class="crud-description">Mensajes recibidos desde el formulario de sugerencias del sitio.</p>
+
+        <table class="crud-table" id="tablaSugerencias">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Tipo receta</th>
+              <th>Mensaje</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="section-contacto" class="crud-section">
+        <h2>Contacto</h2>
+        <p class="crud-description">Mensajes recibidos desde el formulario de contacto.</p>
+
+        <table class="crud-table" id="tablaContactos">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Tipo solicitud</th>
+              <th>Mensaje</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="admin-modal" id="adminModal" aria-hidden="true">
+    <div class="admin-modal__backdrop" tabindex="-1"></div>
+    <div class="admin-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
+      <div class="admin-modal__header">
+        <h2 id="adminModalTitle">Editar</h2>
+        <button class="admin-modal__close" id="adminModalClose" type="button" aria-label="Cerrar"></button>
+      </div>
+      <form class="admin-modal__form" id="adminModalForm">
+        <input type="hidden" id="modalItemId" name="id" />
+        <div class="admin-modal__fields" id="adminModalFields"></div>
+        <div class="admin-modal__footer">
+          <button class="btn-closed" id="adminModalCancel" type="button">Cancelar</button>
+          <button class="btn-send" type="submit">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-modal" id="viewMessageModal" aria-hidden="true">
+    <div class="admin-modal__backdrop" tabindex="-1"></div>
+    <div class="admin-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="viewMessageModalTitle">
+      <div class="admin-modal__header">
+        <h2 id="viewMessageModalTitle">Detalle</h2>
+        <button class="admin-modal__close" id="viewMessageModalClose" type="button" aria-label="Cerrar"></button>
+      </div>
+      <div class="admin-modal__fields" id="viewMessageModalBody"></div>
+      <div class="admin-modal__footer">
+        <button class="btn-closed" id="viewMessageModalCloseBtn" type="button">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/FrontEnd/admin/js/admin.js" defer></script>
+</body>
+</html>
+
+
+

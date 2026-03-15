@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
+<title>Dashboard de usuario</title>
+    <link rel="stylesheet" href="/FrontEnd/View/css/style.css">
+    <link rel="stylesheet" href="/FrontEnd/View/css/dashboard.css">
+</head>
+<body>
+    <!-- Pantalla de carga reutilizada de index.html
+    <div id="loading-screen">
+      <h1 class="bg-title">FOODANIELL</h1>
+      <div class="loading-text">
+        <b>Cargando tu panel personal</b>
+        <span class="dots">
+          <span>.</span><span>.</span><span>.</span>
+        </span>
+      </div>
+    </div> -->
+
+    <main class="dashboard-main dashboard-main--gradient">
+        <section class="dashboard-container">
+            <div class="dashboard-header">
+                <div>
+                    <p class="dashboard-greeting">Bienvenido de nuevo,</p>
+                    <h1 class="dashboard-title">Tu espacio personal</h1>
+                    <p class="dashboard-subtitle">Este módulo es exclusivo para usuarios registrados.</p>
+                </div>
+                <div class="dashboard-user">
+                    <img id="dashboardAvatar" src="/default-profile.png" alt="Foto de perfil" class="dashboard-avatar">
+                    <div>
+                        <!-- Estos datos deberán ser rellenados por el backend -->
+                        <p id="dashboardUserName" class="dashboard-user-name">Nombre del usuario</p>
+                        <p id="dashboardUserEmail" class="dashboard-user-email">correo@ejemplo.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-link active" data-tab="tab-videos">x Videos</button>
+                <button class="tab-link" data-tab="tab-libros">xa Libros</button>
+                <button class="tab-link" data-tab="tab-recetas">x Recetas</button>
+                <button class="tab-link" data-tab="tab-perfil">👤 Perfil</button>
+            </div>
+
+            <div class="tab-content-container">
+                <!-- TAB VIDEOS -->
+                <div id="tab-videos" class="tab-content active">
+                    <h2 class="tab-title">Tus videos</h2>
+                    <p class="tab-description">Aquí se mostrarán los videos asociados a tu cuenta.</p>
+                    <div id="dashboardVideosContent" class="recipe-grid"></div>
+                </div>
+
+                <!-- TAB LIBROS -->
+                <div id="tab-libros" class="tab-content">
+                    <h2 class="tab-title">Tus libros</h2>
+                    <p class="tab-description">Aquí se mostrarán los libros de recetas vinculados a tu usuario.</p>
+                    <div id="dashboardLibrosContent" class="recipe-grid"></div>
+                </div>
+
+                <!-- TAB RECETAS -->
+                <div id="tab-recetas" class="tab-content">
+                    <h2 class="tab-title">Tus recetas</h2>
+                    <p class="tab-description">Aquí se listarán tus recetas guardadas.</p>
+                    <div id="dashboardRecetasContent" class="recipe-grid"></div>
+                </div>
+
+                <!-- TAB PERFIL -->
+                <div id="tab-perfil" class="tab-content">
+                    <h2 class="tab-title">Personaliza tu perfil</h2>
+                    <p class="tab-description">Configura tu información y preferencias. Todos los campos están listos para conectarse con el backend.</p>
+                    <form id="profileForm" class="perfil-form perfil-grid" method="post" novalidate>
+                        <div class="form-group">
+                            <label for="perfil-nombre">Nombre</label>
+                            <input type="text" id="perfil-nombre" name="nombre" placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="perfil-apellido">Apellido</label>
+                            <input type="text" id="perfil-apellido" name="apellido" placeholder="Tu apellido">
+                        </div>
+                        <div class="form-group">
+                            <label for="perfil-email">Correo electrónico</label>
+                            <input type="email" id="perfil-email" name="email" placeholder="tu@correo.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="perfil-username">Nombre de usuario</label>
+                            <input type="text" id="perfil-username" name="username" placeholder="Ej. chef_juan">
+                        </div>
+                        <div class="form-group">
+                            <label for="perfil-password">Contraseña</label>
+                            <input type="password" id="perfil-password" name="password" placeholder="Nueva contraseña" autocomplete="new-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="perfil-confirm-password">Confirmar contraseña</label>
+                            <input type="password" id="perfil-confirm-password" name="confirm-password" placeholder="Repite la contraseña" autocomplete="new-password">
+                        </div>
+                        <div class="form-group form-group--span-2">
+                            <label for="perfil-foto">Foto de perfil</label>
+                            <input type="file" id="perfil-foto" name="foto">
+                        </div>
+                        <div class="form-group form-group--span-2">
+                            <label for="perfil-bio">Biografía</label>
+                            <textarea id="perfil-bio" name="bio" rows="3" placeholder="Cuéntanos un poco sobre ti y tu estilo de cocina"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="perfil-preferencias">Preferencias culinarias</label>
+                            <select id="perfil-preferencias" name="preferencias">
+                                <option value="ninguna">Sin preferencia</option>
+                                <option value="vegetariano">Vegetariano</option>
+                                <option value="vegano">Vegano</option>
+                                <option value="sin-gluten">Sin gluten</option>
+                                <option value="baja-caloria">Baja en calorías</option>
+                            </select>
+                        </div>
+                        <div class="form-group form-group-inline">
+                            <div>
+                                <label for="perfil-notificaciones">Notificaciones por correo</label>
+                                <input type="checkbox" id="perfil-notificaciones" name="notificaciones" checked>
+                                <span class="checkbox-label">Recibir novedades y recetas por correo</span>
+                            </div>
+                        </div>
+                        <div class="perfil-actions form-group--span-2">
+                            <p id="profileUpdateMessage" style="display:none; margin-bottom: 10px;"></p>
+                            <button type="submit" class="btn-primary">Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/FrontEnd/View/JS/main.js"></script>
+    <script src="/FrontEnd/View/JS/dashboard.js"></script>
+    <script src="/FrontEnd/View/JS/profile.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
