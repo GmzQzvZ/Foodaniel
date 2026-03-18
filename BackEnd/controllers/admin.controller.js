@@ -516,7 +516,6 @@ exports.createRecipe = async (req, res) => {
     const normalizedIngredients = normalizeRequiredString(ingredients);
     const normalizedSteps = normalizeRequiredString(steps);
     const normalizedNotes = normalizeOptionalString(notes);
-    const normalizedNotes = normalizeOptionalString(notes);
 
     if (!normalizedTitle || !normalizedIngredients || !normalizedSteps) {
       return res.status(400).json({ error: 'Invalid recipe payload' });
