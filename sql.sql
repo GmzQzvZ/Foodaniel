@@ -120,6 +120,42 @@ CREATE TABLE IF NOT EXISTS recipes (
 CREATE INDEX IF NOT EXISTS idx_recipes_public
   ON recipes (is_public);
 
+-- =========================
+-- RECIPE NUTRITION
+-- =========================
+CREATE TABLE IF NOT EXISTS recipe_nutrition (
+  id BIGSERIAL PRIMARY KEY,
+  recipe_id BIGINT NOT NULL REFERENCES recipes(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  calories DECIMAL(8,2) NULL,
+  proteins DECIMAL(8,2) NULL, -- gramos
+  carbs DECIMAL(8,2) NULL,    -- gramos
+  fats DECIMAL(8,2) NULL,     -- gramos
+  fiber DECIMAL(8,2) NULL,    -- gramos
+  sugar DECIMAL(8,2) NULL,    -- gramos
+  sodium DECIMAL(8,2) NULL,   -- miligramos
+  servings INT NULL,         -- número de porciones
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_recipe_nutrition_recipe_id
+  ON recipe_nutrition(recipe_id);
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_trigger
+    WHERE tgname = 'trg_recipe_nutrition_updated_at'
+  ) THEN
+    CREATE TRIGGER trg_recipe_nutrition_updated_at
+    BEFORE UPDATE ON recipe_nutrition
+    FOR EACH ROW
+    EXECUTE FUNCTION set_updated_at();
+  END IF;
+END $$;
+
 DO $$
 BEGIN
   IF NOT EXISTS (

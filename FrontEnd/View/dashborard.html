@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="/FrontEnd/View/css/style.css">
     <link rel="stylesheet" href="/FrontEnd/View/css/dashboard.css">
 </head>
+
+<script src="/FrontEnd/shared/i18n.js"></script>
+<script src="/FrontEnd/View/JS/main.js" defer></script>
+
 <body>
     <!-- Pantalla de carga reutilizada de index.html
     <div id="loading-screen">
@@ -25,9 +29,9 @@
         <section class="dashboard-container">
             <div class="dashboard-header">
                 <div>
-                    <p class="dashboard-greeting">Bienvenido de nuevo,</p>
-                    <h1 class="dashboard-title">Tu espacio personal</h1>
-                    <p class="dashboard-subtitle">Este módulo es exclusivo para usuarios registrados.</p>
+                    <p class="dashboard-greeting" data-i18n="dashboard_greeting">Bienvenido de nuevo,</p>
+                    <h1 class="dashboard-title" data-i18n="dashboard_title">Tu espacio personal</h1>
+                    <p class="dashboard-subtitle" data-i18n="dashboard_subtitle">Este módulo es exclusivo para usuarios registrados.</p>
                 </div>
                 <div class="dashboard-user">
                     <img id="dashboardAvatar" src="/default-profile.png" alt="Foto de perfil" class="dashboard-avatar">
@@ -132,12 +136,11 @@
         </section>
     </main>
 
-    <script src="/FrontEnd/View/JS/main.js"></script>
-    <script src="/FrontEnd/View/JS/dashboard.js"></script>
-    <script src="/FrontEnd/View/JS/profile.js"></script>
-</body>
+    <script src="/FrontEnd/View/JS/dashboard.js" defer></script>
+    <script src="/FrontEnd/View/JS/profile.js" defer></script>
+    <script src="/FrontEnd/View/JS/main.js" defer></script>
+    </body>
 </html>
-
 
 
 

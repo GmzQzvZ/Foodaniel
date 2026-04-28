@@ -13,6 +13,7 @@ router.delete('/books/:id', authenticateToken, adminController.deleteBook);
 router.post('/recipes', authenticateToken, adminController.createRecipe);
 router.put('/recipes/:id', authenticateToken, adminController.updateRecipe);
 router.delete('/recipes/:id', authenticateToken, adminController.deleteRecipe);
+router.get('/recipes/:id', authenticateToken, adminController.getRecipeById);
 
 router.post('/videos', authenticateToken, adminController.createVideo);
 router.put('/videos/:id', authenticateToken, adminController.updateVideo);

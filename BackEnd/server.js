@@ -1,6 +1,8 @@
 require('dotenv').config();
 
 const express = require('express');
+
+console.log('🚀 Servidor iniciando...');
 const cors = require('cors');
 const path = require('path');
 const authRoutes = require('./routes/auth.routes');
@@ -86,6 +88,12 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+  console.log('📧 Variables SMTP cargadas:', {
+    SMTP_HOST: process.env.SMTP_HOST ? '✓' : '✗',
+    SMTP_PORT: process.env.SMTP_PORT ? '✓' : '✗',
+    SMTP_USER: process.env.SMTP_USER ? '✓' : '✗',
+    SMTP_PASS: process.env.SMTP_PASS ? '✓' : '✗'
+  });
 });
 
 module.exports = app;

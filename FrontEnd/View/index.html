@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 </head>
 
+<script src="/FrontEnd/shared/i18n.js"></script>
 <script src="/FrontEnd/View/JS/main.js" defer></script>
 
 <!-- ===== LOADING SCREEN =====
@@ -39,26 +40,26 @@
       </button>
       <nav class="site-nav">
         <ul class="site-nav__list">
-          <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/index.html">Inicio</a></li>
+          <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/index.html" data-i18n="nav_home">Inicio</a></li>
           <li class="site-nav__item site-nav__item--submenu">
             <button class="site-nav__link site-nav__submenu-toggle" type="button" aria-expanded="false">
-              Contenido
+              <span data-i18n="nav_content">Contenido</span>
               <i class="ti ti-chevron-down" aria-hidden="true"></i>
             </button>
             <ul class="site-submenu">
-              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html">Videos</a></li>
-              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html">Recetas</a></li>
-              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html">Libros</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html" data-i18n="nav_videos">Videos</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html" data-i18n="nav_recipes">Recetas</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html" data-i18n="nav_books">Libros</a></li>
             </ul>
           </li>
-          <li><a class="site-nav__link" href="/FrontEnd/View/About.html">Acerca de</a></li>
-          <li><a class="site-nav__link" href="/FrontEnd/View/Contacto.html">Contacto</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/About.html" data-i18n="nav_about">Acerca de</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/Contacto.html" data-i18n="nav_contact">Contacto</a></li>
 
           <!-- Login -->
           <li>
             <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/Login.html">
               <i class="ti ti-login"></i>
-              <span>Login</span>
+              <span data-i18n="nav_login">Login</span>
             </a>
           </li>
 
@@ -66,7 +67,7 @@
           <li>
             <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/registro.html">
               <i class="ti ti-user-circle"></i>
-              <span>Register</span>
+              <span data-i18n="nav_register">Register</span>
             </a>
           </li>
         </ul>
@@ -80,29 +81,24 @@
     <div class="hero-landing__bg"></div>
 
     <div class="hero-landing__content">
-      <h1 class="hero-landing__title">Soy Daniel.</h1>
+      <h1 class="hero-landing__title" data-i18n="index_hero_title">Soy Daniel.</h1>
 
       <p class="hero-landing__text">
-        Aprendo, viajo, creo contenido y cocino.
-        Porque la buena cocina no es complicada,
-        solo está mal explicada.<br><br>
+        <span data-i18n="index_hero_text_1">Aprendo, viajo, creo contenido y cocino.</span>
+        <span data-i18n="index_hero_text_2">Porque la buena cocina no es complicada, solo está mal explicada.</span><br><br>
 
-        Desde pastas caseras hasta platos saludables y elegantes,
-        para que cocines mejor y comas mejor,
-        sin complicarte la vida.<br><br>
+        <span data-i18n="index_hero_text_3">Desde pastas caseras hasta platos saludables y elegantes, para que cocines mejor y comas mejor, sin complicarte la vida.</span><br><br>
 
-        Resultados que sí puedes replicar en casa.
-        Aquí comparto lo que aprendí en cocinas reales,
-        adaptado a la vida real y al supermercado.<br><br>
+        <span data-i18n="index_hero_text_4">Resultados que sí puedes replicar en casa. Aquí comparto lo que aprendí en cocinas reales, adaptado a la vida real y al supermercado.</span><br><br>
 
-        <strong>Todo Empieza por aquí y haz la cocina parte de tu estilo de vida.</strong>
+        <strong data-i18n="index_hero_text_5">Todo Empieza por aquí y haz la cocina parte de tu estilo de vida.</strong>
       </p>
 
       <div class="hero-landing__cta">
-        <a href="#Suggestion" class="btn-ghost">Sugerencia</a>
-        <a href="#videos" class="btn-ghost">Videos</a>
-        <a href="/FrontEnd/View/libros.html" class="btn-ghost">E-book</a>
-        <a  href="/FrontEnd/View/Recetas.html" class="btn-ghost">Recetas</a>
+        <a href="#Suggestion" class="btn-ghost" data-i18n="index_btn_suggestion">Sugerencia</a>
+        <a href="#videos" class="btn-ghost" data-i18n="index_btn_videos">Videos</a>
+        <a href="/FrontEnd/View/libros.html" class="btn-ghost" data-i18n="index_btn_ebook">E-book</a>
+        <a href="/FrontEnd/View/Recetas.html" class="btn-ghost" data-i18n="index_btn_recetas">Recetas</a>
       </div>
       </div>
     </div>
@@ -118,38 +114,38 @@
         <div class="cards-grid">
           <article class="card">
             <i class="ti ti-list-check"></i>
-            <h2 class="card__title">Recetas</h2>
+            <h2 class="card__title" data-i18n="index_card_recipes_title">Recetas</h2>
             <p class="card__text">
-              Descubre recetas caseras sencillas y deliciosas para tu día a día.
+              <span data-i18n="index_card_recipes_text">Descubre recetas caseras sencillas y deliciosas para tu día a día.</span>
             </p>
-            <a href="/FrontEnd/View/Recetas.html" class="btn btn--outline">Aprende más</a>
+            <a href="/FrontEnd/View/Recetas.html" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende más</a>
           </article>
 
           <article class="card">
             <i class="ti ti-books"></i>
-            <h2 class="card__title">Libros</h2>
+            <h2 class="card__title" data-i18n="index_card_books_title">Libros</h2>
             <p class="card__text">
-              Próximamente podrás encontrar aquí una selección de libros recomendados.
+              <span data-i18n="index_card_books_text">Próximamente podrás encontrar aquí una selección de libros recomendados.</span>
             </p>
-            <a href="/FrontEnd/View/libros.html" class="btn btn--outline">Aprende más</a>
+            <a href="/FrontEnd/View/libros.html" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende más</a>
           </article>
 
           <article class="card">
             <i class="ti ti-video"></i>
-            <h2 class="card__title">Videos</h2>
+            <h2 class="card__title" data-i18n="index_card_videos_title">Videos</h2>
             <p class="card__text">
-              Conoce la historia detrás de Foodaniell y mi pasión por la cocina.
+              <span data-i18n="index_card_videos_text">Conoce la historia detrás de Foodaniell y mi pasión por la cocina.</span>
             </p>
-            <a href="/FrontEnd/View/videos.html" class="btn btn--outline">Aprende más</a>
+            <a href="/FrontEnd/View/videos.html" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende más</a>
           </article>
 
           <article class="card">
             <i class="ti ti-chef-hat"></i>
-            <h2 class="card__title">Sobre mí</h2>
+            <h2 class="card__title" data-i18n="index_card_about_title">Sobre mí</h2>
             <p class="card__text">
-              Conoce la historia detrás de Foodaniell y mi pasión por la cocina.
+              <span data-i18n="index_card_about_text">Conoce la historia detrás de Foodaniell y mi pasión por la cocina.</span>
             </p>
-            <a href="/FrontEnd/View/About.html" class="btn btn--outline">Aprende más</a>
+            <a href="/FrontEnd/View/About.html" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende más</a>
           </article>
         </div>
       </div>
@@ -159,14 +155,12 @@
     <section id="videos" class="section--dark">
       <div class="container cook">
         <div class="cook__text">
-          <h1>Vamos a cocinar</h1>
+          <h1 data-i18n="index_cook_title">Vamos a cocinar</h1>
           <p>
-            La cocina es el lugar donde se mezclan los recuerdos, los sabores y las historias.
-            Aquí encontrarás inspiración para preparar platos sencillos que sorprendan a todos.
+            <span data-i18n="index_cook_text_1">La cocina es el lugar donde se mezclan los recuerdos, los sabores y las historias. Aquí encontrarás inspiración para preparar platos sencillos que sorprendan a todos.</span>
           </p>
           <p>
-            Acompáñame a experimentar con nuevas recetas y técnicas, siempre con un enfoque casero
-            y cercano.
+            <span data-i18n="index_cook_text_2">Acompáñame a experimentar con nuevas recetas y técnicas, siempre con un enfoque casero y cercano.</span>
           </p>
           <!-- <a href="https://www.youtube.com/" target="_blank" rel="noopener" class="btn">
             Ver en YouTube
@@ -185,42 +179,40 @@
   <section id="Suggestion" class="Suggestion">
     <div class="Suggestion-wrapper">
       <aside class="suggestion-info">
-        <h2>¿Tienes una receta en mente?</h2>
+        <h2 data-i18n="suggestion_title">¿Tienes una receta en mente?</h2>
         <p>
-          Nos encanta descubrir nuevas ideas, combinaciones inesperadas
-          y recetas que merecen ser compartidas.
+          <span data-i18n="suggestion_text_1">Nos encanta descubrir nuevas ideas, combinaciones inesperadas y recetas que merecen ser compartidas.</span>
           <br /><br />
-          Escríbela aquí y quizá sea la próxima en nuestra cocina.
-          Prometemos tratarla con cariño⬦ y hambre.
+          <span data-i18n="suggestion_text_2">Escríbela aquí y quizá sea la próxima en nuestra cocina. Prometemos tratarla con cariño⬦ y hambre.</span>
         </p>
       </aside>
 
     <form id="contact-form" class="contact-form" novalidate>
             <div class="form-field">
-              <label for="name">Nombre</label>
-              <input type="text" id="name" name="name" placeholder="Introduce tu nombre" required />
+              <label for="name" data-i18n="form_name_label">Nombre</label>
+              <input type="text" id="name" name="name" data-i18n-placeholder="form_name_placeholder" placeholder="Introduce tu nombre" required />
             </div>
             <div class="form-field">
-              <label for="email">Correo electrónico</label>
-              <input type="email" id="email" name="email" placeholder="Introduce un correo válido" required />
+              <label for="email" data-i18n="form_email_label">Correo electrónico</label>
+              <input type="email" id="email" name="email" data-i18n-placeholder="form_email_placeholder" placeholder="Introduce un correo válido" required />
             </div>
             <div class="form-field">
-              <label for="recipe-type">Tipo de Receta</label>
+              <label for="recipe-type" data-i18n="form_recipe_type_label">Tipo de Receta</label>
               <select id="recipe-type" name="recipe-type" required>
-                <option value="" disabled selected>Selecciona una opción</option>
-                <option value="postre">Postre</option>
-                <option value="entrada">Entrada</option>
-                <option value="plato-principal">Plato principal</option>
-                <option value="Bajo en calorias">Bajo en calorias</option>
-                <option value="Receta tiktok">Receta que viste en tiktok</option>
-                <option value="rapidas">Rápidas (para personas con prisa)</option>
+                <option value="" disabled selected data-i18n="form_recipe_type_placeholder">Selecciona una opción</option>
+                <option value="postre" data-i18n="form_recipe_type_postre">Postre</option>
+                <option value="entrada" data-i18n="form_recipe_type_entrada">Entrada</option>
+                <option value="plato-principal" data-i18n="form_recipe_type_plato_principal">Plato principal</option>
+                <option value="Bajo en calorias" data-i18n="form_recipe_type_bajo_calorias">Bajo en calorias</option>
+                <option value="Receta tiktok" data-i18n="form_recipe_type_tiktok">Receta que viste en tiktok</option>
+                <option value="rapidas" data-i18n="form_recipe_type_rapidas">Rápidas (para personas con prisa)</option>
               </select>
             </div>
             <div class="form-field">
-              <label for="message">Descripción de la receta</label>
-                <textarea id="message" name="message" rows="5" placeholder="Ingredientes, pasos, trucos secretos de la abuela..." required ></textarea>
+              <label for="message" data-i18n="form_message_label">Descripción de la receta</label>
+                <textarea id="message" name="message" rows="5" data-i18n-placeholder="form_message_placeholder" placeholder="Ingredientes, pasos, trucos secretos de la abuela..." required ></textarea>
             </div>
-            <button type="submit" class="btn">Enviar</button>
+            <button type="submit" class="btn" data-i18n="form_submit">Enviar</button>
             <p class="form-message form-message--ok"></p>
             <p class="form-message form-message--error"></p>
       </form>
@@ -229,7 +221,7 @@
 
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <p>© Foodaniell - Todos los derechos reservados.</p>
+      <p data-i18n="footer_copyright">© Foodaniell - Todos los derechos reservados.</p>
     </div>
   </footer>
 </body>

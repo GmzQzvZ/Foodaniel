@@ -139,7 +139,17 @@ async function sendWelcomeEmailSafe(user) {
 }
 
 async function sendRecoveryEmailSafe(user, rawToken) {
-  if (!isMailConfigured() || !user || !user.email || !rawToken) return;
+  console.log('Debug - Recuperación de contraseña:', {
+    user: user ? '✓' : '✗',
+    email: user?.email ? '✓' : '✗',
+    token: rawToken ? '✓' : '✗',
+    mailConfigured: isMailConfigured() ? '✓' : '✗'
+  });
+  
+  if (!isMailConfigured() || !user || !user.email || !rawToken) {
+    console.log('Error: No se puede enviar correo de recuperación - SMTP no configurado o faltan datos');
+    return;
+  }
   try {
     const resetLink = `${getFrontendBaseUrl()}/FrontEnd/View/recovery.html?token=${encodeURIComponent(rawToken)}`;
     const html = renderTemplate('recovery.html', {
@@ -228,6 +238,7 @@ exports.register = async (req, res) => {
 };
 
 exports.forgotPassword = async (req, res) => {
+  console.log('Debug - forgotPassword llamado con:', req.body);
   try {
     const { email } = req.body || {};
     if (typeof email !== 'string' || !emailRegex.test(email.trim())) {

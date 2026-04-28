@@ -6,7 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const PUBLIC_API_URL = `${baseOrigin}/api/public`;
 
   let publicContentCache = null;
+  let publicContentCacheLang = null;
   let publicContentRequestPromise = null;
+  let publicContentRequestLang = null;
+
+  function getCurrentLang() {
+    return window.FoodaniellI18n && typeof window.FoodaniellI18n.getCurrentLang === "function"
+      ? window.FoodaniellI18n.getCurrentLang()
+      : (localStorage.getItem("foodaniell_lang") || "es");
+  }
 
   function loadItems(key) {
     try {
@@ -37,71 +45,15 @@ document.addEventListener("DOMContentLoaded", () => {
     return t.split(/\r?\n/)[0];
   }
 
-  function ensureGoogleTranslate() {
-    if (document.getElementById("google_translate_element")) return;
-    const hidden = document.createElement("div");
-    hidden.id = "google_translate_element";
-    hidden.style.display = "none";
-    document.body.appendChild(hidden);
-
-    window.googleTranslateElementInit = () => {
-      if (!window.google || !window.google.translate || !window.google.translate.TranslateElement) return;
-      new window.google.translate.TranslateElement(
-        {
-          pageLanguage: "es",
-          includedLanguages: "es,en",
-          autoDisplay: false,
-        },
-        "google_translate_element"
-      );
-    };
-
-    const script = document.createElement("script");
-    script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-    script.async = true;
-    document.head.appendChild(script);
-  }
-
-  function setGoogleLanguage(lang) {
-    localStorage.setItem("site_lang", lang);
-    document.cookie = `googtrans=/es/${lang}; path=/`;
-    const combo = document.querySelector(".goog-te-combo");
-    if (combo) {
-      combo.value = lang;
-      combo.dispatchEvent(new Event("change"));
-    } else {
-      window.location.reload();
-    }
-  }
-
-  function ensureLanguageSwitcher() {
-    const footerInner = document.querySelector(".site-footer__inner");
-    if (!footerInner) return;
-    if (footerInner.querySelector(".site-lang-switcher")) return;
-
-    const switcher = document.createElement("div");
-    switcher.className = "site-lang-switcher";
-    switcher.innerHTML = `
-      <span class="site-lang-switcher__label">Idioma:</span>
-      <button type="button" class="site-lang-switcher__btn" data-lang="es" aria-pressed="false">ES</button>
-      <button type="button" class="site-lang-switcher__btn" data-lang="en" aria-pressed="false">EN</button>
-    `;
-    footerInner.appendChild(switcher);
-
-    const active = (localStorage.getItem("site_lang") || "es").toLowerCase();
-    switcher.querySelectorAll(".site-lang-switcher__btn").forEach((btn) => {
-      const isActive = btn.getAttribute("data-lang") === active;
-      btn.classList.toggle("is-active", isActive);
-      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
-      btn.addEventListener("click", () => setGoogleLanguage(btn.getAttribute("data-lang") || "es"));
-    });
-  }
+  // Google Translate eliminado: ahora usamos i18n.js local
 
   async function fetchPublicContent() {
-    if (publicContentCache) return publicContentCache;
-    if (publicContentRequestPromise) return publicContentRequestPromise;
+    const currentLang = getCurrentLang();
+    if (publicContentCache && publicContentCacheLang === currentLang) return publicContentCache;
+    if (publicContentRequestPromise && publicContentRequestLang === currentLang) return publicContentRequestPromise;
 
-    publicContentRequestPromise = fetch(`${PUBLIC_API_URL}/content`)
+    publicContentRequestLang = currentLang;
+    publicContentRequestPromise = fetch(`${PUBLIC_API_URL}/content?lang=${encodeURIComponent(currentLang)}`)
       .then(async (response) => {
         let data = null;
         try { data = await response.json(); } catch (_) { data = null; }
@@ -111,10 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
           libros: Array.isArray(data.libros) ? data.libros : [],
           videos: Array.isArray(data.videos) ? data.videos : [],
         };
+        publicContentCacheLang = currentLang;
         return publicContentCache;
       })
       .catch(() => null)
-      .finally(() => { publicContentRequestPromise = null; });
+      .finally(() => {
+        publicContentRequestPromise = null;
+        publicContentRequestLang = null;
+      });
 
     return publicContentRequestPromise;
   }
@@ -155,6 +111,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const notesEl = document.getElementById("recipeDetailNotes");
     const notesWrapEl = document.getElementById("recipeDetailNotesWrap");
 
+    // Elementos de tabla nutricional
+    const nutritionWrap = document.getElementById("recipeNutritionWrap");
+    const caloriesEl = document.getElementById("nutritionCalories");
+    const proteinsEl = document.getElementById("nutritionProteins");
+    const carbsEl = document.getElementById("nutritionCarbs");
+    const fatsEl = document.getElementById("nutritionFats");
+    const fiberEl = document.getElementById("nutritionFiber");
+    const sugarEl = document.getElementById("nutritionSugar");
+    const sodiumEl = document.getElementById("nutritionSodium");
+    const servingsEl = document.getElementById("nutritionServings");
+
+    function setNutritionPlaceholder() {
+      if (caloriesEl) caloriesEl.textContent = "--";
+      if (proteinsEl) proteinsEl.textContent = "--";
+      if (carbsEl) carbsEl.textContent = "--";
+      if (fatsEl) fatsEl.textContent = "--";
+      if (fiberEl) fiberEl.textContent = "--";
+      if (sugarEl) sugarEl.textContent = "--";
+      if (sodiumEl) sodiumEl.textContent = "--";
+      if (servingsEl) servingsEl.textContent = "--";
+    }
+
     if (titleEl) titleEl.textContent = recipe.titulo || "Receta";
     if (timeEl) timeEl.textContent = recipe.tiempo || "Sin tiempo especificado";
     if (imageEl) { imageEl.src = recipe.imagen || "/FrontEnd/img/90fc53c9.svg"; imageEl.alt = recipe.titulo || "Receta"; }
@@ -162,6 +140,33 @@ document.addEventListener("DOMContentLoaded", () => {
     if (stepsEl) stepsEl.textContent = recipe.pasos || "Sin pasos registrados";
     if (notesEl) notesEl.textContent = recipe.notas || "";
     if (notesWrapEl) notesWrapEl.style.display = recipe.notas ? "block" : "none";
+
+    // Mostrar información nutricional
+    if (nutritionWrap) {
+      const nutrition = recipe.nutrition || {
+        calories: recipe.calories,
+        proteins: recipe.proteins,
+        carbs: recipe.carbs,
+        fats: recipe.fats,
+        fiber: recipe.fiber,
+        sugar: recipe.sugar,
+        sodium: recipe.sodium,
+        servings: recipe.servings,
+      };
+      if (!nutrition) {
+        setNutritionPlaceholder();
+      } else {
+        if (caloriesEl) caloriesEl.textContent = nutrition.calories === null || typeof nutrition.calories === "undefined" || nutrition.calories === "" ? "--" : `${nutrition.calories} kcal`;
+        if (proteinsEl) proteinsEl.textContent = nutrition.proteins === null || typeof nutrition.proteins === "undefined" || nutrition.proteins === "" ? "--" : `${nutrition.proteins}g`;
+        if (carbsEl) carbsEl.textContent = nutrition.carbs === null || typeof nutrition.carbs === "undefined" || nutrition.carbs === "" ? "--" : `${nutrition.carbs}g`;
+        if (fatsEl) fatsEl.textContent = nutrition.fats === null || typeof nutrition.fats === "undefined" || nutrition.fats === "" ? "--" : `${nutrition.fats}g`;
+        if (fiberEl) fiberEl.textContent = nutrition.fiber === null || typeof nutrition.fiber === "undefined" || nutrition.fiber === "" ? "--" : `${nutrition.fiber}g`;
+        if (sugarEl) sugarEl.textContent = nutrition.sugar === null || typeof nutrition.sugar === "undefined" || nutrition.sugar === "" ? "--" : `${nutrition.sugar}g`;
+        if (sodiumEl) sodiumEl.textContent = nutrition.sodium === null || typeof nutrition.sodium === "undefined" || nutrition.sodium === "" ? "--" : `${nutrition.sodium}mg`;
+        if (servingsEl) servingsEl.textContent = nutrition.servings === null || typeof nutrition.servings === "undefined" || nutrition.servings === "" ? "--" : nutrition.servings;
+      }
+      nutritionWrap.style.display = "block";
+    }
 
     emptyState.style.display = "none";
     content.style.display = "grid";
@@ -202,6 +207,14 @@ document.addEventListener("DOMContentLoaded", () => {
       renderCardsIntoGrid(grid, videos, (v) => `<article class="recipe-card"><img src="/FrontEnd/img/90fc53c9.svg" alt="${escapeHtml(v.titulo)}" /><div class="recipe-card__body"><h2 class="recipe-card__title">${escapeHtml(v.titulo)}</h2><p class="recipe-card__text">${escapeHtml(v.descripcion || "Video publicado")}</p><a href="${v.url ? escapeHtml(v.url) : "#"}" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Ver video</a></div></article>`);
     }
   }
+
+  window.addEventListener("foodaniell:langchange", () => {
+    publicContentCache = null;
+    publicContentCacheLang = null;
+    publicContentRequestPromise = null;
+    publicContentRequestLang = null;
+    initDynamicViews();
+  });
 
   async function postPublic(endpoint, payload) {
     const response = await fetch(`${PUBLIC_API_URL}/${endpoint}`, {
@@ -274,19 +287,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const tabLinks = document.querySelectorAll(".tab-link");
   const tabContents = document.querySelectorAll(".tab-content");
+
   if (tabLinks.length && tabContents.length) {
-    tabLinks.forEach((btn) => btn.addEventListener("click", () => {
-      const targetId = btn.getAttribute("data-tab");
-      tabLinks.forEach((b) => b.classList.remove("active"));
-      tabContents.forEach((c) => c.classList.remove("active"));
-      btn.classList.add("active");
-      const targetContent = document.getElementById(targetId);
-      if (targetContent) targetContent.classList.add("active");
-    }));
+    tabLinks.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.getAttribute("data-tab");
+
+        // Quitar active de todas las pestañas
+        tabLinks.forEach((b) => b.classList.remove("active"));
+        tabContents.forEach((c) => c.classList.remove("active"));
+
+        // Activar pestaña y contenido seleccionado
+        btn.classList.add("active");
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) {
+          targetContent.classList.add("active");
+        }
+      });
+    });
   }
 
-  ensureGoogleTranslate();
-  ensureLanguageSwitcher();
+  // i18n.js ahora maneja la actualización automáticamente
+
   initDynamicViews();
+  // Google Translate eliminado: ahora usa i18n.js
   initPublicForms();
 });

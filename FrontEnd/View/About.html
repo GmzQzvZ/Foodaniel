@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
 </head>
 
+<script src="/FrontEnd/shared/i18n.js"></script>
+<script src="/FrontEnd/View/JS/main.js" defer></script>
+
 <!-- ===== LOADING SCREEN =====
 <div id="loading-screen">
   <h1 class="bg-title">FOODANIElL</h1>
@@ -35,26 +38,26 @@
       </button>
       <nav class="site-nav">
         <ul class="site-nav__list">
-          <li><a class="site-nav__link" href="/FrontEnd/View/index.html">Inicio</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/index.html" data-i18n="nav_home">Inicio</a></li>
           <li class="site-nav__item site-nav__item--submenu">
             <button class="site-nav__link site-nav__submenu-toggle" type="button" aria-expanded="false">
-              Contenido
+              <span data-i18n="nav_content">Contenido</span>
               <i class="ti ti-chevron-down" aria-hidden="true"></i>
             </button>
             <ul class="site-submenu">
-              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html">Videos</a></li>
-              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html">Recetas</a></li>
-              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html">Libros</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html" data-i18n="nav_videos">Videos</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html" data-i18n="nav_recipes">Recetas</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html" data-i18n="nav_books">Libros</a></li>
             </ul>
           </li>
-          <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/About.html">Acerca de</a></li>
-          <li><a class="site-nav__link" href="/FrontEnd/View/Contacto.html">Contacto</a></li>
+          <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/About.html" data-i18n="nav_about">Acerca de</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/Contacto.html" data-i18n="nav_contact">Contacto</a></li>
 
           <!-- Login -->
           <li>
             <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/Login.html">
               <i class="ti ti-login"></i>
-              <span>Login</span>
+              <span data-i18n="nav_login">Login</span>
             </a>
           </li>
 
@@ -62,7 +65,7 @@
           <li>
             <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/registro.html">
               <i class="ti ti-user-circle"></i>
-              <span>Register</span>
+              <span data-i18n="nav_register">Register</span>
             </a>
           </li>
         </ul>
@@ -74,21 +77,19 @@
     <section class="section section--light">
       <div class="container about-layout about-layout--text">
         <div class="about-text">
-          <h1>Sobre Foodaniell</h1>
+          <h1 data-i18n="about_title">Sobre Foodaniell</h1>
           <p>
-            Ayudo a personas que quieren comer y cocinar mejor sin convertir su cocina en un laboratorio ni su vida en un concurso gastronómico.
-            Traduzco técnicas de la cocina profesional a procesos simples, prácticos y fáciles de aplicar en casa.
-            Mi enfoque combina gastronomía, estilo de vida y creatividad para que cocinar sea algo natural, elegante y posible en el día a día.
-            No va de ser chef, va de comprender esos pequeños detalles que elevan cualquier plato.
-            Cocina cercana, resultados que se notan y soluciones pensadas para la vida real.
+            <span data-i18n="about_text_1">Ayudo a personas que quieren comer y cocinar mejor sin convertir su cocina en un laboratorio ni su vida en un concurso gastronómico.</span>
+            <span data-i18n="about_text_2">Traduzco técnicas de la cocina profesional a procesos simples, prácticos y fáciles de aplicar en casa.</span>
+            <span data-i18n="about_text_3">Mi enfoque combina gastronomía, estilo de vida y creatividad para que cocinar sea algo natural, elegante y posible en el día a día.</span>
+            <span data-i18n="about_text_4">No va de ser chef, va de comprender esos pequeños detalles que elevan cualquier plato.</span>
+            <span data-i18n="about_text_5">Cocina cercana, resultados que se notan y soluciones pensadas para la vida real.</span>
           </p>
           <p>
-            En Foodaniell encontrarás recetas paso a paso, ideas de presentación y algunos
-            trucos que he ido aprendiendo con el tiempo. Gracias por formar parte de esta
-            aventura culinaria.
+            <span data-i18n="about_text_6">En Foodaniell encontrarás recetas paso a paso, ideas de presentación y algunos trucos que he ido aprendiendo con el tiempo. Gracias por formar parte de esta aventura culinaria.</span>
           </p>
           
-          <h4>Redes Sociales:</h4>
+          <h4 data-i18n="about_social_title">Redes Sociales:</h4>
 
           <div class="social-buttons">
             <a href="#" class="social-btn fb">
@@ -114,6 +115,88 @@
       </div>
     </section>
   </main>
+
+  <!-- Galería de imágenes con efecto hover -->
+  <section class="section section--light">
+    <div class="container">
+      <h2 class="section__title" data-i18n="about_gallery_title">Mi Cocina</h2>
+      <p class="section__subtitle" data-i18n="about_gallery_subtitle">Un vistazo a mis creaciones y el estilo que define Foodaniell</p>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <div class="gallery-image">
+            <img src="/asset/693A0185.JPG" alt="Plato elegante" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-content">
+                <h3 data-i18n="about_gallery_item1_title">Técnica y Simplicidad</h3>
+                <p data-i18n="about_gallery_item1_desc">Platos que combinan técnicas profesionales con ejecución casera, donde cada elemento tiene su propósito.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-image">
+            <img src="/asset/693A0186.JPG" alt="Ingredientes frescos" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-content">
+                <h3 data-i18n="about_gallery_item2_title">Ingredientes que Cuentan</h3>
+                <p data-i18n="about_gallery_item2_desc">Selección cuidadosa de productos que transforman lo simple en extraordinario sin complicaciones.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-image">
+            <img src="/asset/693A0195.JPG" alt="Presentación creativa" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-content">
+                <h3 data-i18n="about_gallery_item3_title">Presentación Natural</h3>
+                <p data-i18n="about_gallery_item3_desc">Elegancia sin artificios, donde la belleza surge de la simplicidad y el respeto por los ingredientes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-image">
+            <img src="/asset/693A0243.JPG" alt="Proceso creativo" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-content">
+                <h3 data-i18n="about_gallery_item4_title">Proceso Creativo</h3>
+                <p data-i18n="about_gallery_item4_desc">Cada receta nace de experimentación, conocimiento y el placer de compartir resultados.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-image">
+            <img src="/asset/693A0244.JPG" alt="Cocina diaria" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-content">
+                <h3 data-i18n="about_gallery_item5_title">Cocina Real</h3>
+                <p data-i18n="about_gallery_item5_desc">Recetas adaptadas a la vida cotidiana, sin sacrificar sabor ni presentación.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-image">
+            <img src="/asset/693A0245.JPG" alt="Detalle y precisión" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-content">
+                <h3 data-i18n="about_gallery_item6_title">Detalle que Marca</h3>
+                <p data-i18n="about_gallery_item6_desc">Pequeños detalles que elevan cualquier preparación de ordinaria a memorable.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <div class="container about-videos">
       <div class="about-photo">
@@ -147,11 +230,9 @@
 
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <p> Foodaniell - Todos los derechos reservados.</p>
+      <p data-i18n="footer_copyright">© Foodaniell - Todos los derechos reservados.</p>
     </div>
   </footer>
-
-  <script src="/FrontEnd/View/JS/main.js" defer></script>
 </body>
 </html>
 <script src="https://www.youtube.com/iframe_api"></script>

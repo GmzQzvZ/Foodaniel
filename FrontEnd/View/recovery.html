@@ -4,41 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
-  <link rel="stylesheet" href="/FrontEnd/View/css/style.css" />
-  <title>Recuperar Contrasena</title>
+  <link rel="stylesheet" href="/FrontEnd/View/css/style.css">
+  <title>Recuperar Contraseña</title>
 </head>
+
 <body class="auth-page">
   <div class="auth-box">
-    <h1 class="auth-title" id="recoveryTitle">Recuperar contrasena</h1>
-    <p class="auth-subtitle" id="recoverySubtitle">Ingresa tu correo para enviarte un enlace.</p>
+    <h1 class="auth-title" id="recoveryTitle" data-i18n="recovery_title">Recuperar Contraseña</h1>
+    <p class="auth-subtitle" id="recoverySubtitle" data-i18n="recovery_subtitle">Ingresa tu correo para enviarte un enlace</p>
 
-    <form id="recoveryForm" class="auth-form">
+    <form id="recoveryForm" class="auth-form" novalidate>
       <div class="form-field" id="recoveryEmailGroup">
-        <label for="recoveryEmail">Correo</label>
-        <input id="recoveryEmail" type="email" placeholder="correo@ejemplo.com" />
+        <label for="recoveryEmail" data-i18n="login_email">Correo</label>
+        <input id="recoveryEmail" name="email" type="email" data-i18n-placeholder="login_email" placeholder="tu@correo.com" required>
       </div>
 
       <div class="form-field" id="recoveryPasswordGroup" style="display:none;">
-        <label for="recoveryPassword">Nueva contrasena</label>
-        <input id="recoveryPassword" type="password" minlength="8" placeholder="********" />
+        <label for="recoveryPassword" data-i18n="register_password">Nueva contraseña</label>
+        <input id="recoveryPassword" name="password" type="password" data-i18n-placeholder="register_password" placeholder="********" minlength="8">
       </div>
 
       <div class="form-field" id="recoveryConfirmGroup" style="display:none;">
-        <label for="recoveryPasswordConfirm">Confirmar contrasena</label>
-        <input id="recoveryPasswordConfirm" type="password" minlength="8" placeholder="********" />
+        <label for="recoveryPasswordConfirm" data-i18n="register_password">Confirmar contraseña</label>
+        <input id="recoveryPasswordConfirm" name="confirmPassword" type="password" data-i18n-placeholder="register_password" placeholder="********" minlength="8">
       </div>
 
       <p id="recoveryMessage" style="display:none; margin: 8px 0;"></p>
 
-      <button id="recoverySubmit" class="btn" style="width:100%" type="submit">Enviar enlace</button>
+      <button type="submit" class="btn" style="width:100%" id="recoverySubmit" data-i18n="recovery_send">Enviar enlace</button>
 
       <div class="auth-alt">
-        <span id="recoveryAltText">Recordaste tu contrasena?</span>
-        <a id="recoveryAltLink" href="Login.html">Iniciar sesion</a>
+        <span id="recoveryAltText" data-i18n="recovery_back_to_login">Recordaste tu contraseña?</span>
+        <a href="Login.html" id="recoveryAltLink" data-i18n="register_login_here">Iniciar sesión</a>
       </div>
     </form>
   </div>
 
+  <script src="/FrontEnd/shared/i18n.js"></script>
   <script src="/FrontEnd/View/JS/auth.js" defer></script>
 </body>
 </html>

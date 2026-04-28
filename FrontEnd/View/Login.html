@@ -11,32 +11,33 @@
 
 <body class="auth-page">
   <div class="auth-box">
-    <h1 class="auth-title">Iniciar Sesion</h1>
-    <p class="auth-subtitle">Bienvenido de nuevo</p>
+    <h1 class="auth-title" data-i18n="login_title">Iniciar Sesión</h1>
+    <p class="auth-subtitle" data-i18n="login_subtitle">Bienvenido de nuevo</p>
 
     <form id="loginForm" class="auth-form">
       <div class="form-field">
-        <label for="loginEmail">Correo</label>
-        <input id="loginEmail" type="email" placeholder="tu@correo.com" required>
+        <label for="loginEmail" data-i18n="login_email">Correo</label>
+        <input id="loginEmail" type="email" data-i18n-placeholder="login_email" placeholder="tu@correo.com" required>
       </div>
 
       <div class="form-field">
-        <label for="loginPassword">Contrasena</label>
-        <input id="loginPassword" type="password" placeholder="********" minlength="8" required>
+        <label for="loginPassword" data-i18n="login_password">Contraseña</label>
+        <input id="loginPassword" type="password" data-i18n-placeholder="login_password" placeholder="********" minlength="8" required>
       </div>
 
       <p id="loginMessage" style="display:none; margin: 8px 0;"></p>
 
-      <button class="btn" style="width:100%" type="submit">Ingresar</button>
+      <button class="btn" style="width:100%" type="submit" data-i18n="login_button">Ingresar</button>
 
       <div class="auth-alt">
-        <a href="recovery.html">Olvidaste tu contrasena?</a><br>
-        No tienes cuenta?
-        <a href="registro.html">Registrate aqui</a>
+        <a href="recovery.html" data-i18n="login_forgot">¿Olvidaste tu contraseña?</a><br>
+        <span data-i18n="login_no_account">¿No tienes cuenta?</span>
+        <a href="registro.html" data-i18n="login_register_here">Regístrate aquí</a>
       </div>
     </form>
   </div>
 
+  <script src="/FrontEnd/shared/i18n.js"></script>
   <script src="/FrontEnd/View/JS/auth.js" defer></script>
 </body>
 </html>

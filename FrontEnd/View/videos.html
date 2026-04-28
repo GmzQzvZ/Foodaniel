@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 </head>
 
+<script src="/FrontEnd/shared/i18n.js"></script>
+<script src="/FrontEnd/View/JS/main.js" defer></script>
+
 <!-- ===== LOADING SCREEN =====
 <div id="loading-screen">
   <h1 class="bg-title">FOODANIElL</h1>
@@ -35,26 +38,26 @@
       </button>
       <nav class="site-nav">
         <ul class="site-nav__list">
-          <li><a class="site-nav__link" href="/FrontEnd/View/index.html">Inicio</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/index.html" data-i18n="nav_home">Inicio</a></li>
           <li class="site-nav__item site-nav__item--submenu">
             <button class="site-nav__link site-nav__link--active site-nav__submenu-toggle" type="button" aria-expanded="false">
-              Contenido
+              <span data-i18n="nav_content">Contenido</span>
               <i class="ti ti-chevron-down" aria-hidden="true"></i>
             </button>
             <ul class="site-submenu">
-              <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/videos.html">Videos</a></li>
-              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html">Recetas</a></li>
-              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html">Libros</a></li>
+              <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/videos.html" data-i18n="nav_videos">Videos</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html" data-i18n="nav_recipes">Recetas</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html" data-i18n="nav_books">Libros</a></li>
             </ul>
           </li>
-          <li><a class="site-nav__link" href="/FrontEnd/View/About.html">Acerca de</a></li>
-          <li><a class="site-nav__link" href="/FrontEnd/View/Contacto.html">Contacto</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/About.html" data-i18n="nav_about">Acerca de</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/Contacto.html" data-i18n="nav_contact">Contacto</a></li>
 
           <!-- Login -->
           <li>
             <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/Login.html">
               <i class="ti ti-login"></i>
-              <span>Login</span>
+              <span data-i18n="nav_login">Login</span>
             </a>
           </li>
 
@@ -62,7 +65,7 @@
           <li>
             <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/registro.html">
               <i class="ti ti-user-circle"></i>
-              <span>Register</span>
+              <span data-i18n="nav_register">Register</span>
             </a>
           </li>
         </ul>
@@ -73,9 +76,9 @@
   <main>
     <section class="section hero--recipes">
       <div class="container">
-        <h1 class="section__title">Videos</h1>
+        <h1 class="section__title" data-i18n="nav_videos">Videos</h1>
         <p class="section__subtitle">
-          Aprende técnicas, tips y recetas en formato audiovisual para llevar tu cocina al siguiente nivel.
+          <span data-i18n="videos_subtitle">Aprende técnicas, tips y recetas en formato audiovisual para llevar tu cocina al siguiente nivel.</span>
         </p>
       </div>
     </section>
@@ -166,11 +169,9 @@
 
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <p>© Foodaniell - Todos los derechos reservados.</p>
+      <p data-i18n="footer_copyright">© Foodaniell - Todos los derechos reservados.</p>
     </div>
   </footer>
-
-  <script src="/FrontEnd/View/JS/main.js" defer></script>
 </body>
 </html>
 

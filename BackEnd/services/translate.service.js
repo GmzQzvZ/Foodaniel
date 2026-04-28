@@ -1,4 +1,15 @@
-const translate = require('@vitalets/google-translate-api');
+// Servicio de traducción deshabilitado temporalmente
+// Para habilitarlo, instalar: npm install @vitalets/google-translate-api
+let translate = null;
+
+try {
+  const translateModule = require('@vitalets/google-translate-api');
+  translate = translateModule && typeof translateModule.translate === 'function'
+    ? translateModule.translate
+    : translateModule;
+} catch (error) {
+  console.warn('Translation library unavailable, recipe translations disabled:', error.message);
+}
 
 const rawTargets = (process.env.TRANSLATION_TARGET_LANGS || 'en')
   .split(',')
@@ -8,14 +19,14 @@ const sourceLang = (process.env.TRANSLATION_SOURCE_LANG || 'es').trim().toLowerC
 const targetLanguages = Array.from(new Set(rawTargets.filter((lang) => lang && lang !== 'es')));
 
 async function translateText(value, targetLang) {
-  if (!value || !targetLang) return '';
+  if (!value || !targetLang || !translate) return value;
 
   try {
     const result = await translate(value, {
       from: sourceLang,
       to: targetLang
     });
-    return result.text || '';
+    return result.text || value;
   } catch (error) {
     console.error('Translation error:', { targetLang, error: error.message });
     return value;

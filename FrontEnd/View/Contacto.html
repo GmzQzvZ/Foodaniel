@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 </head>
 
+<script src="/FrontEnd/shared/i18n.js"></script>
+<script src="/FrontEnd/View/JS/main.js" defer></script>
+
 <!-- ===== LOADING SCREEN =====
 <div id="loading-screen">
   <h1 class="bg-title">FOODANIElL</h1>
@@ -35,26 +38,26 @@
       </button>
       <nav class="site-nav">
         <ul class="site-nav__list">
-          <li><a class="site-nav__link" href="/FrontEnd/View/index.html">Inicio</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/index.html" data-i18n="nav_home">Inicio</a></li>
           <li class="site-nav__item site-nav__item--submenu">
             <button class="site-nav__link site-nav__submenu-toggle" type="button" aria-expanded="false">
-              Contenido
+              <span data-i18n="nav_content">Contenido</span>
               <i class="ti ti-chevron-down" aria-hidden="true"></i>
             </button>
             <ul class="site-submenu">
-              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html">Videos</a></li>
-              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html">Recetas</a></li>
-              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html">Libros</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html" data-i18n="nav_videos">Videos</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html" data-i18n="nav_recipes">Recetas</a></li>
+              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html" data-i18n="nav_books">Libros</a></li>
             </ul>
           </li>
-          <li><a class="site-nav__link" href="/FrontEnd/View/About.html">Acerca de</a></li>
-          <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/Contacto.html">Contacto</a></li>
+          <li><a class="site-nav__link" href="/FrontEnd/View/About.html" data-i18n="nav_about">Acerca de</a></li>
+          <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/Contacto.html" data-i18n="nav_contact">Contacto</a></li>
 
           <!-- Login -->
           <li>
             <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/Login.html">
               <i class="ti ti-login"></i>
-              <span>Login</span>
+              <span data-i18n="nav_login">Login</span>
             </a>
           </li>
 
@@ -62,7 +65,7 @@
           <li>
             <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/registro.html">
               <i class="ti ti-user-circle"></i>
-              <span>Register</span>
+              <span data-i18n="nav_register">Register</span>
             </a>
           </li>
         </ul>
@@ -73,22 +76,22 @@
   <main>
     <section class="section Contacto">
       <div class="container">
-        <h1 class="section__title">Contáctanos</h1>
+        <h1 class="section__title" data-i18n="contact_title">Contáctanos</h1>
         <p class="section__subtitle">
-          ¿Tienes una duda que se te quemó, una idea con buen aroma o una propuesta que podría convertirse en el plato estrella?
+          <span data-i18n="contact_subtitle">¿Tienes una duda que se te quemó, una idea con buen aroma o una propuesta que podría convertirse en el plato estrella?</span>
         </p>
-        <p>Cuéntame! Prometo no dejar tu mensaje <b>Sa fuego lento⬝.</b></p>
+        <p data-i18n="contact_text">Cuéntame! Prometo no dejar tu mensaje <b>a fuego lento⬝.</b></p>
       </div>
     </section>
 
     <section class="section section--light">
       <div class="container contact-layout">
         <div class="contact-info">
-          <h2>Información de contacto</h2>
+          <h2 data-i18n="contact_info_title">Información de contacto</h2>
           <p>
-            ¿Tienes una duda que necesita sazón, una sugerencia para mejorar la receta o una propuesta de colaboración digna de un menú gourmet?
+            <span data-i18n="contact_info_text_1">¿Tienes una duda que necesita sazón, una sugerencia para mejorar la receta o una propuesta de colaboración digna de un menú gourmet?</span>
           </p>
-          <p>Escríbeme y estaré encantado de leerte.</p>
+          <p data-i18n="contact_info_text_2">Escríbeme y estaré encantado de leerte.</p>
           <p>
             <a href="mailto:contacto@foodaniell.com">contacto@foodaniell.com</a>
           </p>
@@ -115,29 +118,31 @@
 
         <form id="contact-form" class="contact-form contact" novalidate>
           <div class="form-field">
-            <label for="name">Nombre</label>
-            <input type="text" id="name" name="name" placeholder="Introduce tu nombre" required />
+            <label for="name" data-i18n="contact_form_name_label">Nombre</label>
+            <input type="text" id="name" name="name" data-i18n-placeholder="contact_form_name_placeholder" placeholder="Introduce tu nombre" required />
           </div>
 
           <div class="form-field">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" name="email" placeholder="Introduce un correo válido" required />
+            <label for="email" data-i18n="contact_form_email_label">Correo electrónico</label>
+            <input type="email" id="email" name="email" data-i18n-placeholder="contact_form_email_placeholder" placeholder="Introduce un correo válido" required />
           </div>
 
           <div class="form-field">
-            <label for="recipe-type">Tipo de Solicitud</label>
+            <label for="recipe-type" data-i18n="contact_form_type_label">Tipo de Solicitud</label>
               <select id="recipe-type" name="recipe-type" required>
-                <option value="" disabled selected>Selecciona una opción</option>
-                <option value="nutritional">Asesoria Nutriconal</option>
+                <option value="" disabled selected data-i18n="contact_form_type_placeholder">Selecciona una opción</option>
+                <option value="nutritional" data-i18n="contact_form_type_nutritional">Asesoria Nutriconal</option>
+                <option value="collaboration" data-i18n="contact_form_type_collaboration">Colaboración Y Marketing</option>
+                <option></option>
               </select>
           </div>
 
           <div class="form-field">
-            <label for="message">Mensaje</label>
-            <textarea id="message" name="message" rows="4" placeholder="Escribe tu mensaje" required></textarea>
+            <label for="message" data-i18n="contact_form_message_label">Mensaje</label>
+            <textarea id="message" name="message" rows="4" data-i18n-placeholder="contact_form_message_placeholder" placeholder="Escribe tu mensaje" required></textarea>
           </div>
 
-          <button type="submit" class="btn">Enviar</button>
+          <button type="submit" class="btn" data-i18n="contact_form_submit">Enviar</button>
           <p class="form-message form-message--ok"></p>
           <p class="form-message form-message--error"></p>
         </form>
@@ -147,11 +152,9 @@
 
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <p>© Foodaniell - Todos los derechos reservados.</p>
+      <p data-i18n="footer_copyright">© Foodaniell - Todos los derechos reservados.</p>
     </div>
   </footer>
-
-  <script src="/FrontEnd/View/JS/main.js" defer></script>
 </body>
 </html>
 

@@ -28,6 +28,7 @@ function parseImageArray(imageUrlValue) {
     return parsed.filter((item) => typeof item === 'string' && item.trim());
   } catch (_) {
   return [];
+  }
 }
 
 function sanitizeLang(value) {
@@ -38,6 +39,17 @@ function sanitizeLang(value) {
 
 function buildRecipeResponse(row, translation) {
   const images = parseImageArray(row.image_url);
+  const nutrition = {
+    calories: row.calories != null ? row.calories : null,
+    proteins: row.proteins != null ? row.proteins : null,
+    carbs: row.carbs != null ? row.carbs : null,
+    fats: row.fats != null ? row.fats : null,
+    fiber: row.fiber != null ? row.fiber : null,
+    sugar: row.sugar != null ? row.sugar : null,
+    sodium: row.sodium != null ? row.sodium : null,
+    servings: row.servings != null ? row.servings : null
+  };
+  const hasNutrition = Object.values(nutrition).some((value) => value !== null);
   const base = {
     id: String(row.id),
     imagen: images[0] || '',
@@ -47,7 +59,16 @@ function buildRecipeResponse(row, translation) {
     ingredientes: row.ingredients || '',
     pasos: row.steps || '',
     notas: row.notes || '',
-    publico: Boolean(row.is_public)
+    publico: Boolean(row.is_public),
+    calories: nutrition.calories,
+    proteins: nutrition.proteins,
+    carbs: nutrition.carbs,
+    fats: nutrition.fats,
+    fiber: nutrition.fiber,
+    sugar: nutrition.sugar,
+    sodium: nutrition.sodium,
+    servings: nutrition.servings,
+    nutrition: hasNutrition ? nutrition : null
   };
 
   if (!translation) {
@@ -73,7 +94,6 @@ async function buildRecipesResponse(rows = [], lang = 'es') {
       : {};
 
   return rows.map((row) => buildRecipeResponse(row, translations[row.id]));
-}
 }
 
 async function ensurePublicTables() {
@@ -198,12 +218,30 @@ exports.createContact = async (req, res) => {
 exports.getPublicContent = async (req, res) => {
   try {
     await ensureVideosDescriptionColumn();
+    const lang = sanitizeLang(req.query.lang);
     const [recipesRows, booksRows, videosRows] = await Promise.all([
       safeQuery(
-        `SELECT id, title, time_text, ingredients, steps, notes, image_url, is_public
-         FROM recipes
-         WHERE is_public = TRUE
-         ORDER BY id DESC`
+        `SELECT
+           r.id,
+           r.title,
+           r.time_text,
+           r.ingredients,
+           r.steps,
+           r.notes,
+           r.image_url,
+           r.is_public,
+           rn.calories,
+           rn.proteins,
+           rn.carbs,
+           rn.fats,
+           rn.fiber,
+           rn.sugar,
+           rn.sodium,
+           rn.servings
+         FROM recipes r
+         LEFT JOIN recipe_nutrition rn ON rn.recipe_id = r.id
+         WHERE r.is_public = TRUE
+         ORDER BY r.id DESC`
       ),
       safeQuery(
         `SELECT id, title, description, buy_link, price, image_url, is_public
@@ -219,7 +257,7 @@ exports.getPublicContent = async (req, res) => {
       )
     ]);
 
-    const recetas = await buildRecipesResponse(recipesRows);
+    const recetas = await buildRecipesResponse(recipesRows, lang);
 
     const libros = booksRows.map((item) => ({
       id: String(item.id),
@@ -255,10 +293,27 @@ exports.getRecipes = async (req, res) => {
   try {
     const lang = sanitizeLang(req.query.lang);
     const recipesRows = await safeQuery(
-      `SELECT id, title, time_text, ingredients, steps, notes, image_url, is_public
-       FROM recipes
+      `SELECT
+         r.id,
+         r.title,
+         r.time_text,
+         r.ingredients,
+         r.steps,
+         r.notes,
+         r.image_url,
+         r.is_public,
+         rn.calories,
+         rn.proteins,
+         rn.carbs,
+         rn.fats,
+         rn.fiber,
+         rn.sugar,
+         rn.sodium,
+         rn.servings
+       FROM recipes r
+       LEFT JOIN recipe_nutrition rn ON rn.recipe_id = r.id
        WHERE is_public = TRUE
-       ORDER BY id DESC`
+       ORDER BY r.id DESC`
     );
 
     const recetas = await buildRecipesResponse(recipesRows, lang);

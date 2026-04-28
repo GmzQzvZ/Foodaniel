@@ -153,6 +153,10 @@ function initRecoveryForm() {
       altLink.textContent = 'Iniciar sesion';
       altLink.href = 'Login.html';
     }
+    // Hacer requeridos los campos de password en modo reset
+    if (passwordInput) passwordInput.required = true;
+    if (confirmInput) confirmInput.required = true;
+    if (emailInput) emailInput.required = false;
   } else {
     if (title) title.textContent = 'Recuperar contrasena';
     if (subtitle) subtitle.textContent = 'Ingresa tu correo para enviarte un enlace.';
@@ -165,34 +169,51 @@ function initRecoveryForm() {
       altLink.textContent = 'Iniciar sesion';
       altLink.href = 'Login.html';
     }
+    // Hacer no requeridos los campos de password en modo recuperación
+    if (passwordInput) passwordInput.required = false;
+    if (confirmInput) confirmInput.required = false;
+    if (emailInput) emailInput.required = true;
   }
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    console.log('Debug - Formulario de recuperación enviado');
     showFormMessage(message, '');
     message.style.display = 'none';
 
     if (isResetMode) {
+      console.log('Debug - Modo reset activado, token:', token);
       const newPassword = (passwordInput?.value || '').trim();
       const confirmPassword = (confirmInput?.value || '').trim();
 
+      console.log('Debug - Passwords:', { 
+        newPassword: newPassword ? '✓' : '✗', 
+        confirmPassword: confirmPassword ? '✓' : '✗',
+        length: newPassword.length 
+      });
+
       if (newPassword.length < 8) {
+        console.log('Debug - Password demasiado corto');
         showFormMessage(message, 'La contrasena debe tener al menos 8 caracteres');
         return;
       }
 
       if (newPassword !== confirmPassword) {
+        console.log('Debug - Passwords no coinciden');
         showFormMessage(message, 'Las contrasenas no coinciden');
         return;
       }
 
+      console.log('Debug - Enviando petición de reset password');
       let result;
       try {
         result = await postJson(`${API_URL}/reset-password`, {
           token,
           password: newPassword
         });
+        console.log('Debug - Respuesta reset password:', result);
       } catch (_) {
+        console.log('Debug - Error de conexión en reset password');
         showFormMessage(message, 'No se pudo conectar con el servidor');
         return;
       }
@@ -217,12 +238,15 @@ function initRecoveryForm() {
       return;
     }
 
+    console.log('Debug - Enviando petición a forgot-password con email:', email);
     let result;
     try {
       result = await postJson(`${API_URL}/forgot-password`, {
         email
       });
+      console.log('Debug - Respuesta recibida:', result);
     } catch (_) {
+      console.log('Debug - Error de conexión');
       showFormMessage(message, 'No se pudo conectar con el servidor');
       return;
     }

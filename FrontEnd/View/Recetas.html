@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 </head>
 
+<script src="/FrontEnd/shared/i18n.js"></script>
+<script src="/FrontEnd/View/JS/main.js" defer></script>
+
 <!-- ===== LOADING SCREEN =====
 <div id="loading-screen">
   <h1 class="bg-title">FOODANIElL</h1>
@@ -73,10 +76,9 @@
   <main>
     <section class="section hero--recipes">
       <div class="container">
-        <h1 class="section__title">Recetas</h1>
+        <h1 class="section__title" data-i18n="nav_recipes">Recetas</h1>
         <p class="section__subtitle">
-          Una colección de ideas para cocinar en casa, con ingredientes sencillos y resultados
-          llenos de sabor.
+          <span data-i18n="recipes_subtitle">Una colección de ideas para cocinar en casa, con ingredientes sencillos y resultados llenos de sabor.</span>
         </p>
       </div>
     </section>
@@ -87,66 +89,66 @@
           <article class="recipe-card">
             <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 1" />
             <div class="recipe-card__body">
-              <h2 class="recipe-card__title">Receta de ejemplo 1</h2>
+              <h2 class="recipe-card__title" data-i18n="recipes_example_1_title">Receta de ejemplo 1</h2>
               <p class="recipe-card__text">
-                Una receta sencilla para comenzar: perfecta para una comida rápida entre semana.
+                <span data-i18n="recipes_example_1_text">Una receta sencilla para comenzar: perfecta para una comida rápida entre semana.</span>
               </p>
-              <a href="#" class="btn btn--outline">Ver receta</a>
+              <a href="#" class="btn btn--outline" data-i18n="recipes_view_recipe">Ver receta</a>
             </div>
           </article>
 
           <article class="recipe-card">
             <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 2" />
             <div class="recipe-card__body">
-              <h2 class="recipe-card__title">Receta de ejemplo 2</h2>
+              <h2 class="recipe-card__title" data-i18n="recipes_example_2_title">Receta de ejemplo 2</h2>
               <p class="recipe-card__text">
-                Ideal para compartir en familia, con ingredientes fáciles de encontrar.
+                <span data-i18n="recipes_example_2_text">Ideal para compartir en familia, con ingredientes fáciles de encontrar.</span>
               </p>
-              <a href="#" class="btn btn--outline">Ver receta</a>
+              <a href="#" class="btn btn--outline" data-i18n="recipes_view_recipe">Ver receta</a>
             </div>
           </article>
 
           <article class="recipe-card">
             <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 3" />
             <div class="recipe-card__body">
-              <h2 class="recipe-card__title">Receta de ejemplo 3</h2>
+              <h2 class="recipe-card__title" data-i18n="recipes_example_3_title">Receta de ejemplo 3</h2>
               <p class="recipe-card__text">
-                Un plato un poco más elaborado para cuando quieras sorprender a tus invitados.
+                <span data-i18n="recipes_example_3_text">Un plato un poco más elaborado para cuando quieras sorprender a tus invitados.</span>
               </p>
-              <a href="#" class="btn btn--outline">Ver receta</a>
+              <a href="#" class="btn btn--outline" data-i18n="recipes_view_recipe">Ver receta</a>
             </div>
           </article>
 
           <article class="recipe-card">
             <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 4" />
             <div class="recipe-card__body">
-              <h2 class="recipe-card__title">Receta de ejemplo 4</h2>
+              <h2 class="recipe-card__title" data-i18n="recipes_example_4_title">Receta de ejemplo 4</h2>
               <p class="recipe-card__text">
-                Perfecta para una cena ligera, con sabores frescos y equilibrados.
+                <span data-i18n="recipes_example_4_text">Perfecta para una cena ligera, con sabores frescos y equilibrados.</span>
               </p>
-              <a href="#" class="btn btn--outline">Ver receta</a>
+              <a href="#" class="btn btn--outline" data-i18n="recipes_view_recipe">Ver receta</a>
             </div>
           </article>
 
           <article class="recipe-card">
             <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 5" />
             <div class="recipe-card__body">
-              <h2 class="recipe-card__title">Receta de ejemplo 5</h2>
+              <h2 class="recipe-card__title" data-i18n="recipes_example_5_title">Receta de ejemplo 5</h2>
               <p class="recipe-card__text">
-                Una opción rápida para cuando tienes poco tiempo pero muchas ganas de comer bien.
+                <span data-i18n="recipes_example_5_text">Una opción rápida para cuando tienes poco tiempo pero muchas ganas de comer bien.</span>
               </p>
-              <a href="#" class="btn btn--outline">Ver receta</a>
+              <a href="#" class="btn btn--outline" data-i18n="recipes_view_recipe">Ver receta</a>
             </div>
           </article>
 
           <article class="recipe-card">
             <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 6" />
             <div class="recipe-card__body">
-              <h2 class="recipe-card__title">Receta de ejemplo 6</h2>
+              <h2 class="recipe-card__title" data-i18n="recipes_example_6_title">Receta de ejemplo 6</h2>
               <p class="recipe-card__text">
-                Para ocasiones especiales, con un toque diferente y muy sabroso.
+                <span data-i18n="recipes_example_6_text">Para ocasiones especiales, con un toque diferente y muy sabroso.</span>
               </p>
-              <a href="#" class="btn btn--outline">Ver receta</a>
+              <a href="#" class="btn btn--outline" data-i18n="recipes_view_recipe">Ver receta</a>
             </div>
           </article>
         </div>
@@ -155,10 +157,9 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="section__title">Perfección del diseño</h2>
+        <h2 class="section__title" data-i18n="recipes_bottom_title">Perfección del diseño</h2>
         <p class="section__subtitle">
-          Cada receta está pensada para ser clara y fácil de seguir. Poco a poco podrás adaptar
-          las preparaciones a tu gusto y estilo de vida, encontrando tu propia forma de cocinar.
+          <span data-i18n="recipes_bottom_subtitle">Cada receta está pensada para ser clara y fácil de seguir. Poco a poco podrás adaptar las preparaciones a tu gusto y estilo de vida, encontrando tu propia forma de cocinar.</span>
         </p>
       </div>
     </section>
@@ -166,11 +167,9 @@
 
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <p>© Foodaniell - Todos los derechos reservados.</p>
+      <p data-i18n="footer_copyright">© Foodaniell - Todos los derechos reservados.</p>
     </div>
   </footer>
-
-  <script src="/FrontEnd/View/JS/main.js" defer></script>
 </body>
 </html>
 

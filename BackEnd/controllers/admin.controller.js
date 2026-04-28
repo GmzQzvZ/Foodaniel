@@ -48,8 +48,98 @@ async function ensureAdminTasksTable() {
 
 async function ensureVideosDescriptionColumn() {
   await db.query(
-    'ALTER TABLE videos ADD COLUMN IF NOT EXISTS description TEXT NULL'
+    'ALTER TABLE videos ADD COLUMN IF NOT EXISTS description TEXT'
   );
+}
+
+async function ensureRecipeNutritionTable() {
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS recipe_nutrition (
+      id BIGSERIAL PRIMARY KEY,
+      recipe_id BIGINT NOT NULL REFERENCES recipes(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+      calories DECIMAL(8,2) NULL,
+      proteins DECIMAL(8,2) NULL,
+      carbs DECIMAL(8,2) NULL,
+      fats DECIMAL(8,2) NULL,
+      fiber DECIMAL(8,2) NULL,
+      sugar DECIMAL(8,2) NULL,
+      sodium DECIMAL(8,2) NULL,
+      servings INT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NULL
+    )
+  `);
+}
+
+async function saveRecipeNutrition(recipeId, nutritionData) {
+  try {
+    await ensureRecipeNutritionTable();
+
+    const parseOptionalNumber = (value) => {
+      if (value === null || typeof value === 'undefined' || value === '') return null;
+      const parsed = Number(value);
+      return Number.isFinite(parsed) ? parsed : null;
+    };
+
+    const parseOptionalInteger = (value) => {
+      if (value === null || typeof value === 'undefined' || value === '') return null;
+      const parsed = Number.parseInt(value, 10);
+      return Number.isInteger(parsed) ? parsed : null;
+    };
+
+    const normalizedNutrition = {
+      calories: parseOptionalNumber(nutritionData && nutritionData.calories),
+      proteins: parseOptionalNumber(nutritionData && nutritionData.proteins),
+      carbs: parseOptionalNumber(nutritionData && nutritionData.carbs),
+      fats: parseOptionalNumber(nutritionData && nutritionData.fats),
+      fiber: parseOptionalNumber(nutritionData && nutritionData.fiber),
+      sugar: parseOptionalNumber(nutritionData && nutritionData.sugar),
+      sodium: parseOptionalNumber(nutritionData && nutritionData.sodium),
+      servings: parseOptionalInteger(nutritionData && nutritionData.servings)
+    };
+
+    await db.query('DELETE FROM recipe_nutrition WHERE recipe_id = ?', [recipeId]);
+
+    const hasAnyNutritionValue = Object.values(normalizedNutrition).some((value) => value !== null);
+    if (!hasAnyNutritionValue) {
+      return null;
+    }
+
+    const [result] = await db.query(`
+      INSERT INTO recipe_nutrition (recipe_id, calories, proteins, carbs, fats, fiber, sugar, sodium, servings)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `, [
+      recipeId,
+      normalizedNutrition.calories,
+      normalizedNutrition.proteins,
+      normalizedNutrition.carbs,
+      normalizedNutrition.fats,
+      normalizedNutrition.fiber,
+      normalizedNutrition.sugar,
+      normalizedNutrition.sodium,
+      normalizedNutrition.servings
+    ]);
+
+    return result;
+  } catch (error) {
+    console.error('Error saving recipe nutrition:', error);
+    // No lanzar el error para que no falle la creación/edición de la receta
+    return null;
+  }
+}
+
+async function getRecipeNutrition(recipeId) {
+  try {
+    // Primero verificar si la tabla existe
+    await ensureRecipeNutritionTable();
+    const [rows] = await db.query('SELECT * FROM recipe_nutrition WHERE recipe_id = ?', [recipeId]);
+    return rows[0] || null;
+  } catch (error) {
+    console.error('Error getting recipe nutrition:', error);
+    return null;
+  }
 }
 
 async function hasUsersColumn(columnName) {
@@ -215,10 +305,32 @@ exports.getBootstrapData = async (req, res) => {
   try {
     await ensureAdminTasksTable();
     await ensureVideosDescriptionColumn();
+    await ensureRecipeNutritionTable();
 
     const [books, recipes, videos, users, suggestions, contacts, tasks] = await Promise.all([
       safeQuery('SELECT * FROM books ORDER BY id DESC'),
-      safeQuery('SELECT * FROM recipes ORDER BY id DESC'),
+      safeQuery(`
+        SELECT
+          r.id,
+          r.title,
+          r.time_text,
+          r.ingredients,
+          r.steps,
+          r.notes,
+          r.image_url,
+          r.is_public,
+          rn.calories,
+          rn.proteins,
+          rn.carbs,
+          rn.fats,
+          rn.fiber,
+          rn.sugar,
+          rn.sodium,
+          rn.servings
+        FROM recipes r
+        LEFT JOIN recipe_nutrition rn ON rn.recipe_id = r.id
+        ORDER BY r.id DESC
+      `),
       safeQuery('SELECT * FROM videos ORDER BY id DESC'),
       fetchUsersForAdmin(),
       safeQuery(
@@ -510,7 +622,7 @@ exports.deleteBook = async (req, res) => {
 
 exports.createRecipe = async (req, res) => {
   try {
-    const { title, timeText, ingredients, steps, notes, imageUrl, imageUrls, isPublic } = req.body || {};
+    const { title, timeText, ingredients, steps, notes, imageUrl, imageUrls, isPublic, nutrition } = req.body || {};
 
     const normalizedTitle = normalizeRequiredString(title);
     const normalizedIngredients = normalizeRequiredString(ingredients);
@@ -542,6 +654,9 @@ exports.createRecipe = async (req, res) => {
       ]
     );
 
+    // Guardar información nutricional
+    await saveRecipeNutrition(result.insertId, nutrition);
+
     await translateAndStoreRecipeTexts(result.insertId, {
       title: normalizedTitle,
       ingredients: normalizedIngredients,
@@ -562,11 +677,12 @@ exports.updateRecipe = async (req, res) => {
       return res.status(400).json({ error: 'Invalid recipe id' });
     }
 
-    const { title, timeText, ingredients, steps, notes, imageUrl, imageUrls, isPublic } = req.body || {};
+    const { title, timeText, ingredients, steps, notes, imageUrl, imageUrls, isPublic, nutrition } = req.body || {};
 
     const normalizedTitle = normalizeRequiredString(title);
     const normalizedIngredients = normalizeRequiredString(ingredients);
     const normalizedSteps = normalizeRequiredString(steps);
+    const normalizedNotes = normalizeOptionalString(notes);
 
     if (!normalizedTitle || !normalizedIngredients || !normalizedSteps) {
       return res.status(400).json({ error: 'Invalid recipe payload' });
@@ -598,6 +714,9 @@ exports.updateRecipe = async (req, res) => {
     if (!result.affectedRows) {
       return res.status(404).json({ error: 'Recipe not found' });
     }
+
+    // Actualizar información nutricional
+    await saveRecipeNutrition(recipeId, nutrition);
 
     await translateAndStoreRecipeTexts(recipeId, {
       title: normalizedTitle,
@@ -793,6 +912,43 @@ exports.deleteTask = async (req, res) => {
   }
 };
 
+// Endpoint para obtener una receta con información nutricional
+exports.getRecipeById = async (req, res) => {
+  try {
+    const recipeId = parseEntityId(req.params.id);
+    if (!recipeId) {
+      return res.status(400).json({ error: 'Invalid recipe id' });
+    }
+
+    const [recipeRows] = await db.query('SELECT * FROM recipes WHERE id = ?', [recipeId]);
+    if (!recipeRows.length) {
+      return res.status(404).json({ error: 'Recipe not found' });
+    }
+
+    const recipe = recipeRows[0];
+    
+    // Obtener información nutricional si existe
+    let nutrition = null;
+    try {
+      nutrition = await getRecipeNutrition(recipeId);
+    } catch (nutritionError) {
+      console.error('Error getting nutrition data:', nutritionError);
+      // Continuar sin datos nutricionales
+    }
+
+    return res.json({
+      success: true,
+      recipe: {
+        ...recipe,
+        nutrition: nutrition || null
+      }
+    });
+  } catch (error) {
+    console.error('Get recipe by ID error:', error);
+    return res.status(500).json({ error: 'Server error' });
+  }
+};
+
 exports.sendNotificationEmails = async (req, res) => {
   try {
     const { subject, message } = req.body || {};
@@ -804,6 +960,7 @@ exports.sendNotificationEmails = async (req, res) => {
     }
 
     if (!isMailConfigured()) {
+      console.log('Error: SMTP no está configurado - Revisa variables en .env');
       return res.status(500).json({ error: 'SMTP is not configured' });
     }
 

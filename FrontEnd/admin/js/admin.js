@@ -60,11 +60,16 @@
     const token = localStorage.getItem("auth_token");
     if (!token) throw new Error("Sesin no vlida");
 
-    const response = await fetch(`${API_ADMIN_URL}/bootstrap`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    let response;
+    try {
+      response = await fetch(`${API_ADMIN_URL}/bootstrap`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (_) {
+      throw new Error("No se pudo conectar con el backend. Verifica que est ejecutndose.");
+    }
 
     if (!response.ok) {
       throw new Error("No se pudo cargar la informacin del panel");
@@ -135,17 +140,56 @@
         parsedImages = [item.image_url];
       }
 
-      return ({
-      id: String(item.id),
-      imagen: parsedImages[0] || "",
-      imagenes: parsedImages,
-      titulo: item.title || "",
-      tiempo: item.time_text || "",
-      ingredientes: item.ingredients || "",
-      pasos: item.steps || "",
-      notas: item.notes || "",
-      publico: Boolean(item.is_public),
-      });
+      const calorias = item.calories != null ? String(item.calories) : "";
+      const proteinas = item.proteins != null ? String(item.proteins) : "";
+      const carbohidratos = item.carbs != null ? String(item.carbs) : "";
+      const grasas = item.fats != null ? String(item.fats) : "";
+      const fibra = item.fiber != null ? String(item.fiber) : "";
+      const azucar = item.sugar != null ? String(item.sugar) : "";
+      const sodio = item.sodium != null ? String(item.sodium) : "";
+      const porciones = item.servings != null ? String(item.servings) : "";
+      const hasNutrition = [
+        calorias,
+        proteinas,
+        carbohidratos,
+        grasas,
+        fibra,
+        azucar,
+        sodio,
+        porciones,
+      ].some((value) => value !== "");
+
+      return {
+        id: String(item.id),
+        imagen: parsedImages[0] || "",
+        imagenes: parsedImages,
+        titulo: item.title || "",
+        tiempo: item.time_text || "",
+        ingredientes: item.ingredients || "",
+        pasos: item.steps || "",
+        notas: item.notes || "",
+        publico: Boolean(item.is_public),
+        calorias,
+        proteinas,
+        carbohidratos,
+        grasas,
+        fibra,
+        azucar,
+        sodio,
+        porciones,
+        nutrition: hasNutrition
+          ? {
+              calories: item.calories != null ? item.calories : null,
+              proteins: item.proteins != null ? item.proteins : null,
+              carbs: item.carbs != null ? item.carbs : null,
+              fats: item.fats != null ? item.fats : null,
+              fiber: item.fiber != null ? item.fiber : null,
+              sugar: item.sugar != null ? item.sugar : null,
+              sodium: item.sodium != null ? item.sodium : null,
+              servings: item.servings != null ? item.servings : null,
+            }
+          : null,
+      };
     });
 
     const videosMapped = videos.map((item) => ({
@@ -198,12 +242,25 @@
     localStorage.setItem("admin_todos", JSON.stringify(tareas));
   }
 
+  let adminBootstrapFailureCount = 0;
+  let adminBootstrapRetryAfter = 0;
+
   async function syncAdminDataFromDatabase() {
+    const now = Date.now();
+    if (adminBootstrapRetryAfter && now < adminBootstrapRetryAfter) {
+      return;
+    }
+
     try {
       const data = await fetchAdminBootstrap();
       normalizeBootstrapToLocalStorage(data);
+      adminBootstrapFailureCount = 0;
+      adminBootstrapRetryAfter = 0;
     } catch (error) {
       console.error("No se pudo sincronizar el panel admin:", error);
+      adminBootstrapFailureCount += 1;
+      const backoffMs = Math.min(5 * 60 * 1000, adminBootstrapFailureCount * 60 * 1000);
+      adminBootstrapRetryAfter = Date.now() + backoffMs;
     }
   }
 
@@ -423,9 +480,11 @@
     const viewMessageModalClose = document.getElementById("viewMessageModalClose");
     const viewMessageModalCloseBtn = document.getElementById("viewMessageModalCloseBtn");
     let lastSeenMessagesAt = Number(localStorage.getItem("admin_last_seen_messages_at") || 0);
+    let lastViewMessageModalTrigger = null;
 
     function openMessageModal(title, fields) {
       if (!viewMessageModal || !viewMessageModalTitle || !viewMessageModalBody) return;
+      lastViewMessageModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       viewMessageModalTitle.textContent = title || "Detalle";
       viewMessageModalBody.innerHTML = "";
       fields.forEach((item) => {
@@ -444,13 +503,37 @@
         viewMessageModalBody.appendChild(wrap);
       });
 
+      viewMessageModal.setAttribute("aria-hidden", "false");
       viewMessageModal.classList.add("admin-modal--open");
+
+      window.requestAnimationFrame(() => {
+        if (viewMessageModalCloseBtn && typeof viewMessageModalCloseBtn.focus === "function") {
+          viewMessageModalCloseBtn.focus();
+        }
+      });
     }
 
     function closeMessageModal() {
       if (!viewMessageModal || !viewMessageModalBody) return;
+
+      const active = document.activeElement;
+      if (active && viewMessageModal.contains(active) && typeof active.blur === "function") {
+        active.blur();
+      }
+
+      viewMessageModal.setAttribute("aria-hidden", "true");
       viewMessageModal.classList.remove("admin-modal--open");
       viewMessageModalBody.innerHTML = "";
+
+      window.requestAnimationFrame(() => {
+        if (lastViewMessageModalTrigger && typeof lastViewMessageModalTrigger.focus === "function") {
+          try {
+            lastViewMessageModalTrigger.focus();
+          } catch (_) {
+            // Ignore focus restoration failures when the trigger is gone.
+          }
+        }
+      });
     }
 
     if (viewMessageModalClose) {
@@ -781,12 +864,14 @@
     const modalItemId = document.getElementById("modalItemId");
     const modalClose = document.getElementById("adminModalClose");
     const modalCancel = document.getElementById("adminModalCancel");
+    let lastAdminModalTrigger = null;
 
     let currentModalContext = null;
 
     function openModal(title, fieldsHtml, context, item) {
       if (!modal || !modalTitle || !modalFields || !modalForm) return;
 
+      lastAdminModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       modalTitle.textContent = title || "Editar";
       modalFields.innerHTML = fieldsHtml || "";
       currentModalContext = context || null;
@@ -871,15 +956,44 @@
         });
       });
 
+      modal.setAttribute("aria-hidden", "false");
       modal.classList.add("admin-modal--open");
+
+      const focusTarget =
+        modalFields.querySelector(
+          "input:not([type='hidden']):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled])"
+        ) || modalClose;
+
+      window.requestAnimationFrame(() => {
+        if (focusTarget && typeof focusTarget.focus === "function") {
+          focusTarget.focus();
+        }
+      });
     }
 
     function closeModal() {
       if (!modal) return;
+
+      const active = document.activeElement;
+      if (active && modal.contains(active) && typeof active.blur === "function") {
+        active.blur();
+      }
+
+      modal.setAttribute("aria-hidden", "true");
       modal.classList.remove("admin-modal--open");
       if (modalFields) modalFields.innerHTML = "";
       if (modalItemId) modalItemId.value = "";
       currentModalContext = null;
+
+      window.requestAnimationFrame(() => {
+        if (lastAdminModalTrigger && typeof lastAdminModalTrigger.focus === "function") {
+          try {
+            lastAdminModalTrigger.focus();
+          } catch (_) {
+            // Ignore focus restoration failures when the trigger is gone.
+          }
+        }
+      });
     }
 
     // Cerrar con los botones y fondo
@@ -986,6 +1100,8 @@
     const videoCancelar = document.getElementById("videoCancelar");
 
     async function reloadContentFromDatabase() {
+      // Pequeño delay para asegurar que la base de datos haya procesado los cambios
+      await new Promise(resolve => setTimeout(resolve, 300));
       await syncAdminDataFromDatabase();
       libros = loadItems("admin_libros");
       recetas = loadItems("admin_recetas");
@@ -1014,6 +1130,35 @@
         ? data.imagenes.filter((value) => typeof value === "string" && value.trim())
         : (typeof data.imagen === "string" && data.imagen.trim() ? [data.imagen.trim()] : []);
 
+      const parseOptionalNumber = (value) => {
+        if (value === null || typeof value === "undefined") return null;
+        const trimmed = typeof value === "string" ? value.trim() : value;
+        if (trimmed === "") return null;
+        const parsed = Number(trimmed);
+        return Number.isFinite(parsed) ? parsed : null;
+      };
+
+      const parseOptionalInteger = (value) => {
+        if (value === null || typeof value === "undefined") return null;
+        const trimmed = typeof value === "string" ? value.trim() : value;
+        if (trimmed === "") return null;
+        const parsed = Number.parseInt(trimmed, 10);
+        return Number.isInteger(parsed) ? parsed : null;
+      };
+
+      const nutrition = {
+        calories: parseOptionalNumber(data.calorias),
+        proteins: parseOptionalNumber(data.proteinas),
+        carbs: parseOptionalNumber(data.carbohidratos),
+        fats: parseOptionalNumber(data.grasas),
+        fiber: parseOptionalNumber(data.fibra),
+        sugar: parseOptionalNumber(data.azucar),
+        sodium: parseOptionalNumber(data.sodio),
+        servings: parseOptionalInteger(data.porciones)
+      };
+
+      const hasNutritionData = Object.values(nutrition).some((val) => val !== null);
+
       return {
         title: (data.titulo || "").trim(),
         timeText: (data.tiempo || "").trim(),
@@ -1023,6 +1168,7 @@
         imageUrls,
         imageUrl: imageUrls[0] || "",
         isPublic: !!data.publico,
+        nutrition: hasNutritionData ? nutrition : null,
       };
     }
 
@@ -1297,6 +1443,52 @@
               <label for="modalRecetaNotas">Notas</label><br>
               <textarea id="modalRecetaNotas" name="notas" rows="3"></textarea>
             </div>
+            
+            <!-- Información Nutricional -->
+            <div class="form-group">
+              <h4 style="margin: 20px 0 10px 0; color: #f28f3b; border-bottom: 1px solid #f28f3b; padding-bottom: 5px;">Información Nutricional</h4>
+            </div>
+            
+            <div class="form-group">
+              <label for="modalRecetaCalorias">Calorías</label><br>
+              <input type="number" id="modalRecetaCalorias" name="calorias" placeholder="Ej: 250" step="0.1" min="0" />
+            </div>
+            
+            <div class="form-group">
+              <label for="modalRecetaProteinas">Proteínas (g)</label><br>
+              <input type="number" id="modalRecetaProteinas" name="proteinas" placeholder="Ej: 25" step="0.1" min="0" />
+            </div>
+            
+            <div class="form-group">
+              <label for="modalRecetaCarbohidratos">Carbohidratos (g)</label><br>
+              <input type="number" id="modalRecetaCarbohidratos" name="carbohidratos" placeholder="Ej: 30" step="0.1" min="0" />
+            </div>
+            
+            <div class="form-group">
+              <label for="modalRecetaGrasas">Grasas (g)</label><br>
+              <input type="number" id="modalRecetaGrasas" name="grasas" placeholder="Ej: 15" step="0.1" min="0" />
+            </div>
+            
+            <div class="form-group">
+              <label for="modalRecetaFibra">Fibra (g)</label><br>
+              <input type="number" id="modalRecetaFibra" name="fibra" placeholder="Ej: 5" step="0.1" min="0" />
+            </div>
+            
+            <div class="form-group">
+              <label for="modalRecetaAzucar">Azúcar (g)</label><br>
+              <input type="number" id="modalRecetaAzucar" name="azucar" placeholder="Ej: 10" step="0.1" min="0" />
+            </div>
+            
+            <div class="form-group">
+              <label for="modalRecetaSodio">Sodio (mg)</label><br>
+              <input type="number" id="modalRecetaSodio" name="sodio" placeholder="Ej: 500" step="0.1" min="0" />
+            </div>
+            
+            <div class="form-group">
+              <label for="modalRecetaPorciones">Porciones</label><br>
+              <input type="number" id="modalRecetaPorciones" name="porciones" placeholder="Ej: 4" min="1" />
+            </div>
+            
             <div class="form-group">
               <label for="modalRecetaPublico">Publico</label><br>
               <label class="md-checkbox">
@@ -1366,6 +1558,52 @@
             <label for="modalRecetaNotas">Notas</label><br>
             <textarea id="modalRecetaNotas" name="notas" rows="3"></textarea>
           </div>
+          
+          <!-- Información Nutricional -->
+          <div class="form-group">
+            <h4 style="margin: 20px 0 10px 0; color: #f28f3b; border-bottom: 1px solid #f28f3b; padding-bottom: 5px;">Información Nutricional</h4>
+          </div>
+          
+          <div class="form-group">
+            <label for="modalRecetaCalorias">Calorías</label><br>
+            <input type="number" id="modalRecetaCalorias" name="calorias" placeholder="Ej: 250" step="0.1" min="0" />
+          </div>
+          
+          <div class="form-group">
+            <label for="modalRecetaProteinas">Proteínas (g)</label><br>
+            <input type="number" id="modalRecetaProteinas" name="proteinas" placeholder="Ej: 25" step="0.1" min="0" />
+          </div>
+          
+          <div class="form-group">
+            <label for="modalRecetaCarbohidratos">Carbohidratos (g)</label><br>
+            <input type="number" id="modalRecetaCarbohidratos" name="carbohidratos" placeholder="Ej: 30" step="0.1" min="0" />
+          </div>
+          
+          <div class="form-group">
+            <label for="modalRecetaGrasas">Grasas (g)</label><br>
+            <input type="number" id="modalRecetaGrasas" name="grasas" placeholder="Ej: 15" step="0.1" min="0" />
+          </div>
+          
+          <div class="form-group">
+            <label for="modalRecetaFibra">Fibra (g)</label><br>
+            <input type="number" id="modalRecetaFibra" name="fibra" placeholder="Ej: 5" step="0.1" min="0" />
+          </div>
+          
+          <div class="form-group">
+            <label for="modalRecetaAzucar">Azúcar (g)</label><br>
+            <input type="number" id="modalRecetaAzucar" name="azucar" placeholder="Ej: 10" step="0.1" min="0" />
+          </div>
+          
+          <div class="form-group">
+            <label for="modalRecetaSodio">Sodio (mg)</label><br>
+            <input type="number" id="modalRecetaSodio" name="sodio" placeholder="Ej: 500" step="0.1" min="0" />
+          </div>
+          
+          <div class="form-group">
+            <label for="modalRecetaPorciones">Porciones</label><br>
+            <input type="number" id="modalRecetaPorciones" name="porciones" placeholder="Ej: 4" min="1" />
+          </div>
+          
           <div class="form-group">
             <label for="modalRecetaPublico">Publico</label><br>
             <label class="md-checkbox">
@@ -1621,7 +1859,7 @@
 
     renderUsuarios();
     setInterval(() => {
-      refreshMessagesFromDatabase().catch((error) => {
+      reloadContentFromDatabase().catch((error) => {
         console.error("No se pudieron actualizar notificaciones", error);
       });
     }, 30000);

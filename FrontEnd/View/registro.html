@@ -11,40 +11,38 @@
 
 <body class="auth-page">
   <div class="auth-box">
-    <h1 class="auth-title">Crear Cuenta</h1>
-    <p class="auth-subtitle">Unete a la familia culinaria</p>
+    <h1 class="auth-title" data-i18n="register_title">Crear Cuenta</h1>
+    <p class="auth-subtitle" data-i18n="register_subtitle">Únete a la familia culinaria</p>
 
     <form id="registerForm" class="auth-form">
       <div class="form-field">
-        <label for="registerName">Nombre completo</label>
-        <input id="registerName" type="text" placeholder="Tu nombre" minlength="2" maxlength="120" required>
+        <label for="registerName" data-i18n="register_name">Nombre completo</label>
+        <input id="registerName" type="text" data-i18n-placeholder="register_name" placeholder="Tu nombre" minlength="2" maxlength="120" required>
       </div>
 
       <div class="form-field">
-        <label for="registerEmail">Correo</label>
-        <input id="registerEmail" type="email" placeholder="correo@ejemplo.com" required>
+        <label for="registerEmail" data-i18n="register_email">Correo</label>
+        <input id="registerEmail" type="email" data-i18n-placeholder="register_email" placeholder="correo@ejemplo.com" required>
       </div>
 
       <div class="form-field">
-        <label for="registerPassword">Contrasena</label>
-        <input id="registerPassword" type="password" placeholder="********" minlength="8" required>
+        <label for="registerPassword" data-i18n="register_password">Contraseña</label>
+        <input id="registerPassword" type="password" data-i18n-placeholder="register_password" placeholder="********" minlength="8" required>
       </div>
 
       <p id="registerMessage" style="display:none; margin: 8px 0;"></p>
 
-      <button class="btn" style="width:100%" type="submit">Registrarme</button>
+      <button type="submit" class="btn" style="width:100%" data-i18n="register_button">Registrarse</button>
 
       <div class="auth-alt">
-        Ya tienes cuenta?
-        <a href="Login.html">Inicia sesion</a>
+        <span data-i18n="register_has_account">¿Ya tienes cuenta?</span>
+        <a href="Login.html" data-i18n="register_login_here">Inicia sesión</a>
       </div>
     </form>
   </div>
 
+  <script src="/FrontEnd/shared/i18n.js"></script>
   <script src="/FrontEnd/View/JS/auth.js" defer></script>
 </body>
 </html>
-
-
-
 
