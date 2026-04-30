@@ -8,6 +8,7 @@ const path = require('path');
 const authRoutes = require('./routes/auth.routes');
 const adminRoutes = require('./routes/admin.routes');
 const publicRoutes = require('./routes/public.routes');
+const { buildOpenApiSpec } = require('./docs/openapi');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -41,6 +42,52 @@ app.use('/api/auth', authRoutes);
 app.use('/api', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/public', publicRoutes);
+
+function buildSwaggerHtml() {
+  return `<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Foodaniell API Docs</title>
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
+  <style>
+    body {
+      margin: 0;
+      background: #0f172a;
+    }
+    .swagger-ui .topbar {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="swagger-ui"></div>
+  <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+  <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js"></script>
+  <script>
+    window.ui = SwaggerUIBundle({
+      url: '/api-docs.json',
+      dom_id: '#swagger-ui',
+      deepLinking: true,
+      displayRequestDuration: true,
+      presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+      layout: 'BaseLayout'
+    });
+  </script>
+</body>
+</html>`;
+}
+
+app.get('/api-docs.json', (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  res.json(buildOpenApiSpec());
+});
+
+app.get('/api-docs', (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  res.type('html').send(buildSwaggerHtml());
+});
 
 // Return JSON 404 for any unknown API route.
 app.use('/api', (req, res) => {

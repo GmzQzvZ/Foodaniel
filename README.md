@@ -16,6 +16,7 @@ Full-stack platform with an Express/Node.js backend, a static marketing frontend
 2. From the root run `cd BackEnd && npm install`. (Or double-click `run-project.bat` to install dependencies and start `npm run dev`.)
 3. Ensure the database schema exists (`sql.sql` contains the current tables/triggers) and the connection string points to a reachable PostgreSQL server.
 4. Start the server with `npm run dev` (development) or `npm run start`; the API listens on `PORT` (default `3000`).
+5. Open `http://localhost:3000/api-docs` to browse the Swagger UI, or `http://localhost:3000/api-docs.json` to inspect the raw OpenAPI schema.
 
 ## Frontend & admin
 
@@ -49,4 +50,3 @@ Use `BackEnd/.env.example` as the template. The most important variables are:
 - Confirm `asset/uploads` has the necessary permissions before using the admin image upload. The backend writes files to `/asset/uploads/{recipes,profiles}`.
 - Run `npm audit` after `npm install` (five vulnerabilities were reported when the translator package was added) and apply fixes as needed.
 - Validate the translation cache with a request such as `curl http://localhost:3000/api/public/recipes?lang=en` after creating a recipe from the admin panel.
-
