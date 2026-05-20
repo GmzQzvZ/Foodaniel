@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://foodaniell.com/sitemap.xml
+
+# Disallow admin areas
+Disallow: /FrontEnd/admin/
+Disallow: /api/
+
+# Allow static assets
+Allow: /FrontEnd/View/css/
+Allow: /FrontEnd/View/js/
+Allow: /FrontEnd/View/img/
+Allow: /asset/
+
+# Crawl-delay (optional, adjust as needed)
+# Crawl-delay: 1

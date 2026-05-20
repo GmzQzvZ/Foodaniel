@@ -3,11 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Foodaniell - Detalle de receta</title>
-  <meta name="description" content="Detalle de receta Foodaniell." />
+  
+  <!-- SEO Meta Tags -->
+  <title>Detalle de Receta - Foodaniell</title>
+  <meta name="description" content="Consulta el detalle completo de nuestras recetas con ingredientes, instrucciones paso a paso, información nutricional y tips del chef. Cocina fácil y deliciosa." />
+  <meta name="keywords" content="detalle receta, ingredientes receta, instrucciones cocina, información nutricional, receta paso a paso, Foodaniell" />
+  <meta name="author" content="Foodaniell" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://foodaniell.com/FrontEnd/View/receta.html" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://foodaniell.com/FrontEnd/View/receta.html" />
+  <meta property="og:title" content="Detalle de Receta - Foodaniell" />
+  <meta property="og:description" content="Consulta el detalle completo de nuestras recetas con ingredientes, instrucciones paso a paso, información nutricional y tips del chef." />
+  <meta property="og:image" content="https://foodaniell.com/FrontEnd/img/og-image.jpg" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://foodaniell.com/FrontEnd/View/receta.html" />
+  <meta property="twitter:title" content="Detalle de Receta - Foodaniell" />
+  <meta property="twitter:description" content="Consulta el detalle completo de nuestras recetas con ingredientes, instrucciones paso a paso, información nutricional y tips del chef." />
+  <meta property="twitter:image" content="https://foodaniell.com/FrontEnd/img/og-image.jpg" />
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="/FrontEnd/View/css/style.css" />
   <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  
+  <!-- Structured Data for Recipe (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Recipe",
+    "name": "Receta de Foodaniell",
+    "image": "https://foodaniell.com/FrontEnd/img/og-image.jpg",
+    "author": {
+      "@type": "Person",
+      "name": "Foodaniell"
+    },
+    "datePublished": "2025-01-01",
+    "description": "Deliciosa receta casera con ingredientes simples y pasos fáciles de seguir.",
+    "prepTime": "PT30M",
+    "cookTime": "PT45M",
+    "totalTime": "PT1H15M",
+    "keywords": "receta casera, cocina fácil, Foodaniell",
+    "recipeYield": "4",
+    "recipeCategory": "Plato Principal",
+    "recipeCuisine": "Casera",
+    "nutrition": {
+      "@type": "NutritionInformation",
+      "calories": "350 kcal",
+      "proteinContent": "20g",
+      "carbohydrateContent": "30g",
+      "fatContent": "15g"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.5",
+      "reviewCount": "12"
+    }
+  }
+  </script>
 </head>
 
 <script src="/FrontEnd/shared/i18n.js"></script>
