@@ -1,7 +1,22 @@
+function deriveSupabaseHost() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  try {
+    const url = new URL(supabaseUrl);
+    const projectRef = url.hostname.split('.')[0];
+    return projectRef ? `db.${projectRef}.supabase.co` : '';
+  } catch (_) {
+    return '';
+  }
+}
+
+const supabaseHost = deriveSupabaseHost();
+const configuredHost = process.env.DB_HOST || '';
+
 module.exports = {
   CLIENT: process.env.DB_CLIENT || 'postgres',
   DATABASE_URL: process.env.DATABASE_URL || '',
-  HOST: process.env.DB_HOST || 'localhost',
+  HOST: configuredHost && configuredHost !== 'localhost' ? configuredHost : supabaseHost || configuredHost || 'localhost',
+  PORT: Number(process.env.DB_PORT || 5432),
   USER: process.env.DB_USER || 'postgres',
   PASSWORD: process.env.DB_PASSWORD || '',
   DB: process.env.DB_NAME || 'postgres',

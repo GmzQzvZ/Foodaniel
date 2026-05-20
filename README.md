@@ -29,7 +29,7 @@ Use `BackEnd/.env.example` as the template. The most important variables are:
 
 | Variable | Purpose |
 | --- | --- |
-| `DATABASE_URL`, `DB_*` | PostgreSQL connection (supported via `DATABASE_URL` or host/user/password). |
+| `DATABASE_URL`, `DB_*` | PostgreSQL connection (supported via `DATABASE_URL` or host/user/password/port). When `NEXT_PUBLIC_SUPABASE_URL` is present, the backend can derive the Supabase DB host automatically. |
 | `JWT_SECRET`, `JWT_EXPIRES_IN` | Signing configuration for JWT-based auth. |
 | `CORS_ORIGINS` | Comma-separated origins allowed by the backend (default: `http://localhost:3000,http://127.0.0.1:3000`). |
 | `SMTP_*` | Optional email credentials used by welcome/recovery workflows; the templates live in `FrontEnd/template/`. |
