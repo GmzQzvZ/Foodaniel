@@ -266,11 +266,11 @@
           <input type="hidden" id="usuarioId" />
           <div class="form-group">
             <label for="usuarioNombre">Nombre</label>
-            <input id="usuarioNombre" type="text" placeholder="Ej: Juan Pérez" required />
+            <input id="usuarioNombre" type="text" autocomplete="name" placeholder="Ej: Juan Pérez" required />
           </div>
           <div class="form-group">
             <label for="usuarioEmail">Correo</label>
-            <input id="usuarioEmail" type="email" placeholder="correo@dominio.com" required />
+            <input id="usuarioEmail" type="email" autocomplete="email" placeholder="correo@dominio.com" required />
           </div>
           <div class="form-group">
             <label for="usuarioRole">Rol</label>
@@ -313,11 +313,11 @@
         <form class="crud-form" id="formCorreos">
           <div class="form-group">
             <label for="correoAsunto">Asunto</label>
-            <input id="correoAsunto" type="text" placeholder="Ej: Nuevo contenido disponible" required />
+            <input id="correoAsunto" type="text" autocomplete="off" placeholder="Ej: Nuevo contenido disponible" required />
           </div>
           <div class="form-group">
             <label for="correoMensaje">Mensaje</label>
-            <textarea id="correoMensaje" rows="5" placeholder="Escribe el mensaje que recibirán los usuarios..." required></textarea>
+            <textarea id="correoMensaje" rows="5" autocomplete="off" placeholder="Escribe el mensaje que recibirán los usuarios..." required></textarea>
           </div>
           <div class="form-group">
             <label>&nbsp;</label>

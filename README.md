@@ -31,7 +31,7 @@ Use `BackEnd/.env.example` as the template. The most important variables are:
 | --- | --- |
 | `DATABASE_URL`, `DB_*` | PostgreSQL connection (supported via `DATABASE_URL` or host/user/password/port). When `NEXT_PUBLIC_SUPABASE_URL` is present, the backend can derive the Supabase DB host automatically. |
 | `JWT_SECRET`, `JWT_EXPIRES_IN` | Signing configuration for JWT-based auth. |
-| `CORS_ORIGINS` | Comma-separated origins allowed by the backend (default: `http://localhost:3000,http://127.0.0.1:3000`). |
+| `CORS_ORIGINS` | Comma-separated origins allowed by the backend (default: `http://localhost:3000,http://127.0.0.1:3000,https://*.vercel.app`). Wildcards like `https://*.vercel.app` are supported. |
 | `SMTP_*` | Optional email credentials used by welcome/recovery workflows; the templates live in `FrontEnd/template/`. |
 | `LOGIN_RATE_LIMIT_*` | Rate limiting window length and allowed attempts for login/registration endpoints. |
 | `TRANSLATION_SOURCE_LANG`, `TRANSLATION_TARGET_LANGS` | Configure the automatic translator (default: source `es`, target `en`). Translated rows are cached in `recipe_translations`. |

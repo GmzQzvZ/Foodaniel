@@ -1,8 +1,10 @@
 const profileBaseOrigin =
-  window.location.protocol === 'file:' || window.location.origin === 'null'
-    ? 'http://localhost:3000'
-    : window.location.origin;
-const PROFILE_API_URL = `${profileBaseOrigin}/api/auth/profile`;
+  (typeof window !== 'undefined' && typeof window.__API_BASE_URL === 'string' && window.__API_BASE_URL.trim())
+    || (window.location.protocol === 'file:' || window.location.origin === 'null'
+      ? 'http://localhost:3000'
+      : window.location.origin);
+const profileApiOrigin = profileBaseOrigin.replace(/\/+$/, '');
+const PROFILE_API_URL = `${profileApiOrigin}/api/auth/profile`;
 const MAX_AVATAR_SIZE_BYTES = 2 * 1024 * 1024;
 const ALLOWED_AVATAR_TYPES = new Set(['image/png', 'image/jpeg', 'image/webp']);
 

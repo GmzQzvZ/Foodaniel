@@ -17,12 +17,12 @@
     <form id="loginForm" class="auth-form">
       <div class="form-field">
         <label for="loginEmail" data-i18n="login_email">Correo</label>
-        <input id="loginEmail" type="email" data-i18n-placeholder="login_email" placeholder="tu@correo.com" required>
+        <input id="loginEmail" type="email" autocomplete="email" data-i18n-placeholder="login_email" placeholder="tu@correo.com" required>
       </div>
 
       <div class="form-field">
         <label for="loginPassword" data-i18n="login_password">Contraseña</label>
-        <input id="loginPassword" type="password" data-i18n-placeholder="login_password" placeholder="********" minlength="8" required>
+        <input id="loginPassword" type="password" autocomplete="current-password" data-i18n-placeholder="login_password" placeholder="********" minlength="8" required>
       </div>
 
       <p id="loginMessage" style="display:none; margin: 8px 0;"></p>
@@ -41,7 +41,6 @@
   <script src="/FrontEnd/View/JS/auth.js" defer></script>
 </body>
 </html>
-
 
 
 

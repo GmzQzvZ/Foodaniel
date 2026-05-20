@@ -1,5 +1,10 @@
 // URL base de la API
-const API_URL = 'http://localhost:3000/api/auth';
+const API_URL = `${(
+  (typeof window !== 'undefined' && typeof window.__API_BASE_URL === 'string' && window.__API_BASE_URL.trim())
+    || (window.location.protocol === 'file:' || window.location.origin === 'null'
+      ? 'http://localhost:3000'
+      : window.location.origin)
+).replace(/\/+$/, '')}/api/auth`;
 
 // Función para hacer peticiones autenticadas
 async function fetchWithAuth(url, options = {}) {

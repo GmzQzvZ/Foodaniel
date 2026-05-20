@@ -17,17 +17,17 @@
     <form id="registerForm" class="auth-form">
       <div class="form-field">
         <label for="registerName" data-i18n="register_name">Nombre completo</label>
-        <input id="registerName" type="text" data-i18n-placeholder="register_name" placeholder="Tu nombre" minlength="2" maxlength="120" required>
+        <input id="registerName" type="text" autocomplete="name" data-i18n-placeholder="register_name" placeholder="Tu nombre" minlength="2" maxlength="120" required>
       </div>
 
       <div class="form-field">
         <label for="registerEmail" data-i18n="register_email">Correo</label>
-        <input id="registerEmail" type="email" data-i18n-placeholder="register_email" placeholder="correo@ejemplo.com" required>
+        <input id="registerEmail" type="email" autocomplete="email" data-i18n-placeholder="register_email" placeholder="correo@ejemplo.com" required>
       </div>
 
       <div class="form-field">
         <label for="registerPassword" data-i18n="register_password">Contraseña</label>
-        <input id="registerPassword" type="password" data-i18n-placeholder="register_password" placeholder="********" minlength="8" required>
+        <input id="registerPassword" type="password" autocomplete="new-password" data-i18n-placeholder="register_password" placeholder="********" minlength="8" required>
       </div>
 
       <p id="registerMessage" style="display:none; margin: 8px 0;"></p>
@@ -45,4 +45,3 @@
   <script src="/FrontEnd/View/JS/auth.js" defer></script>
 </body>
 </html>
-

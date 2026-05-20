@@ -1,9 +1,11 @@
 const dashboardBaseOrigin =
-  window.location.protocol === 'file:' || window.location.origin === 'null'
-    ? 'http://localhost:3000'
-    : window.location.origin;
-const DASHBOARD_API_URL = `${dashboardBaseOrigin}/api/auth`;
-const PUBLIC_CONTENT_API_URL = `${dashboardBaseOrigin}/api/public/content`;
+  (typeof window !== 'undefined' && typeof window.__API_BASE_URL === 'string' && window.__API_BASE_URL.trim())
+    || (window.location.protocol === 'file:' || window.location.origin === 'null'
+      ? 'http://localhost:3000'
+      : window.location.origin);
+const dashboardApiOrigin = dashboardBaseOrigin.replace(/\/+$/, '');
+const DASHBOARD_API_URL = `${dashboardApiOrigin}/api/auth`;
+const PUBLIC_CONTENT_API_URL = `${dashboardApiOrigin}/api/public/content`;
 const DEFAULT_AVATAR = '/default-profile.png';
 let publicContentCache = null;
 let publicContentRequestPromise = null;

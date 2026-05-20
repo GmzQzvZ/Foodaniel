@@ -141,12 +141,12 @@
         <form id="contact-form" class="contact-form contact" novalidate>
           <div class="form-field">
             <label for="name" data-i18n="contact_form_name_label">Nombre</label>
-            <input type="text" id="name" name="name" data-i18n-placeholder="contact_form_name_placeholder" placeholder="Introduce tu nombre" required />
+            <input type="text" id="name" name="name" autocomplete="name" data-i18n-placeholder="contact_form_name_placeholder" placeholder="Introduce tu nombre" required />
           </div>
 
           <div class="form-field">
             <label for="email" data-i18n="contact_form_email_label">Correo electrónico</label>
-            <input type="email" id="email" name="email" data-i18n-placeholder="contact_form_email_placeholder" placeholder="Introduce un correo válido" required />
+            <input type="email" id="email" name="email" autocomplete="email" data-i18n-placeholder="contact_form_email_placeholder" placeholder="Introduce un correo válido" required />
           </div>
 
           <div class="form-field">
@@ -179,6 +179,5 @@
   </footer>
 </body>
 </html>
-
 
 

@@ -3,7 +3,11 @@ const configuredApiBase =
     ? window.__API_BASE_URL.trim()
     : '';
 
-const baseOrigin = configuredApiBase || 'http://localhost:3000';
+const baseOrigin =
+  configuredApiBase ||
+  (window.location.protocol === 'file:' || window.location.origin === 'null'
+    ? 'http://localhost:3000'
+    : window.location.origin);
 const API_URL = `${baseOrigin.replace(/\/+$/, '')}/api/auth`;
 
 function showFormMessage(element, message, isError = true) {

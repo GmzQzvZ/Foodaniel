@@ -1,9 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const configuredApiBase =
+    typeof window !== "undefined" && typeof window.__API_BASE_URL === "string"
+      ? window.__API_BASE_URL.trim()
+      : "";
   const baseOrigin =
-    window.location.protocol === "file:" || window.location.origin === "null"
+    configuredApiBase ||
+    (window.location.protocol === "file:" || window.location.origin === "null"
       ? "http://localhost:3000"
-      : window.location.origin;
-  const PUBLIC_API_URL = `${baseOrigin}/api/public`;
+      : window.location.origin);
+  const PUBLIC_API_URL = `${baseOrigin.replace(/\/+$/, "")}/api/public`;
 
   let publicContentCache = null;
   let publicContentCacheLang = null;

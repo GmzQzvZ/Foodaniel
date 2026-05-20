@@ -1,11 +1,13 @@
 
 (function () {
   const baseOrigin =
-    window.location.protocol === "file:" || window.location.origin === "null"
-      ? "http://localhost:3000"
-      : window.location.origin;
-  const API_URL = `${baseOrigin}/api/auth`;
-  const API_ADMIN_URL = `${baseOrigin}/api/admin`;
+    (typeof window !== "undefined" && typeof window.__API_BASE_URL === "string" && window.__API_BASE_URL.trim())
+      || (window.location.protocol === "file:" || window.location.origin === "null"
+        ? "http://localhost:3000"
+        : window.location.origin);
+  const apiOrigin = baseOrigin.replace(/\/+$/, "");
+  const API_URL = `${apiOrigin}/api/auth`;
+  const API_ADMIN_URL = `${apiOrigin}/api/admin`;
 
   function isDashboard() {
     const path = window.location.pathname;

@@ -18,15 +18,29 @@ const frontendViewPath = path.join(frontendRootPath, 'View');
 const assetPath = path.join(__dirname, '../asset');
 const defaultProfilePath = path.join(assetPath, 'img profile.png');
 
-const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000,http://127.0.0.1:3000')
+const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000,http://127.0.0.1:3000,https://*.vercel.app')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
 
+function originMatchesAllowedList(origin) {
+  return allowedOrigins.some((allowedOrigin) => {
+    if (allowedOrigin === origin) return true;
+
+    if (!allowedOrigin.includes('*')) return false;
+
+    const escaped = allowedOrigin
+      .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+      .replace(/\\\*/g, '.*');
+    const pattern = new RegExp(`^${escaped}$`);
+    return pattern.test(origin);
+  });
+}
+
 const corsOptions = {
   origin(origin, callback) {
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) return callback(null, true);
+    if (originMatchesAllowedList(origin)) return callback(null, true);
     return callback(new Error('CORS origin not allowed'));
   },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
