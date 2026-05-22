@@ -18,6 +18,28 @@ Full-stack platform with an Express/Node.js backend, a static marketing frontend
 4. Start the server with `npm run dev` (development) or `npm run start`; the API listens on `PORT` (default `3000`).
 5. Open `http://localhost:3000/api-docs` to browse the Swagger UI, or `http://localhost:3000/api-docs.json` to inspect the raw OpenAPI schema.
 
+## Deploying on Render
+
+This repository includes a [`render.yaml`](render.yaml) file so Render can deploy the backend from the correct folder.
+
+Use these values in Render:
+
+| Field | Value |
+| --- | --- |
+| `Root Directory` | `BackEnd` |
+| `Build Command` | `npm install` |
+| `Start Command` | `npm start` |
+
+Add the same environment variables you use locally in `BackEnd/.env`, especially:
+
+- `DATABASE_URL` or the `DB_*` variables
+- `JWT_SECRET`
+- `CORS_ORIGINS`
+- `SMTP_*` if you send email from the app
+- `TRANSLATION_SOURCE_LANG` and `TRANSLATION_TARGET_LANGS` if you use translations
+
+If your frontend is hosted separately, make sure its domain is included in `CORS_ORIGINS`.
+
 ## Frontend & admin
 
 - Public marketing pages fetch `/api/public/content` and the new `/api/public/recipes?lang=<code>` endpoint (e.g., `/api/public/recipes?lang=en`) to read cached translations instead of calling the translator every request.
