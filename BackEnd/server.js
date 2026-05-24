@@ -23,7 +23,19 @@ const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000,http:
   .map((origin) => origin.trim())
   .filter(Boolean);
 
-function originMatchesAllowedList(origin) {
+function isLocalhostOrigin(origin) {
+  try {
+    const url = new URL(origin);
+    return (
+      url.protocol === 'http:' &&
+      (url.hostname === 'localhost' || url.hostname === '127.0.0.1')
+    );
+  } catch (_) {
+    return false;
+  }
+}
+
+function isExplicitlyAllowedOrigin(origin) {
   return allowedOrigins.some((allowedOrigin) => {
     if (allowedOrigin === origin) return true;
 
@@ -35,6 +47,19 @@ function originMatchesAllowedList(origin) {
     const pattern = new RegExp(`^${escaped}$`);
     return pattern.test(origin);
   });
+}
+
+function originMatchesAllowedList(origin) {
+  if (!origin) return true;
+  if (origin === 'null') {
+    return process.env.NODE_ENV !== 'production';
+  }
+
+  if (isLocalhostOrigin(origin)) {
+    return true;
+  }
+
+  return isExplicitlyAllowedOrigin(origin);
 }
 
 const corsOptions = {
