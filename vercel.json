@@ -1,0 +1,12 @@
+{
+  "buildCommand": "cd BackEnd && npm install",
+  "outputDirectory": "BackEnd",
+  "framework": "express",
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "JWT_SECRET": "@jwt_secret",
+    "NODE_ENV": "production",
+    "CORS_ORIGINS": "@cors_origins",
+    "DB_SSL": "true"
+  }
+}
