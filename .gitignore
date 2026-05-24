@@ -5,6 +5,7 @@ FrontEnd/admin/node_modules/
 FrontEnd/View/node_modules/
 
 # Environment overrides
+.vscode/
 *.env
 *.env.*
 BackEnd/.env
