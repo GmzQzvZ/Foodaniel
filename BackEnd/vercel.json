@@ -13,8 +13,9 @@
     }
   ],
   "env": {
-    "DATABASE_URL": "@database_url",
-    "JWT_SECRET": "@jwt_secret",
+    "DATABASE_URL": "sb_publishable_oau3XkOwGG3vm0ispmVXEQ_naxp7Wti",
+    "JWT_SECRET": "b8a0bcaf0f2eec0e7afc805e49301c41",
     "NODE_ENV": "production"
   }
 }
+
