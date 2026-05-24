@@ -18,6 +18,39 @@ Full-stack platform with an Express/Node.js backend, a static marketing frontend
 4. Start the server with `npm run dev` (development) or `npm run start`; the API listens on `PORT` (default `3000`).
 5. Open `http://localhost:3000/api-docs` to browse the Swagger UI, or `http://localhost:3000/api-docs.json` to inspect the raw OpenAPI schema.
 
+## Deploying on Vercel
+
+This repository includes a [`BackEnd/vercel.json`](BackEnd/vercel.json) configuration file for deploying the backend to Vercel.
+
+### Steps to deploy:
+
+1. **Push your code to GitHub** (ensure `BackEnd/vercel.json` is committed).
+2. **In Vercel Dashboard**:
+   - Import your repository
+   - Set **Framework Preset** to `Node.js`
+   - Set **Root Directory** to `BackEnd` (or leave empty and configure in next step)
+   - Click **Deploy**
+3. **Configure Environment Variables** in Vercel **Settings → Environment Variables**:
+
+| Variable | Value | Notes |
+| --- | --- | --- |
+| `DATABASE_URL` | `postgresql://user:password@host:port/database` | Get from your database provider (e.g., Supabase) |
+| `JWT_SECRET` | Your secret key | Use a strong, random string |
+| `NODE_ENV` | `production` | |
+| `CORS_ORIGINS` | `https://yourfrontend.vercel.app,http://localhost:3000` | Add all frontend URLs |
+| `DB_SSL` | `true` | Required for most cloud databases |
+| `SMTP_*` | Your email credentials | If you use the email service |
+| `TRANSLATION_SOURCE_LANG` | `es` | Source language for translations |
+| `TRANSLATION_TARGET_LANGS` | `en,fr` | Target languages (comma-separated) |
+
+4. **Redeploy** after adding environment variables.
+
+### Troubleshooting Vercel deployment:
+
+- **403 Forbidden on `/api/auth/login`**: Check that `CORS_ORIGINS` includes your frontend domain and `DATABASE_URL` is set correctly.
+- **Database connection errors**: Ensure your PostgreSQL server accepts connections from Vercel's IP range. For Supabase, this is automatic.
+- **Missing environment variables**: Verify all variables are added in Vercel's dashboard and match your local `.env`.
+
 ## Deploying on Render
 
 This repository includes a [`render.yaml`](render.yaml) file so Render can deploy the backend from the correct folder.
