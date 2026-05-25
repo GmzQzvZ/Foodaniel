@@ -1,5 +1,14 @@
 require('dotenv').config();
 
+// ✅ Validate required environment variables
+const requiredEnvVars = ['JWT_SECRET', 'DATABASE_URL', 'NODE_ENV'];
+const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+if (missingVars.length > 0) {
+  console.error('❌ Missing required environment variables:', missingVars.join(', '));
+  console.error('💡 Make sure to set them in Vercel Dashboard or your .env file');
+  process.exit(1);
+}
+
 const express = require('express');
 
 console.log('🚀 Servidor iniciando...');
