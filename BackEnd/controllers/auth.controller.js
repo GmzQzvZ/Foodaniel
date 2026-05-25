@@ -117,8 +117,21 @@ function hashResetToken(rawToken) {
   return crypto.createHash('sha256').update(String(rawToken)).digest('hex');
 }
 
-function getFrontendBaseUrl() {
-  return process.env.FRONTEND_BASE_URL || `http://localhost:${process.env.PORT || 3000}`;
+function getFrontendBaseUrl(req) {
+  // Si FRONTEND_BASE_URL está configurado en env, úsalo
+  if (process.env.FRONTEND_BASE_URL) {
+    return process.env.FRONTEND_BASE_URL;
+  }
+  
+  // Si tenemos el request, construye la URL basada en el host y protocolo
+  if (req) {
+    const protocol = req.protocol || (req.headers['x-forwarded-proto'] || 'http');
+    const host = req.get('host') || req.headers.host || 'localhost';
+    return `${protocol}://${host}`;
+  }
+  
+  // Fallback a localhost
+  return `http://localhost:${process.env.PORT || 3000}`;
 }
 
 async function sendWelcomeEmailSafe(user) {
@@ -138,12 +151,13 @@ async function sendWelcomeEmailSafe(user) {
   }
 }
 
-async function sendRecoveryEmailSafe(user, rawToken) {
+async function sendRecoveryEmailSafe(user, rawToken, req) {
   console.log('Debug - Recuperación de contraseña:', {
     user: user ? '✓' : '✗',
     email: user?.email ? '✓' : '✗',
     token: rawToken ? '✓' : '✗',
-    mailConfigured: isMailConfigured() ? '✓' : '✗'
+    mailConfigured: isMailConfigured() ? '✓' : '✗',
+    baseUrl: getFrontendBaseUrl(req)
   });
   
   if (!isMailConfigured() || !user || !user.email || !rawToken) {
@@ -151,7 +165,7 @@ async function sendRecoveryEmailSafe(user, rawToken) {
     return;
   }
   try {
-    const resetLink = `${getFrontendBaseUrl()}/FrontEnd/View/recovery.html?token=${encodeURIComponent(rawToken)}`;
+    const resetLink = `${getFrontendBaseUrl(req)}/FrontEnd/View/recovery.html?token=${encodeURIComponent(rawToken)}`;
     const html = renderTemplate('recovery.html', {
       CLIENT_NAME: escapeHtml(user.name || 'Usuario'),
       RESET_LINK: resetLink,
@@ -261,7 +275,7 @@ exports.forgotPassword = async (req, res) => {
       [user.id, tokenHash, expiresAt]
     );
 
-    await sendRecoveryEmailSafe(user, rawToken);
+    await sendRecoveryEmailSafe(user, rawToken, req);
 
     return res.json({ success: true, message: 'If the email exists, a reset link was sent' });
   } catch (error) {
