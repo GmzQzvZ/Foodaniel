@@ -2,6 +2,9 @@
 
 Full-stack platform with an Express/Node.js backend, a static marketing frontend in `FrontEnd/View`, and a single-page administration console under `FrontEnd/admin`. The backend centralizes authentication, public data, admin CRUD operations, email templates, rate limiting, and the new translation caching pipeline for recipes.
 
+## Web site
+ web site deployment : https://foodaniel-git-main-gmzqzvzs.vercel.app/
+
 ## Structure
 | Area | Description |
 | --- | --- |
@@ -105,3 +108,5 @@ Use `BackEnd/.env.example` as the template. The most important variables are:
 - Confirm `asset/uploads` has the necessary permissions before using the admin image upload. The backend writes files to `/asset/uploads/{recipes,profiles}`.
 - Run `npm audit` after `npm install` (five vulnerabilities were reported when the translator package was added) and apply fixes as needed.
 - Validate the translation cache with a request such as `curl http://localhost:3000/api/public/recipes?lang=en` after creating a recipe from the admin panel.
+
+

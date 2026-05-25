@@ -98,6 +98,10 @@
     border-radius: 999px;
     color: #555;
     font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s ease, color 0.2s ease;
     transition: background 0.2s ease, color 0.2s ease;
 }
 
@@ -253,6 +257,48 @@
 .btn-primary:hover {
     background: #c96c22;
     border-color: #c96c22;
+}
+
+/* Botón de logout */
+.btn-logout {
+    padding: 0.45rem 0.9rem;
+    background: #ff5252;
+    border: none;
+    border-radius: 999px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s ease, transform 0.1s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.btn-logout .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.btn-logout:hover {
+    background: #e53935;
+    transform: translateY(-2px);
+}
+
+.btn-logout:active {
+    transform: translateY(0);
+}
+
+/* Estilos para iconos Tabler */
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.icon-tabler {
+    width: 1.25rem;
+    height: 1.25rem;
 }
 
 /* Responsivo */

@@ -273,4 +273,14 @@ async function renderDashboardContentTabs() {
 document.addEventListener('DOMContentLoaded', () => {
   renderDashboardContentTabs();
   initDashboardUser();
+
+  // Agregar funcionalidad al botón de logout
+  const logoutBtn = document.getElementById('logoutBtn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+        redirectToLogin();
+      }
+    });
+  }
 });
