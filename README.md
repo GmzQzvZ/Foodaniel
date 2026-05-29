@@ -40,7 +40,7 @@ This repository includes a [`BackEnd/vercel.json`](BackEnd/vercel.json) configur
 | `DATABASE_URL` | `postgresql://user:password@host:port/database` | Get from your database provider (e.g., Supabase) |
 | `JWT_SECRET` | Your secret key | Use a strong, random string |
 | `NODE_ENV` | `production` | |
-| `CORS_ORIGINS` | `https://yourfrontend.vercel.app,http://localhost:3000` | Add all frontend URLs |
+| `CORS_ORIGINS` | `https://yourfrontend.vercel.app,http://localhost:3000` | Add all frontend URLs. Include your custom domain too if you use one, for example `https://foodaniell.com,https://www.foodaniell.com,https://foodaniel.vercel.app`. |
 | `DB_SSL` | `true` | Required for most cloud databases |
 | `SMTP_*` | Your email credentials | If you use the email service |
 | `TRANSLATION_SOURCE_LANG` | `es` | Source language for translations |
@@ -75,6 +75,7 @@ Add the same environment variables you use locally in `BackEnd/.env`, especially
 - `TRANSLATION_SOURCE_LANG` and `TRANSLATION_TARGET_LANGS` if you use translations
 
 If your frontend is hosted separately, make sure its domain is included in `CORS_ORIGINS`.
+If you use Vercel preview URLs, the backend already allows `https://*.vercel.app`, but production should still list your final frontend domain explicitly.
 
 ## Frontend & admin
 
@@ -108,5 +109,3 @@ Use `BackEnd/.env.example` as the template. The most important variables are:
 - Confirm `asset/uploads` has the necessary permissions before using the admin image upload. The backend writes files to `/asset/uploads/{recipes,profiles}`.
 - Run `npm audit` after `npm install` (five vulnerabilities were reported when the translator package was added) and apply fixes as needed.
 - Validate the translation cache with a request such as `curl http://localhost:3000/api/public/recipes?lang=en` after creating a recipe from the admin panel.
-
-

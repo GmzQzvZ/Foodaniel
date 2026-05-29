@@ -27,7 +27,7 @@ const frontendViewPath = path.join(frontendRootPath, 'View');
 const assetPath = path.join(__dirname, '../asset');
 const defaultProfilePath = path.join(assetPath, 'img profile.png');
 
-const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000,http://127.0.0.1:3000,https://*.vercel.app')
+const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000,http://127.0.0.1:3000,https://*.vercel.app,https://foodaniell.com,https://www.foodaniell.com,https://foodaniel.vercel.app')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
@@ -64,6 +64,10 @@ function originMatchesAllowedList(origin) {
     return process.env.NODE_ENV !== 'production';
   }
 
+  if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin)) {
+    return true;
+  }
+
   if (isLocalhostOrigin(origin)) {
     return true;
   }
@@ -78,10 +82,12 @@ const corsOptions = {
     return callback(new Error('CORS origin not allowed'));
   },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json({ limit: process.env.JSON_LIMIT || '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: process.env.JSON_LIMIT || '20mb' }));
 
