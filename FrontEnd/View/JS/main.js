@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let publicContentRequestLang = null;
 
   function getCurrentLang() {
-    return window.FoodaniellI18n && typeof window.FoodaniellI18n.getCurrentLang === "function"
-      ? window.FoodaniellI18n.getCurrentLang()
-      : (localStorage.getItem("foodaniell_lang") || "es");
+    return window.FoodanieleeI18n && typeof window.FoodanieleeI18n.getCurrentLang === "function"
+      ? window.FoodanieleeI18n.getCurrentLang()
+      : (localStorage.getItem("foodanielee_lang") || "es");
   }
 
   function loadItems(key) {
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  window.addEventListener("foodaniell:langchange", () => {
+  window.addEventListener("foodanielee:langchange", () => {
     publicContentCache = null;
     publicContentCacheLang = null;
     publicContentRequestPromise = null;

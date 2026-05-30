@@ -1,4 +1,4 @@
-# 🚀 GUÍA DE DESPLIEGUE EN VERCEL - Foodaniell
+# 🚀 GUÍA DE DESPLIEGUE EN VERCEL - Foodanielee
 
 ## ✅ Checklist Pre-Despliegue
 

@@ -1,7 +1,7 @@
 {
   "name": "foodaniell-backend",
   "version": "1.0.0",
-  "description": "Backend para Foodaniell con Node.js",
+  "description": "Backend para Foodanielee con Node.js",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

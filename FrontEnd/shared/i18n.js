@@ -1,4 +1,4 @@
-window.FoodaniellI18n = (function () {
+window.FoodanieleeI18n = (function () {
   const STORAGE_KEY = 'foodaniell_lang';
   const DEFAULT_LANG = 'es';
   const SUPPORTED = ['es', 'en'];
@@ -82,7 +82,7 @@ window.FoodaniellI18n = (function () {
       confirm_delete: '¿Confirmar eliminación?',
 
       // Footer
-      footer_copyright: '© Foodaniell - Todos los derechos reservados.',
+      footer_copyright: '© Foodanielee - Todos los derechos reservados.',
       lang_label: 'Idioma:',
 
       // Subtitles
@@ -134,13 +134,13 @@ window.FoodaniellI18n = (function () {
       recipes_bottom_subtitle: 'Cada receta está pensada para ser clara y fácil de seguir. Poco a poco podrás adaptar las preparaciones a tu gusto y estilo de vida, encontrando tu propia forma de cocinar.',
 
       // About page
-      about_title: 'Sobre Foodaniell',
+      about_title: 'Sobre Foodanielee',
       about_text_1: 'Ayudo a personas que quieren comer y cocinar mejor sin convertir su cocina en un laboratorio ni su vida en un concurso gastronómico.',
       about_text_2: 'Traduzco técnicas de la cocina profesional a procesos simples, prácticos y fáciles de aplicar en casa.',
       about_text_3: 'Mi enfoque combina gastronomía, estilo de vida y creatividad para que cocinar sea algo natural, elegante y posible en el día a día.',
       about_text_4: 'No va de ser chef, va de comprender esos pequeños detalles que elevan cualquier plato.',
       about_text_5: 'Cocina cercana, resultados que se notan y soluciones pensadas para la vida real.',
-      about_text_6: 'En Foodaniell encontrarás recetas paso a paso, ideas de presentación y algunos trucos que he ido aprendiendo con el tiempo. Gracias por formar parte de esta aventura culinaria.',
+      about_text_6: 'En Foodanielee encontrarás recetas paso a paso, ideas de presentación y algunos trucos que he ido aprendiendo con el tiempo. Gracias por formar parte de esta aventura culinaria.',
       about_social_title: 'Redes Sociales:',
 
       // Index cards
@@ -149,9 +149,9 @@ window.FoodaniellI18n = (function () {
       index_card_books_title: 'Libros',
       index_card_books_text: 'Próximamente podrás encontrar aquí una selección de libros recomendados.',
       index_card_videos_title: 'Videos',
-      index_card_videos_text: 'Conoce la historia detrás de Foodaniell y mi pasión por la cocina.',
+      index_card_videos_text: 'Conoce la historia detrás de Foodanielee y mi pasión por la cocina.',
       index_card_about_title: 'Sobre mí',
-      index_card_about_text: 'Conoce la historia detrás de Foodaniell y mi pasión por la cocina.',
+      index_card_about_text: 'Conoce la historia detrás de Foodanielee y mi pasión por la cocina.',
       index_btn_learn_more: 'Aprende más',
 
       // Index cook section
@@ -202,7 +202,7 @@ window.FoodaniellI18n = (function () {
 
       // About page gallery
       about_gallery_title: 'Mi Cocina',
-      about_gallery_subtitle: 'Un vistazo a mis creaciones y el estilo que define Foodaniell',
+      about_gallery_subtitle: 'Un vistazo a mis creaciones y el estilo que define Foodanielee',
       about_gallery_item1_title: 'Técnica y Simplicidad',
       about_gallery_item1_desc: 'Platos que combinan técnicas profesionales con ejecución casera, donde cada elemento tiene su propósito.',
       about_gallery_item2_title: 'Ingredientes que Cuentan',
@@ -295,7 +295,7 @@ window.FoodaniellI18n = (function () {
       confirm_delete: 'Confirm deletion?',
 
       // Footer
-      footer_copyright: '© Foodaniell - All rights reserved.',
+      footer_copyright: '© Foodanielee - All rights reserved.',
       lang_label: 'Language:',
 
       // Subtitles
@@ -347,13 +347,13 @@ window.FoodaniellI18n = (function () {
       recipes_bottom_subtitle: 'Each recipe is designed to be clear and easy to follow. Gradually you can adapt the preparations to your taste and lifestyle, finding your own way of cooking.',
 
       // About page
-      about_title: 'About Foodaniell',
+      about_title: 'About Foodanielee',
       about_text_1: 'I help people who want to eat and cook better without turning their kitchen into a laboratory or their life into a gastronomic contest.',
       about_text_2: 'I translate professional cooking techniques into simple, practical and easy-to-apply processes at home.',
       about_text_3: 'My approach combines gastronomy, lifestyle and creativity to make cooking something natural, elegant and possible in everyday life.',
       about_text_4: 'It\'s not about being a chef, it\'s about understanding those little details that elevate any dish.',
       about_text_5: 'Close cooking, noticeable results and solutions designed for real life.',
-      about_text_6: 'In Foodaniell you will find step-by-step recipes, presentation ideas and some tricks I\'ve been learning over time. Thank you for being part of this culinary adventure.',
+      about_text_6: 'In Foodanielee you will find step-by-step recipes, presentation ideas and some tricks I\'ve been learning over time. Thank you for being part of this culinary adventure.',
       about_social_title: 'Social Networks:',
 
       // Index cards
@@ -362,9 +362,9 @@ window.FoodaniellI18n = (function () {
       index_card_books_title: 'Books',
       index_card_books_text: 'Soon you will find here a selection of recommended books.',
       index_card_videos_title: 'Videos',
-      index_card_videos_text: 'Discover the story behind Foodaniell and my passion for cooking.',
+      index_card_videos_text: 'Discover the story behind Foodanielee and my passion for cooking.',
       index_card_about_title: 'About Me',
-      index_card_about_text: 'Discover the story behind Foodaniell and my passion for cooking.',
+      index_card_about_text: 'Discover the story behind Foodanielee and my passion for cooking.',
       index_btn_learn_more: 'Learn More',
 
       // Index cook section
@@ -415,7 +415,7 @@ window.FoodaniellI18n = (function () {
 
       // About page gallery
       about_gallery_title: 'My Kitchen',
-      about_gallery_subtitle: 'A glimpse of my creations and the style that defines Foodaniell',
+      about_gallery_subtitle: 'A glimpse of my creations and the style that defines Foodanielee',
       about_gallery_item1_title: 'Technique and Simplicity',
       about_gallery_item1_desc: 'Dishes that combine professional techniques with home execution, where each element has its purpose.',
       about_gallery_item2_title: 'Ingredients that Matter',

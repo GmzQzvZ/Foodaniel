@@ -293,7 +293,7 @@ async function sendWelcomeEmailSafe(user) {
     });
     await sendMail({
       to: user.email,
-      subject: 'Bienvenido a Foodaniell',
+      subject: 'Bienvenido a Foodanielee',
       html
     });
   } catch (error) {

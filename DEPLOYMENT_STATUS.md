@@ -1,7 +1,7 @@
 # 📊 Estado del Proyecto para Despliegue en Vercel
 
 **Fecha**: 25 de mayo de 2026  
-**Proyecto**: Foodaniell (Full-Stack)
+**Proyecto**: Foodanielee (Full-Stack)
 
 ---
 

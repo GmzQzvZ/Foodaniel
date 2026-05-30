@@ -613,11 +613,11 @@ function buildOpenApiSpec() {
   return {
     openapi: '3.0.3',
     info: {
-      title: 'Foodaniell API',
+      title: 'Foodanielee API',
       version: '1.0.0',
-      description: 'Documentacion OpenAPI de la API Express de Foodaniell, incluyendo rutas nuevas y alias historicos de autenticacion.',
+      description: 'Documentacion OpenAPI de la API Express de Foodanielee, incluyendo rutas nuevas y alias historicos de autenticacion.',
       contact: {
-        name: 'Foodaniell',
+        name: 'Foodanielee',
         url: 'http://localhost:3000'
       }
     },

@@ -143,7 +143,7 @@ async function sendWelcomeEmailSafe(user) {
     });
     await sendMail({
       to: user.email,
-      subject: 'Bienvenido a Foodaniell',
+      subject: 'Bienvenido a Foodanielee',
       html
     });
   } catch (error) {
@@ -173,7 +173,7 @@ async function sendRecoveryEmailSafe(user, rawToken, req) {
     });
     await sendMail({
       to: user.email,
-      subject: 'Recuperacion de contrasena - Foodaniell',
+      subject: 'Recuperacion de contrasena - Foodanielee',
       html
     });
   } catch (error) {
@@ -413,5 +413,4 @@ exports.logout = (req, res) => {
   // For JWT systems logout is handled client-side by removing the token.
   res.json({ success: true, message: 'Logged out successfully' });
 };
-
 

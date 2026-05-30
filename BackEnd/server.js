@@ -27,7 +27,7 @@ const frontendViewPath = path.join(frontendRootPath, 'View');
 const assetPath = path.join(__dirname, '../asset');
 const defaultProfilePath = path.join(assetPath, 'img profile.png');
 
-const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000,http://127.0.0.1:3000,https://*.vercel.app,https://foodaniell.com,https://www.foodaniell.com,https://foodaniel.vercel.app')
+const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000,http://127.0.0.1:3000,https://*.vercel.app,https://foodaniell.com,https://www.foodaniell.com,https://foodaniel.vercel.app,https://www.fodanielee.com')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
@@ -103,7 +103,7 @@ function buildSwaggerHtml() {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Foodaniell API Docs</title>
+  <title>Foodanielee API Docs</title>
   <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
   <style>
     body {

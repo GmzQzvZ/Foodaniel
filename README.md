@@ -1,4 +1,4 @@
-# Foodaniell
+# Foodanielee
 
 Full-stack platform with an Express/Node.js backend, a static marketing frontend in `FrontEnd/View`, and a single-page administration console under `FrontEnd/admin`. The backend centralizes authentication, public data, admin CRUD operations, email templates, rate limiting, and the new translation caching pipeline for recipes.
 
