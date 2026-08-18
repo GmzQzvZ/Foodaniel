@@ -1,4 +1,4 @@
-const dashboardBaseOrigin =
+﻿const dashboardBaseOrigin =
   (typeof window !== 'undefined' && typeof window.__API_BASE_URL === 'string' && window.__API_BASE_URL.trim())
     || (window.location.protocol === 'file:' || window.location.origin === 'null'
       ? 'http://localhost:3000'
@@ -168,7 +168,7 @@ function fillProfileTab(user) {
 function redirectToLogin() {
   localStorage.removeItem('auth_token');
   localStorage.removeItem('user');
-  window.location.href = '/FrontEnd/View/Login.html';
+  window.location.href = '/login';
 }
 
 async function initDashboardUser() {
@@ -214,7 +214,7 @@ async function renderDashboardContentTabs() {
             <h2 class="recipe-card__title">${titulo}</h2>
             <p class="recipe-card__text">${ingredientes}</p>
             ${tiempo ? `<h4>tiempo: ${tiempo}</h4>` : ``}
-            <a href="/FrontEnd/View/receta.html?id=${encodeURIComponent(String(r.id || ''))}" class="btn btn--outline">Ver receta</a>
+            <a href="/receta?id=${encodeURIComponent(String(r.id || ''))}" class="btn btn--outline">Ver receta</a>
           </div>
         </article>
       `;

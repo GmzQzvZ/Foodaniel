@@ -1,13 +1,84 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/tabler-icons.css">
-<link rel="stylesheet" href="/FrontEnd/View/css/style.css">
-  <title>Registro</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="/FrontEnd/View/css/style.css">
+  <title>Registro - Foodanielee</title>
+  <style>
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 1.5rem;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 750px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-header {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: #111;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .modal-body {
+      padding: 1rem;
+      overflow-y: auto;
+      height: 55vh;
+    }
+    .modal-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .privacy-box-trigger {
+      background: #fdf8f4;
+      border: 1.5px dashed #f28f3b;
+      border-radius: 12px;
+      padding: 1rem;
+      margin: 1.2rem 0;
+      text-align: center;
+    }
+    .privacy-status {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed !important;
+      pointer-events: none;
+    }
+  </style>
 </head>
 
 <body class="auth-page">
@@ -31,15 +102,54 @@
         <input id="registerPassword" type="password" autocomplete="new-password" data-i18n-placeholder="register_password" placeholder="********" minlength="8" required>
       </div>
 
+      <!-- SECCIÓN REGLA POLÍTICA DE PRIVACIDAD -->
+      <div class="privacy-box-trigger">
+        <button type="button" id="btnOpenPrivacy" class="btn btn--outline" style="width:100%; border-color: #f28f3b; color: #d97706;">
+          <i class="ti ti-shield-check"></i> Abrir Política de Privacidad
+        </button>
+
+        <div style="margin-top: 0.8rem; text-align: left;">
+          <label style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.88rem; cursor: pointer;">
+            <input type="checkbox" id="acceptPrivacy" disabled required style="margin-top: 3px;" />
+            <span>He leído y acepto la <a href="/privacy-policy" target="_blank" style="color: #f28f3b; text-decoration: underline;">Política de Privacidad</a></span>
+          </label>
+        </div>
+
+        <p id="privacyStatus" class="privacy-status" style="color: #c92a2a;">
+          ⚠️ Debes abrir la Política de Privacidad para poder registrarte.
+        </p>
+      </div>
+
       <p id="registerMessage" style="display:none; margin: 8px 0;"></p>
 
-      <button type="submit" class="btn" style="width:100%" data-i18n="register_button">Registrarse</button>
+      <button type="submit" id="registerSubmitBtn" class="btn" style="width:100%" disabled data-i18n="register_button">Registrarse</button>
 
       <div class="auth-alt">
         <span data-i18n="register_has_account">¿Ya tienes cuenta?</span>
-        <a href="Login.html" data-i18n="register_login_here">Inicia sesión</a>
+        <a href="/login" data-i18n="register_login_here">Inicia sesión</a>
       </div>
     </form>
+  </div>
+
+  <!-- MODAL DE POLÍTICA DE PRIVACIDAD EN REGISTRO -->
+  <div id="privacyModal" class="modal-overlay">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h3><i class="ti ti-file-certificate" style="color: #f28f3b;"></i> Política de Privacidad Internacional</h3>
+        <button type="button" id="btnClosePrivacyModal" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #666;">&times;</button>
+      </header>
+      <div class="modal-body">
+        <iframe src="/privacy-policy" style="width: 100%; height: 50vh; border: none;"></iframe>
+      </div>
+      <footer class="modal-footer">
+        <a href="/privacy-policy" target="_blank" class="btn btn--ghost" style="font-size: 0.9rem; color: #555;">
+          <i class="ti ti-external-link"></i> Abrir en nueva pestaña
+        </a>
+        <button type="button" id="btnAcceptPrivacyModal" class="btn" style="background: #f28f3b;">
+          <i class="ti ti-check"></i> He leído y acepto la Política
+        </button>
+      </footer>
+    </div>
   </div>
 
   <script src="/FrontEnd/shared/i18n.js"></script>

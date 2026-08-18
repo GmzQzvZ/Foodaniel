@@ -5,6 +5,19 @@
   padding: 0;
 }
 
+/* Accesibilidad: ocultar visualmente pero mantener para SEO y lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 html {
   font-size: 16px;
   scroll-behavior: smooth;
@@ -168,6 +181,15 @@ main {
   color: #555;
 }
 
+.text-justify,
+.about-text p,
+.cook__text p,
+.contact-info p,
+.privacy-section p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 /* === HEADER / NAV === */
 .site-header {
   position: sticky;
@@ -273,16 +295,41 @@ main {
   display: none;
   flex-direction: column;
   justify-content: center;
-  gap: 0.25rem;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  gap: 4px;
   border: none;
   background: none;
   cursor: pointer;
+  padding: 0;
+  z-index: 1001;
 }
 
 .nav-toggle span {
   width: 22px;
   height: 2px;
   background: #fff;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animación a X al abrir menú móvil */
+.nav-toggle.is-active span:nth-child(1),
+.nav-toggle.nav-toggle--open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav-toggle.is-active span:nth-child(2),
+.nav-toggle.nav-toggle--open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-toggle.is-active span:nth-child(3),
+.nav-toggle.nav-toggle--open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 /* ==== HERO LANDING (PORTADA PRINCIPAL) ==== */
@@ -354,7 +401,7 @@ main {
 /* Texto principal */
 .hero-landing__content {
   color: #fff;
-  padding-left: 150px;
+  padding-left: clamp(1rem, 5vw, 6rem);
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
@@ -362,16 +409,14 @@ main {
 
 @media (max-width: 900px) {
   .hero-landing__content {
-    padding-left: 0.2rem;
-    padding-right: 1.5rem;
+    padding-left: 0;
+    padding-right: 0;
     align-items: center;
   }
 }
 
-
-
 .hero-landing__title {
-  font-size: clamp(3.3rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 900;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -379,11 +424,12 @@ main {
 }
 
 .hero-landing__text {
-  line-height: 1.3;
-  font-size: 1.2rem;
-  max-width: 550px;
-  padding-left: 2px;
+  line-height: 1.5;
+  font-size: 1.15rem;
+  max-width: 580px;
   color: #f1f1f1;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 /* Botones */
@@ -891,10 +937,105 @@ main {
   }
 }
 
+@media (max-width: 480px) {
+  .container {
+    padding-inline: 1rem;
+  }
+
+  .hero-landing {
+    padding: 3rem 0;
+  }
+
+  .hero-landing__title {
+    font-size: clamp(2.1rem, 7.5vw, 3rem);
+  }
+
+  .hero-landing__text {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .btn-ghost {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1rem;
+  }
+
+  .content-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .recipe-card__body {
+    padding: 1rem;
+  }
+}
+
 .social-buttons {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+}
+
+.social-buttons--hero-mobile {
+  display: none;
+  z-index: 2;
+  position: relative;
+}
+
+.social-buttons--hero-desktop {
+  display: flex;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .social-buttons--hero-mobile {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .social-buttons--hero-desktop {
+    display: none;
+  }
+}
+
+/* === VISTA CONTENT (MIS RECOMENDADOS) === */
+
+.content-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.8rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.content-section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.content-section-icon {
+  font-size: 1.8rem;
+  color: #f28f3b;
+}
+
+.content-section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.btn--sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .social-btn {

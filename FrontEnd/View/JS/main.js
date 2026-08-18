@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function getCurrentLang() {
     return window.FoodanieleeI18n && typeof window.FoodanieleeI18n.getCurrentLang === "function"
       ? window.FoodanieleeI18n.getCurrentLang()
-      : (localStorage.getItem("foodanielee_lang") || "es");
+      : (localStorage.getItem("foodaniell_lang") || "en");
   }
 
   function loadItems(key) {
@@ -173,6 +173,45 @@ document.addEventListener("DOMContentLoaded", () => {
       nutritionWrap.style.display = "block";
     }
 
+    // Inyección dinámica de datos estructurados Schema.org para Google Rich Snippets
+    let recipeScript = document.getElementById("dynamic-recipe-schema");
+    if (!recipeScript) {
+      recipeScript = document.createElement("script");
+      recipeScript.id = "dynamic-recipe-schema";
+      recipeScript.type = "application/ld+json";
+      document.head.appendChild(recipeScript);
+    }
+    const schemaData = {
+      "@context": "https://schema.org/",
+      "@type": "Recipe",
+      "name": recipe.titulo || "Receta",
+      "image": recipe.imagen ? (recipe.imagen.startsWith("http") ? recipe.imagen : `${window.location.origin}${recipe.imagen}`) : "https://foodaniell.com/FrontEnd/img/og-image.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Juan Daniel Quiñones Torres",
+        "url": `${window.location.origin}/about`
+      },
+      "description": firstLine(recipe.ingredientes) || "Receta casera de Foodanielee",
+      "recipeYield": recipe.nutrition?.servings ? String(recipe.nutrition.servings) : "4",
+      "recipeCategory": "Plato Principal",
+      "recipeCuisine": "Casera",
+      "recipeIngredient": (recipe.ingredientes || "").split(/\r?\n/).filter(Boolean),
+      "recipeInstructions": (recipe.pasos || "").split(/\r?\n/).filter(Boolean).map(step => ({
+        "@type": "HowToStep",
+        "text": step
+      }))
+    };
+    if (recipe.nutrition) {
+      schemaData.nutrition = {
+        "@type": "NutritionInformation",
+        "calories": recipe.nutrition.calories ? `${recipe.nutrition.calories} kcal` : undefined,
+        "proteinContent": recipe.nutrition.proteins ? `${recipe.nutrition.proteins}g` : undefined,
+        "carbohydrateContent": recipe.nutrition.carbs ? `${recipe.nutrition.carbs}g` : undefined,
+        "fatContent": recipe.nutrition.fats ? `${recipe.nutrition.fats}g` : undefined
+      };
+    }
+    recipeScript.textContent = JSON.stringify(schemaData, null, 2);
+
     emptyState.style.display = "none";
     content.style.display = "grid";
     return true;
@@ -195,19 +234,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const grid = document.querySelector(".recipe-grid");
     if (!grid) return;
 
-    if (path.includes("/recetas.html")) {
-      const recetas = await getPublishedItems("recetas", "admin_recetas");
-      renderCardsIntoGrid(grid, recetas, (r) => `<article class="recipe-card"><img src="${r.imagen || "/FrontEnd/img/90fc53c9.svg"}" alt="${escapeHtml(r.titulo)}" /><div class="recipe-card__body"><h2 class="recipe-card__title">${escapeHtml(r.titulo)}</h2><p class="recipe-card__text">${escapeHtml(firstLine(r.ingredientes))}</p>${r.tiempo ? `<h4>tiempo: ${escapeHtml(r.tiempo)}</h4>` : ``}<a href="/FrontEnd/View/receta.html?id=${encodeURIComponent(String(r.id || ""))}" class="btn btn--outline">Ver receta</a></div></article>`);
+    if (path.includes("/content")) {
+      const recipesGrid = document.querySelector('.recipe-grid[data-content-type="recetas"]');
+      const booksGrid = document.querySelector('.recipe-grid[data-content-type="libros"]');
+      const videosGrid = document.querySelector('.recipe-grid[data-content-type="videos"]');
+
+      if (recipesGrid) {
+        const recetas = await getPublishedItems("recetas", "admin_recetas");
+        renderCardsIntoGrid(recipesGrid, recetas.slice(0, 4), (r) => `<article class="recipe-card"><img src="${r.imagen || "/FrontEnd/img/90fc53c9.svg"}" alt="${escapeHtml(r.titulo)}" /><div class="recipe-card__body"><h2 class="recipe-card__title">${escapeHtml(r.titulo)}</h2><p class="recipe-card__text">${escapeHtml(firstLine(r.ingredientes))}</p>${r.tiempo ? `<h4>tiempo: ${escapeHtml(r.tiempo)}</h4>` : ``}<a href="/receta?id=${encodeURIComponent(String(r.id || ""))}" class="btn btn--outline">Ver receta</a></div></article>`);
+      }
+
+      if (booksGrid) {
+        const libros = await getPublishedItems("libros", "admin_libros");
+        renderCardsIntoGrid(booksGrid, libros.slice(0, 4), (l) => `<article class="recipe-card"><img src="${l.imagen || "/FrontEnd/img/90fc53c9.svg"}" alt="${escapeHtml(l.titulo)}" /><div class="recipe-card__body"><h2 class="recipe-card__title">${escapeHtml(l.titulo)}</h2><p class="recipe-card__text">${escapeHtml(l.descripcion)}</p>${l.precio ? `<h4>precio: ${escapeHtml(l.precio)}</h4>` : ``}<a href="${l.linkCompra ? escapeHtml(l.linkCompra) : "#"}" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Ver / Comprar</a></div></article>`);
+      }
+
+      if (videosGrid) {
+        const videos = await getPublishedItems("videos", "admin_videos");
+        renderCardsIntoGrid(videosGrid, videos.slice(0, 4), (v) => `<article class="recipe-card"><img src="/FrontEnd/img/90fc53c9.svg" alt="${escapeHtml(v.titulo)}" /><div class="recipe-card__body"><h2 class="recipe-card__title">${escapeHtml(v.titulo)}</h2><p class="recipe-card__text">${escapeHtml(v.descripcion || "Video publicado")}</p><a href="${v.url ? escapeHtml(v.url) : "#"}" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Ver video</a></div></article>`);
+      }
       return;
     }
 
-    if (path.includes("/libros.html")) {
+    if (path.includes("/recetas")) {
+      const recetas = await getPublishedItems("recetas", "admin_recetas");
+      renderCardsIntoGrid(grid, recetas, (r) => `<article class="recipe-card"><img src="${r.imagen || "/FrontEnd/img/90fc53c9.svg"}" alt="${escapeHtml(r.titulo)}" /><div class="recipe-card__body"><h2 class="recipe-card__title">${escapeHtml(r.titulo)}</h2><p class="recipe-card__text">${escapeHtml(firstLine(r.ingredientes))}</p>${r.tiempo ? `<h4>tiempo: ${escapeHtml(r.tiempo)}</h4>` : ``}<a href="/receta?id=${encodeURIComponent(String(r.id || ""))}" class="btn btn--outline">Ver receta</a></div></article>`);
+      return;
+    }
+
+    if (path.includes("/libros")) {
       const libros = await getPublishedItems("libros", "admin_libros");
       renderCardsIntoGrid(grid, libros, (l) => `<article class="recipe-card"><img src="${l.imagen || "/FrontEnd/img/90fc53c9.svg"}" alt="${escapeHtml(l.titulo)}" /><div class="recipe-card__body"><h2 class="recipe-card__title">${escapeHtml(l.titulo)}</h2><p class="recipe-card__text">${escapeHtml(l.descripcion)}</p>${l.precio ? `<h4>precio: ${escapeHtml(l.precio)}</h4>` : ``}<a href="${l.linkCompra ? escapeHtml(l.linkCompra) : "#"}" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Ver / Comprar</a></div></article>`);
       return;
     }
 
-    if (path.includes("/videos.html")) {
+    if (path.includes("/videos")) {
       const videos = await getPublishedItems("videos", "admin_videos");
       renderCardsIntoGrid(grid, videos, (v) => `<article class="recipe-card"><img src="/FrontEnd/img/90fc53c9.svg" alt="${escapeHtml(v.titulo)}" /><div class="recipe-card__body"><h2 class="recipe-card__title">${escapeHtml(v.titulo)}</h2><p class="recipe-card__text">${escapeHtml(v.descripcion || "Video publicado")}</p><a href="${v.url ? escapeHtml(v.url) : "#"}" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Ver video</a></div></article>`);
     }
@@ -272,11 +333,58 @@ document.addEventListener("DOMContentLoaded", () => {
   const submenuToggles = document.querySelectorAll(".site-nav__submenu-toggle");
 
   if (navToggle && siteNav) {
-    navToggle.addEventListener("click", () => {
-      siteNav.classList.toggle("site-nav--open");
+    function closeMobileMenu() {
+      siteNav.classList.remove("site-nav--open");
+      navToggle.classList.remove("is-active", "nav-toggle--open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Abrir menú");
+      submenuToggles.forEach((btn) => {
+        const item = btn.closest(".site-nav__item--submenu");
+        if (item) item.classList.remove("site-nav__item--open");
+        btn.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    function openMobileMenu() {
+      siteNav.classList.add("site-nav--open");
+      navToggle.classList.add("is-active", "nav-toggle--open");
+      navToggle.setAttribute("aria-expanded", "true");
+      navToggle.setAttribute("aria-label", "Cerrar menú");
+    }
+
+    navToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
       const isOpen = siteNav.classList.contains("site-nav--open");
-      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      if (!isOpen) submenuToggles.forEach((btn) => { const item = btn.closest(".site-nav__item--submenu"); if (item) item.classList.remove("site-nav__item--open"); btn.setAttribute("aria-expanded", "false"); });
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    // Cerrar menú al hacer clic fuera del header
+    document.addEventListener("click", (e) => {
+      if (siteNav.classList.contains("site-nav--open") && !e.target.closest(".site-header")) {
+        closeMobileMenu();
+      }
+    });
+
+    // Cerrar menú al hacer scroll en la página
+    let lastScrollPos = window.scrollY;
+    window.addEventListener("scroll", () => {
+      if (siteNav.classList.contains("site-nav--open")) {
+        if (Math.abs(window.scrollY - lastScrollPos) > 6) {
+          closeMobileMenu();
+        }
+      }
+      lastScrollPos = window.scrollY;
+    }, { passive: true });
+
+    // Cerrar menú al hacer clic en un enlace del menú
+    siteNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        closeMobileMenu();
+      });
     });
   }
 

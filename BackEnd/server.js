@@ -148,15 +148,34 @@ app.use('/api', (req, res) => {
   return res.status(404).json({ error: 'API route not found' });
 });
 
-// Serve frontend static files.
+// Serve frontend static files with clean URLs.
 app.use('/FrontEnd', express.static(frontendRootPath));
 app.use('/admin', express.static(path.join(frontendRootPath, 'admin')));
 app.use('/FrontEnd/css', express.static(path.join(frontendViewPath, 'css')));
 app.use('/FrontEnd/JS', express.static(path.join(frontendViewPath, 'JS')));
 app.use('/FrontEnd/img', express.static(path.join(frontendViewPath, 'img')));
 app.use('/asset', express.static(assetPath));
-app.use(express.static(frontendViewPath));
+app.use(express.static(frontendViewPath, { extensions: ['html', 'htm'] }));
 app.get('/default-profile.png', (req, res) => res.sendFile(defaultProfilePath));
+
+// Mapeo de URLs cortas y precisas
+const cleanPageRoutes = {
+  '/content': 'Content.html',
+  '/recetas': 'Recetas.html',
+  '/receta': 'receta.html',
+  '/libros': 'libros.html',
+  '/videos': 'videos.html',
+  '/about': 'About.html',
+  '/contacto': 'Contacto.html',
+  '/login': 'Login.html',
+  '/registro': 'registro.html',
+  '/dashboard': 'dashborard.html',
+  '/privacy-policy': 'privacy-policy.html'
+};
+
+Object.entries(cleanPageRoutes).forEach(([cleanRoute, fileName]) => {
+  app.get(cleanRoute, (req, res) => res.sendFile(path.join(frontendViewPath, fileName)));
+});
 
 app.get('*.html', (req, res) => {
   return res.status(404).sendFile(path.join(frontendViewPath, '404.html'));

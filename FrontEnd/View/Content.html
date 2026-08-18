@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Mis Recomendados de la Cocina - Foodanielee</title>
+  <meta name="description" content="Descubre nuestra selección de los 4 mejores videos, recetas y e-books recomendados para mejorar tu cocina en casa con Foodanielee." />
+  <meta name="keywords" content="recomendados cocina, mejores recetas, ebooks cocina, videos gastronomia, Foodanielee recomendados" />
+  <meta name="author" content="Foodanielee" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://foodaniell.com/content" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://foodaniell.com/content" />
+  <meta property="og:title" content="Mis Recomendados de la Cocina - Foodanielee" />
+  <meta property="og:description" content="Descubre nuestra selección de los 4 mejores videos, recetas y e-books recomendados." />
+  <meta property="og:image" content="https://foodaniell.com/FrontEnd/img/og-image.jpg" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://foodaniell.com/content" />
+  <meta property="twitter:title" content="Mis Recomendados de la Cocina - Foodanielee" />
+  <meta property="twitter:description" content="Descubre nuestra selección de los 4 mejores videos, recetas y e-books recomendados." />
+  <meta property="twitter:image" content="https://foodaniell.com/FrontEnd/img/og-image.jpg" />
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/FrontEnd/View/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+  <!-- Structured Data: CollectionPage (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "url": "https://foodaniell.com/content",
+    "name": "Mis Recomendados de la Cocina - Foodanielee",
+    "description": "Selección de recetas, libros y videos de cocina recomendados por Juan Daniel Quiñones Torres de Foodanielee.",
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://foodaniell.com/#organization",
+      "name": "Foodanielee"
+    },
+    "author": {
+      "@type": "Person",
+      "@id": "https://foodaniell.com/#author",
+      "name": "Juan Daniel Quiñones Torres"
+    },
+    "about": [
+      { "@type": "Thing", "name": "Recetas de Cocina" },
+      { "@type": "Thing", "name": "Libros de Cocina" },
+      { "@type": "Thing", "name": "Videos Gastronómicos" }
+    ],
+    "inLanguage": "en"
+  }
+  </script>
+</head>
+
+<script src="/FrontEnd/shared/i18n.js"></script>
+<script src="/FrontEnd/View/JS/main.js" defer></script>
+
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="site-header__brand">
+        <i class="ti ti-chef-hat" style="color: #f28f3b;" class="site-header__logo"></i>
+        <span class="site-header__title">Foodanielee</span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="/" data-i18n="nav_home">Inicio</a></li>
+          <li class="site-nav__item site-nav__item--submenu">
+            <button class="site-nav__link site-nav__link--active site-nav__submenu-toggle" type="button" aria-expanded="false">
+              <span data-i18n="nav_content">Contenido</span>
+              <i class="ti ti-chevron-down" aria-hidden="true"></i>
+            </button>
+            <ul class="site-submenu">
+              <li><a class="site-nav__link site-nav__link--active" href="/content" data-i18n="nav_content_all">Mis Recomendados</a></li>
+              <li><a class="site-nav__link" href="/recetas" data-i18n="nav_recipes">Recetas</a></li>
+              <li><a class="site-nav__link" href="/libros" data-i18n="nav_books">E-books</a></li>
+              <li><a class="site-nav__link" href="/videos" data-i18n="nav_videos">Videos</a></li>
+            </ul>
+          </li>
+          <li><a class="site-nav__link" href="/about" data-i18n="nav_about">Acerca de</a></li>
+          <li><a class="site-nav__link" href="/contacto" data-i18n="nav_contact">Contacto</a></li>
+
+          <!-- Login -->
+          <li>
+            <a class="site-nav__link site-nav__icon" href="/login">
+              <i class="ti ti-login"></i>
+              <span data-i18n="nav_login">Login</span>
+            </a>
+          </li>
+
+          <!-- Register -->
+          <li>
+            <a class="site-nav__link site-nav__icon" href="/registro">
+              <i class="ti ti-user-circle"></i>
+              <span data-i18n="nav_register">Register</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO DE LA VISTA CONTENT -->
+    <section class="section hero--recipes">
+      <div class="container">
+        <h1 class="section__title" data-i18n="content_title">Mis Recomendados de la Cocina</h1>
+        <p class="section__subtitle">
+          <span data-i18n="content_subtitle">Una selección de 4 recetas, e-books y videos prácticos pensados para que disfrutes y aprendas en casa.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 1: RECETAS RECOMENDADAS (4 ITEMS) -->
+    <section class="section section--light">
+      <div class="container">
+        <div class="content-section-header">
+          <div class="content-section-title-wrap">
+            <i class="ti ti-tools-kitchen-2 content-section-icon"></i>
+            <h2 class="content-section-title" data-i18n="content_section_recipes">Recetas Recomendadas</h2>
+          </div>
+          <a href="/recetas" class="btn btn--outline btn--sm">
+            <span data-i18n="content_view_all">Ver todas</span>
+            <i class="ti ti-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="recipe-grid" data-content-type="recetas">
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 1" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title" data-i18n="recipes_example_1_title">Receta de ejemplo 1</h2>
+              <p class="recipe-card__text">
+                <span data-i18n="recipes_example_1_text">Una receta sencilla para comenzar: perfecta para una comida rápida entre semana.</span>
+              </p>
+              <a href="/recetas" class="btn btn--outline" data-i18n="recipes_view_recipe">Ver receta</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 2" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title" data-i18n="recipes_example_2_title">Receta de ejemplo 2</h2>
+              <p class="recipe-card__text">
+                <span data-i18n="recipes_example_2_text">Ideal para compartir en familia, con ingredientes fáciles de encontrar.</span>
+              </p>
+              <a href="/recetas" class="btn btn--outline" data-i18n="recipes_view_recipe">Ver receta</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 3" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title" data-i18n="recipes_example_3_title">Receta de ejemplo 3</h2>
+              <p class="recipe-card__text">
+                <span data-i18n="recipes_example_3_text">Un plato un poco más elaborado para cuando quieras sorprender a tus invitados.</span>
+              </p>
+              <a href="/recetas" class="btn btn--outline" data-i18n="recipes_view_recipe">Ver receta</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Receta 4" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title" data-i18n="recipes_example_4_title">Receta de ejemplo 4</h2>
+              <p class="recipe-card__text">
+                <span data-i18n="recipes_example_4_text">Perfecta para una cena ligera, con sabores frescos y equilibrados.</span>
+              </p>
+              <a href="/recetas" class="btn btn--outline" data-i18n="recipes_view_recipe">Ver receta</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: E-BOOKS Y LIBROS (4 ITEMS) -->
+    <section class="section">
+      <div class="container">
+        <div class="content-section-header">
+          <div class="content-section-title-wrap">
+            <i class="ti ti-books content-section-icon"></i>
+            <h2 class="content-section-title" data-i18n="content_section_books">E-books y Libros</h2>
+          </div>
+          <a href="/libros" class="btn btn--outline btn--sm">
+            <span data-i18n="content_view_all">Ver todos</span>
+            <i class="ti ti-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="recipe-grid" data-content-type="libros">
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Libro 1" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title" data-i18n="books_cost_title">Medicion de costo para recetas</h2>
+              <p class="recipe-card__text" data-i18n="books_cost_text">Tabla dinámica en Excel para la medición de costos de una receta básica.</p>
+              <h4>precio: Gratis</h4>
+              <a href="/free/PLANTILLA+COSTOS.xlsx" download class="btn btn--outline" data-i18n="books_download_doc">Descargar Documento</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Libro 2" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Guía de Pastas Caseras</h2>
+              <p class="recipe-card__text">Aprende los secretos para preparar pastas frescas como un chef italiano en tu propia cocina.</p>
+              <h4>precio: Gratis</h4>
+              <a href="/libros" class="btn btn--outline">Ver E-book</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Libro 3" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Salsas Esenciales</h2>
+              <p class="recipe-card__text">Las 10 salsas fundamentales que transforman cualquier platillo en una obra de arte.</p>
+              <h4>precio: Gratis</h4>
+              <a href="/libros" class="btn btn--outline">Ver E-book</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Libro 4" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Técnicas de Corte & Preparación</h2>
+              <p class="recipe-card__text">Optimiza tu tiempo en la cocina domando las técnicas básicas de cuchillo.</p>
+              <h4>precio: Gratis</h4>
+              <a href="/libros" class="btn btn--outline">Ver E-book</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: VIDEOS DESTACADOS (4 ITEMS) -->
+    <section class="section section--light">
+      <div class="container">
+        <div class="content-section-header">
+          <div class="content-section-title-wrap">
+            <i class="ti ti-video content-section-icon"></i>
+            <h2 class="content-section-title" data-i18n="content_section_videos">Videos Destacados</h2>
+          </div>
+          <a href="/videos" class="btn btn--outline btn--sm">
+            <span data-i18n="content_view_all">Ver todos</span>
+            <i class="ti ti-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="recipe-grid" data-content-type="videos">
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Video 1" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Cómo hacer Pasta Carbonara Real</h2>
+              <p class="recipe-card__text">Paso a paso sin crema, usando la técnica tradicional de yemas y guanciale o tocineta.</p>
+              <a href="https://www.youtube.com/@juandanielquinonestorres2521/featured" target="_blank" rel="noopener noreferrer" class="btn btn--outline">Ver video</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Video 2" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Secretos de la Masa de Pizza Casera</h2>
+              <p class="recipe-card__text">Fermetación rápida y horneado en horno casero convencional con resultados crujientes.</p>
+              <a href="https://www.youtube.com/@juandanielquinonestorres2521/featured" target="_blank" rel="noopener noreferrer" class="btn btn--outline">Ver video</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Video 3" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">5 Errores Comunes al Cocinar Carne</h2>
+              <p class="recipe-card__text">Evita que la carne quede dura o seca aplicando estos 5 trucos sencillos.</p>
+              <a href="https://www.youtube.com/@juandanielquinonestorres2521/featured" target="_blank" rel="noopener noreferrer" class="btn btn--outline">Ver video</a>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="/FrontEnd/img/90fc53c9.svg" alt="Video 4" />
+            <div class="recipe-card__body">
+              <h2 class="recipe-card__title">Emplatado Elegante en 3 Pasos</h2>
+              <p class="recipe-card__text">Eleva la presentación de tus platillos diarios para impresionar a tus invitados.</p>
+              <a href="https://www.youtube.com/@juandanielquinonestorres2521/featured" target="_blank" rel="noopener noreferrer" class="btn btn--outline">Ver video</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p data-i18n="footer_copyright">© Foodanielee - Todos los derechos reservados.</p>
+      <p>Plataforma desarrollada por <a href="https://sebas-gomez.com/" target="_blank" rel="noopener noreferrer"><strong>Sebastián Gómez</strong></a></p>
+    </div>
+  </footer>
+</body>
+</html>

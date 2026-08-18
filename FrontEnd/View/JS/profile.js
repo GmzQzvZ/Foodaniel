@@ -1,4 +1,4 @@
-const profileBaseOrigin =
+﻿const profileBaseOrigin =
   (typeof window !== 'undefined' && typeof window.__API_BASE_URL === 'string' && window.__API_BASE_URL.trim())
     || (window.location.protocol === 'file:' || window.location.origin === 'null'
       ? 'http://localhost:3000'
@@ -137,7 +137,7 @@ function initProfileForm() {
     const token = localStorage.getItem('auth_token');
     if (!token) {
       showProfileMessage('Sesion no valida. Inicia sesion nuevamente.');
-      window.location.href = '/FrontEnd/View/Login.html';
+      window.location.href = '/login';
       return;
     }
 

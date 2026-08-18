@@ -1,76 +1,89 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
+
   <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/tabler-icons.css">
-  
+
   <!-- SEO Meta Tags -->
   <title>Foodanielee - Recetas Caseras, Cocina Fácil y Videos Gastronómicos</title>
-  <meta name="description" content="Descubre recetas caseras fáciles y deliciosas, videos de cocina y libros gastronómicos en Foodanielee. Aprende a cocinar platos saludables y elegantes sin complicaciones." />
-  <meta name="keywords" content="recetas caseras, cocina fácil, videos de cocina, libros gastronomía, cocina saludable, recetas sencillas, Foodanielee, Daniel cocina" />
+  <meta name="description"
+    content="Descubre recetas caseras fáciles y deliciosas, videos de cocina y libros gastronómicos en Foodanielee. Aprende a cocinar platos saludables y elegantes sin complicaciones." />
+  <meta name="keywords"
+    content="recetas caseras, cocina fácil, videos de cocina, libros gastronomía, cocina saludable, recetas sencillas, Foodanielee, Daniel cocina" />
   <meta name="author" content="Foodanielee" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://foodaniell.com/" />
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://foodaniell.com/" />
   <meta property="og:title" content="Foodanielee - Recetas Caseras, Cocina Fácil y Videos Gastronómicos" />
-  <meta property="og:description" content="Descubre recetas caseras fáciles y deliciosas, videos de cocina y libros gastronómicos. Aprende a cocinar platos saludables y elegantes sin complicaciones." />
+  <meta property="og:description"
+    content="Descubre recetas caseras fáciles y deliciosas, videos de cocina y libros gastronómicos. Aprende a cocinar platos saludables y elegantes sin complicaciones." />
   <meta property="og:image" content="https://foodaniell.com/FrontEnd/img/og-image.jpg" />
-  
+
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://foodaniell.com/" />
   <meta property="twitter:title" content="Foodanielee - Recetas Caseras, Cocina Fácil y Videos Gastronómicos" />
-  <meta property="twitter:description" content="Descubre recetas caseras fáciles y deliciosas, videos de cocina y libros gastronómicos. Aprende a cocinar platos saludables y elegantes sin complicaciones." />
+  <meta property="twitter:description"
+    content="Descubre recetas caseras fáciles y deliciosas, videos de cocina y libros gastronómicos. Aprende a cocinar platos saludables y elegantes sin complicaciones." />
   <meta property="twitter:image" content="https://foodaniell.com/FrontEnd/img/og-image.jpg" />
-  
+
   <!-- Stylesheets -->
-<link rel="stylesheet" href="/FrontEnd/View/css/style.css"/>
+  <link rel="stylesheet" href="/FrontEnd/View/css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
-  
-  <!-- Structured Data for Organization (Schema.org) -->
+
+  <!-- Structured Data for Organization & Person (Schema.org) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Foodanielee",
-    "url": "https://foodaniell.com",
-    "logo": "https://foodaniell.com/FrontEnd/img/favicon.svg",
-    "description": "Plataforma de recetas caseras, videos de cocina y recursos gastronómicos. Ayudamos a personas que quieren comer y cocinar mejor sin complicaciones.",
-    "sameAs": [
-      "https://www.facebook.com/foodaniell",
-      "https://www.instagram.com/foodaniell",
-      "https://www.youtube.com/@foodaniell",
-      "https://www.tiktok.com/@foodaniell"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "",
-      "contactType": "customer service",
-      "email": "contacto@foodaniell.com",
-      "availableLanguage": "Spanish"
-    }
-  }
-  </script>
-  
-  <!-- Structured Data for WebSite (Schema.org) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Foodanielee",
-    "url": "https://foodaniell.com",
-    "description": "Recetas caseras fáciles y deliciosas, videos de cocina y libros gastronómicos",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://foodaniell.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://foodaniell.com/#organization",
+        "name": "Foodanielee",
+        "url": "https://foodaniell.com",
+        "logo": "https://foodaniell.com/FrontEnd/img/favicon.svg",
+        "description": "Plataforma de recetas caseras, videos de cocina y recursos gastronómicos.",
+        "sameAs": [
+          "https://www.instagram.com/foodanielee/",
+          "https://www.tiktok.com/@foodanielee",
+          "https://www.youtube.com/@juandanielquinonestorres2521/featured"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "foodanielee@gmail.com",
+          "availableLanguage": ["Spanish", "English"]
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://foodaniell.com/#author",
+        "name": "Juan Daniel Quiñones Torres",
+        "alternateName": "Daniel",
+        "jobTitle": "Chef & Creador de Contenido Gastronómico",
+        "worksFor": { "@id": "https://foodaniell.com/#organization" },
+        "url": "https://foodaniell.com/about",
+        "sameAs": [
+          "https://www.instagram.com/foodanielee/",
+          "https://www.tiktok.com/@foodanielee"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://foodaniell.com/#website",
+        "name": "Foodanielee",
+        "url": "https://foodaniell.com",
+        "description": "Recetas caseras fáciles y deliciosas, videos de cocina y libros gastronómicos",
+        "publisher": { "@id": "https://foodaniell.com/#organization" }
+      }
+    ]
   }
   </script>
 </head>
@@ -78,24 +91,23 @@
 <script src="/FrontEnd/shared/i18n.js"></script>
 <script src="/FrontEnd/View/JS/main.js" defer></script>
 
-<!-- ===== LOADING SCREEN =====
 <div id="loading-screen">
-  <h1 class="bg-title">FOODANIElL</h1> 
+  <div class="bg-title" aria-hidden="true">FOODANIElL</div>
   <div class="loading-text">
     <b>Cargando experiencias deliciosas</b>
     <span class="dots">
       <span>.</span><span>.</span><span>.</span>
     </span>
   </div>
-</div> -->
+</div>
 
 
 <body>
   <header class="site-header">
     <div class="site-header__inner">
-      <a href="/FrontEnd/View/index.html" class="site-header__brand">
+      <a href="/" class="site-header__brand">
         <i class="ti ti-chef-hat" style="color: #f28f3b;" alt="Foodanielee" class="site-header__logo"></i>
-        <span class="site-header__title" href="/FrontEnd/View/index.html">Foodanielee</span>
+        <span class="site-header__title" href="/">Foodanielee</span>
       </a>
       <button class="nav-toggle" aria-label="Abrir menú">
         <span></span>
@@ -104,24 +116,26 @@
       </button>
       <nav class="site-nav">
         <ul class="site-nav__list">
-          <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/index.html" data-i18n="nav_home">Inicio</a></li>
+          <li><a class="site-nav__link site-nav__link--active" href="/"
+              data-i18n="nav_home">Inicio</a></li>
           <li class="site-nav__item site-nav__item--submenu">
             <button class="site-nav__link site-nav__submenu-toggle" type="button" aria-expanded="false">
               <span data-i18n="nav_content">Contenido</span>
               <i class="ti ti-chevron-down" aria-hidden="true"></i>
             </button>
             <ul class="site-submenu">
-              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html" data-i18n="nav_videos">Videos</a></li>
-              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html" data-i18n="nav_recipes">Recetas</a></li>
-              <li><a class="site-nav__link" href="/FrontEnd/View/libros.html" data-i18n="nav_books">Libros</a></li>
+              <li><a class="site-nav__link" href="/content" data-i18n="nav_content_all">Mis Recomendados</a></li>
+              <li><a class="site-nav__link" href="/recetas" data-i18n="nav_recipes">Recetas</a></li>
+              <li><a class="site-nav__link" href="/libros" data-i18n="nav_books">Libros</a></li>
+              <li><a class="site-nav__link" href="/videos" data-i18n="nav_videos">Videos</a></li>
             </ul>
           </li>
-          <li><a class="site-nav__link" href="/FrontEnd/View/About.html" data-i18n="nav_about">Acerca de</a></li>
-          <li><a class="site-nav__link" href="/FrontEnd/View/Contacto.html" data-i18n="nav_contact">Contacto</a></li>
+          <li><a class="site-nav__link" href="/about" data-i18n="nav_about">Acerca de</a></li>
+          <li><a class="site-nav__link" href="/contacto" data-i18n="nav_contact">Contacto</a></li>
 
           <!-- Login -->
           <li>
-            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/Login.html">
+            <a class="site-nav__link site-nav__icon" href="/login">
               <i class="ti ti-login"></i>
               <span data-i18n="nav_login">Login</span>
             </a>
@@ -129,7 +143,7 @@
 
           <!-- Register -->
           <li>
-            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/registro.html">
+            <a class="site-nav__link site-nav__icon" href="/registro">
               <i class="ti ti-user-circle"></i>
               <span data-i18n="nav_register">Register</span>
             </a>
@@ -140,39 +154,76 @@
   </header>
   <main>
 
-  <section class="hero-landing">
-        <div class="container">
-    <div class="hero-landing__bg"></div>
+    <section class="hero-landing">
+      <div class="container">
+        <div class="hero-landing__bg"></div>
 
-    <div class="hero-landing__content">
-      <h1 class="hero-landing__title" data-i18n="index_hero_title">Soy Daniel.</h1>
+        <div class="social-buttons social-buttons--hero-mobile">
+          <a href="#" class="social-btn fb" aria-label="Facebook">
+            <i class="ti ti-brand-facebook"></i>
+          </a>
 
-      <p class="hero-landing__text">
-        <span data-i18n="index_hero_text_1">Aprendo, viajo, creo contenido y cocino.</span>
-        <span data-i18n="index_hero_text_2">Porque la buena cocina no es complicada, solo está mal explicada.</span><br><br>
+          <a href="https://www.tiktok.com/@foodanielee" class="social-btn tk" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <i class="ti ti-brand-tiktok"></i>
+          </a>
 
-        <span data-i18n="index_hero_text_3">Desde pastas caseras hasta platos saludables y elegantes, para que cocines mejor y comas mejor, sin complicarte la vida.</span><br><br>
+          <a href="https://www.instagram.com/foodanielee/" class="social-btn ig" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="ti ti-brand-instagram"></i>
+          </a>
 
-        <span data-i18n="index_hero_text_4">Resultados que sí puedes replicar en casa. Aquí comparto lo que aprendí en cocinas reales, adaptado a la vida real y al supermercado.</span><br><br>
+          <a href="https://www.youtube.com/@juandanielquinonestorres2521/featured" class="social-btn yt" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <i class="ti ti-brand-youtube"></i>
+          </a>
+        </div>
 
-        <strong data-i18n="index_hero_text_5">Todo Empieza por aquí y haz la cocina parte de tu estilo de vida.</strong>
-      </p>
+        <div class="hero-landing__content">
+          <h1 class="hero-landing__title" data-i18n="index_hero_title">Soy Daniel.</h1>
 
-      <div class="hero-landing__cta">
-        <a href="#Suggestion" class="btn-ghost" data-i18n="index_btn_suggestion">Sugerencia</a>
-        <a href="#videos" class="btn-ghost" data-i18n="index_btn_videos">Videos</a>
-        <a href="/FrontEnd/View/libros.html" class="btn-ghost" data-i18n="index_btn_ebook">E-book</a>
-        <a href="/FrontEnd/View/Recetas.html" class="btn-ghost" data-i18n="index_btn_recetas">Recetas</a>
+          <p class="hero-landing__text">
+            <span data-i18n="index_hero_text_1">Aprendo, viajo, creo contenido y cocino.</span>
+            <span data-i18n="index_hero_text_2">Porque la buena cocina no es complicada, solo está mal
+              explicada.</span><br><br>
+
+            <span data-i18n="index_hero_text_3">Desde pastas caseras hasta platos saludables y elegantes, para que
+              cocines mejor y comas mejor, sin complicarte la vida.</span><br><br>
+
+            <span data-i18n="index_hero_text_4">Resultados que sí puedes replicar en casa. Aquí comparto lo que aprendí
+              en cocinas reales, adaptado a la vida real y al supermercado.</span><br><br>
+
+            <strong data-i18n="index_hero_text_5">Todo Empieza por aquí y haz la cocina parte de tu estilo de
+              vida.</strong>
+          </p>
+
+          <div class="hero-landing__cta">
+            <a href="/content" class="btn-ghost" data-i18n="index_btn_recommendations">Mis recomendados de la cocina</a>
+          </div>
+
+          <div class="social-buttons social-buttons--hero-desktop">
+            <a href="#" class="social-btn fb" aria-label="Facebook">
+              <i class="ti ti-brand-facebook"></i>
+            </a>
+
+            <a href="https://www.tiktok.com/@foodanielee" class="social-btn tk" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <i class="ti ti-brand-tiktok"></i>
+            </a>
+
+            <a href="https://www.instagram.com/foodanielee/" class="social-btn ig" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <i class="ti ti-brand-instagram"></i>
+            </a>
+
+            <a href="https://www.youtube.com/@juandanielquinonestorres2521/featured" class="social-btn yt" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <i class="ti ti-brand-youtube"></i>
+            </a>
+          </div>
+        </div>
       </div>
-      </div>
-    </div>
 
-    <a href="/FrontEnd/View/About.html" class="hero-landing__chef-wrap" aria-label="Ir a Acerca de">
-      <div class="hero-landing__chef"></div>
-    </a>
-  </section>
+      <a href="/about" class="hero-landing__chef-wrap" aria-label="Ir a Acerca de">
+        <div class="hero-landing__chef"></div>
+      </a>
+    </section>
 
-  <!-- ===== INFORMACION ===== -->
+    <!-- ===== INFORMACION ===== -->
     <section class="section section--light">
       <div class="container">
         <div class="cards-grid">
@@ -180,36 +231,44 @@
             <i class="ti ti-list-check"></i>
             <h2 class="card__title" data-i18n="index_card_recipes_title">Recetas</h2>
             <p class="card__text">
-              <span data-i18n="index_card_recipes_text">Descubre recetas caseras sencillas y deliciosas para tu día a día.</span>
+              <span data-i18n="index_card_recipes_text">Descubre recetas caseras sencillas y deliciosas para tu día a
+                día.</span>
             </p>
-            <a href="/FrontEnd/View/Recetas.html" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende más</a>
+            <a href="/recetas" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende
+              más</a>
           </article>
 
           <article class="card">
             <i class="ti ti-books"></i>
             <h2 class="card__title" data-i18n="index_card_books_title">Libros</h2>
             <p class="card__text">
-              <span data-i18n="index_card_books_text">Próximamente podrás encontrar aquí una selección de libros recomendados.</span>
+              <span data-i18n="index_card_books_text">Próximamente podrás encontrar aquí una selección de libros
+                recomendados.</span>
             </p>
-            <a href="/FrontEnd/View/libros.html" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende más</a>
+            <a href="/libros" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende
+              más</a>
           </article>
 
           <article class="card">
             <i class="ti ti-video"></i>
             <h2 class="card__title" data-i18n="index_card_videos_title">Videos</h2>
             <p class="card__text">
-              <span data-i18n="index_card_videos_text">Conoce la historia detrás de Foodanielee y mi pasión por la cocina.</span>
+              <span data-i18n="index_card_videos_text">Conoce la historia detrás de Foodanielee y mi pasión por la
+                cocina.</span>
             </p>
-            <a href="/FrontEnd/View/videos.html" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende más</a>
+            <a href="/videos" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende
+              más</a>
           </article>
 
           <article class="card">
             <i class="ti ti-chef-hat"></i>
             <h2 class="card__title" data-i18n="index_card_about_title">Sobre mí</h2>
             <p class="card__text">
-              <span data-i18n="index_card_about_text">Conoce la historia detrás de Foodanielee y mi pasión por la cocina.</span>
+              <span data-i18n="index_card_about_text">Conoce la historia detrás de Foodanielee y mi pasión por la
+                cocina.</span>
             </p>
-            <a href="/FrontEnd/View/About.html" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende más</a>
+            <a href="/about" class="btn btn--outline" data-i18n="index_btn_learn_more">Aprende
+              más</a>
           </article>
         </div>
       </div>
@@ -219,22 +278,24 @@
     <section id="videos" class="section--dark">
       <div class="container cook">
         <div class="cook__text">
-          <h1 data-i18n="index_cook_title">Vamos a cocinar</h1>
+          <h2 data-i18n="index_cook_title">Vamos a cocinar</h2>
           <p>
-            <span data-i18n="index_cook_text_1">La cocina es el lugar donde se mezclan los recuerdos, los sabores y las historias. Aquí encontrarás inspiración para preparar platos sencillos que sorprendan a todos.</span>
+            <span data-i18n="index_cook_text_1">La cocina es el lugar donde se mezclan los recuerdos, los sabores y las
+              historias. Aquí encontrarás inspiración para preparar platos sencillos que sorprendan a todos.</span>
           </p>
           <p>
-            <span data-i18n="index_cook_text_2">Acompáñame a experimentar con nuevas recetas y técnicas, siempre con un enfoque casero y cercano.</span>
+            <span data-i18n="index_cook_text_2">Acompáñame a experimentar con nuevas recetas y técnicas, siempre con un
+              enfoque casero y cercano.</span>
           </p>
           <!-- <a href="https://www.youtube.com/" target="_blank" rel="noopener" class="btn">
             Ver en YouTube
           </a> -->
         </div>
         <div class="cook__gallery" aria-hidden="true">
-          <a class="cook__photo cook__photo--1" href="/FrontEnd/View/videos.html"></a>
-          <a class="cook__photo cook__photo--2" href="/FrontEnd/View/videos.html"></a>
-          <a class="cook__photo cook__photo--3" href="/FrontEnd/View/videos.html"></a>
-          <a class="cook__photo cook__photo--4" href="/FrontEnd/View/videos.html"></a>
+          <a class="cook__photo cook__photo--1" href="/videos"></a>
+          <a class="cook__photo cook__photo--2" href="/videos"></a>
+          <a class="cook__photo cook__photo--3" href="/videos"></a>
+          <a class="cook__photo cook__photo--4" href="/videos"></a>
         </div>
       </div>
     </section>
@@ -245,50 +306,56 @@
       <aside class="suggestion-info">
         <h2 data-i18n="suggestion_title">¿Tienes una receta en mente?</h2>
         <p>
-          <span data-i18n="suggestion_text_1">Nos encanta descubrir nuevas ideas, combinaciones inesperadas y recetas que merecen ser compartidas.</span>
+          <span data-i18n="suggestion_text_1">Nos encanta descubrir nuevas ideas, combinaciones inesperadas y recetas
+            que merecen ser compartidas.</span>
           <br /><br />
-          <span data-i18n="suggestion_text_2">Escríbela aquí y quizá sea la próxima en nuestra cocina. Prometemos tratarla con cariño⬦ y hambre.</span>
+          <span data-i18n="suggestion_text_2">Escríbela aquí y quizá sea la próxima en nuestra cocina. Prometemos
+            tratarla con cariño⬦ y hambre.</span>
         </p>
       </aside>
 
-    <form id="contact-form" class="contact-form" novalidate>
-            <div class="form-field">
-              <label for="name" data-i18n="form_name_label">Nombre</label>
-               <input type="text" id="name" name="name" autocomplete="name" data-i18n-placeholder="form_name_placeholder" placeholder="Introduce tu nombre" required />
-            </div>
-            <div class="form-field">
-              <label for="email" data-i18n="form_email_label">Correo electrónico</label>
-               <input type="email" id="email" name="email" autocomplete="email" data-i18n-placeholder="form_email_placeholder" placeholder="Introduce un correo válido" required />
-            </div>
-            <div class="form-field">
-              <label for="recipe-type" data-i18n="form_recipe_type_label">Tipo de Receta</label>
-              <select id="recipe-type" name="recipe-type" required>
-                <option value="" disabled selected data-i18n="form_recipe_type_placeholder">Selecciona una opción</option>
-                <option value="postre" data-i18n="form_recipe_type_postre">Postre</option>
-                <option value="entrada" data-i18n="form_recipe_type_entrada">Entrada</option>
-                <option value="plato-principal" data-i18n="form_recipe_type_plato_principal">Plato principal</option>
-                <option value="Bajo en calorias" data-i18n="form_recipe_type_bajo_calorias">Bajo en calorias</option>
-                <option value="Receta tiktok" data-i18n="form_recipe_type_tiktok">Receta que viste en tiktok</option>
-                <option value="rapidas" data-i18n="form_recipe_type_rapidas">Rápidas (para personas con prisa)</option>
-              </select>
-            </div>
-            <div class="form-field">
-              <label for="message" data-i18n="form_message_label">Descripción de la receta</label>
-                <textarea id="message" name="message" rows="5" data-i18n-placeholder="form_message_placeholder" placeholder="Ingredientes, pasos, trucos secretos de la abuela..." required ></textarea>
-            </div>
-            <button type="submit" class="btn" data-i18n="form_submit">Enviar</button>
-            <p class="form-message form-message--ok"></p>
-            <p class="form-message form-message--error"></p>
+      <form id="contact-form" class="contact-form" novalidate>
+        <div class="form-field">
+          <label for="name" data-i18n="form_name_label">Nombre</label>
+          <input type="text" id="name" name="name" autocomplete="name" data-i18n-placeholder="form_name_placeholder"
+            placeholder="Introduce tu nombre" required />
+        </div>
+        <div class="form-field">
+          <label for="email" data-i18n="form_email_label">Correo electrónico</label>
+          <input type="email" id="email" name="email" autocomplete="email"
+            data-i18n-placeholder="form_email_placeholder" placeholder="Introduce un correo válido" required />
+        </div>
+        <div class="form-field">
+          <label for="recipe-type" data-i18n="form_recipe_type_label">Tipo de Receta</label>
+          <select id="recipe-type" name="recipe-type" required>
+            <option value="" disabled selected data-i18n="form_recipe_type_placeholder">Selecciona una opción</option>
+            <option value="postre" data-i18n="form_recipe_type_postre">Postre</option>
+            <option value="entrada" data-i18n="form_recipe_type_entrada">Entrada</option>
+            <option value="plato-principal" data-i18n="form_recipe_type_plato_principal">Plato principal</option>
+            <option value="Bajo en calorias" data-i18n="form_recipe_type_bajo_calorias">Bajo en calorias</option>
+            <option value="Receta tiktok" data-i18n="form_recipe_type_tiktok">Receta que viste en tiktok</option>
+            <option value="rapidas" data-i18n="form_recipe_type_rapidas">Rápidas (para personas con prisa)</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="message" data-i18n="form_message_label">Descripción de la receta</label>
+          <textarea id="message" name="message" rows="5" data-i18n-placeholder="form_message_placeholder"
+            placeholder="Ingredientes, pasos, trucos secretos de la abuela..." required></textarea>
+        </div>
+        <button type="submit" class="btn" data-i18n="form_submit">Enviar</button>
+        <p class="form-message form-message--ok"></p>
+        <p class="form-message form-message--error"></p>
       </form>
-      </div>
+    </div>
   </section>
 
   <footer class="site-footer">
     <div class="site-footer__inner">
       <p data-i18n="footer_copyright">© Foodanielee - Todos los derechos reservados.</p>
-      <p>Plataforma desarrollada por <a href="https://sebas-gomez.com/" target="_blank" rel="noopener noreferrer"><strong>Sebastián Gómez</strong></a></p>
+      <p>Plataforma desarrollada por <a href="https://sebas-gomez.com/" target="_blank"
+          rel="noopener noreferrer"><strong>Sebastián Gómez</strong></a></p>
     </div>
   </footer>
 </body>
-</html>
 
+</html>

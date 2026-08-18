@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,18 +10,18 @@
   <meta name="keywords" content="libros cocina, e-books gastronomía, recursos cocina, guías culinarias, Foodanielee libros, descargas cocina, manuales cocina" />
   <meta name="author" content="Foodanielee" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://foodaniell.com/FrontEnd/View/libros.html" />
+  <link rel="canonical" href="https://foodaniell.com/libros" />
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://foodaniell.com/FrontEnd/View/libros.html" />
+  <meta property="og:url" content="https://foodaniell.com/libros" />
   <meta property="og:title" content="Libros y E-books de Cocina - Foodanielee" />
   <meta property="og:description" content="Descubre nuestra selección de e-books y recursos prácticos para mejorar tu cocina. Guías de costos, recetas y técnicas culinarias en formato digital." />
   <meta property="og:image" content="https://foodaniell.com/FrontEnd/img/og-image.jpg" />
   
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://foodaniell.com/FrontEnd/View/libros.html" />
+  <meta property="twitter:url" content="https://foodaniell.com/libros" />
   <meta property="twitter:title" content="Libros y E-books de Cocina - Foodanielee" />
   <meta property="twitter:description" content="Descubre nuestra selección de e-books y recursos prácticos para mejorar tu cocina. Guías de costos, recetas y técnicas culinarias en formato digital." />
   <meta property="twitter:image" content="https://foodaniell.com/FrontEnd/img/og-image.jpg" />
@@ -30,6 +30,29 @@
   <link rel="stylesheet" href="/FrontEnd/View/css/style.css" />
   <link rel="icon" type="image/svg+xml" href="/FrontEnd/img/favicon.svg" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+  <!-- Structured Data: CollectionPage for Books (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "url": "https://foodaniell.com/libros",
+    "name": "E-books de Cocina - Foodanielee",
+    "description": "Selección de libros y e-books de cocina recomendados por Juan Daniel Quiñones Torres de Foodanielee.",
+    "about": { "@type": "Thing", "name": "Libros de Cocina y Gastronomía" },
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://foodaniell.com/#organization",
+      "name": "Foodanielee"
+    },
+    "author": {
+      "@type": "Person",
+      "@id": "https://foodaniell.com/#author",
+      "name": "Juan Daniel Quiñones Torres"
+    },
+    "inLanguage": "en"
+  }
+  </script>
 </head>
 
 <script src="/FrontEnd/shared/i18n.js"></script>
@@ -37,7 +60,7 @@
 
 <!-- ===== LOADING SCREEN =====
 <div id="loading-screen">
-  <h1 class="bg-title">FOODANIElL</h1>
+  <div class="bg-title" aria-hidden="true">FOODANIElL</div>
   <div class="loading-text">
     Cargando experiencias deliciosas
     <span class="dots">
@@ -49,9 +72,9 @@
 <body>
   <header class="site-header">
     <div class="site-header__inner">
-      <a href="/FrontEnd/View/index.html" class="site-header__brand">
+      <a href="/" class="site-header__brand">
         <i class="ti ti-chef-hat" style="color: #f28f3b;" alt="Foodanielee" class="site-header__logo"></i>
-        <span class="site-header__title" href="/FrontEnd/View/index.html">Foodanielee</span>
+        <span class="site-header__title" href="/">Foodanielee</span>
       </a>
       <button class="nav-toggle" aria-label="Abrir menú">
         <span></span>
@@ -60,24 +83,24 @@
       </button>
       <nav class="site-nav">
         <ul class="site-nav__list">
-          <li><a class="site-nav__link" href="/FrontEnd/View/index.html" data-i18n="nav_home">Inicio</a></li>
+          <li><a class="site-nav__link" href="/" data-i18n="nav_home">Inicio</a></li>
           <li class="site-nav__item site-nav__item--submenu">
             <button class="site-nav__link site-nav__link--active site-nav__submenu-toggle" type="button" aria-expanded="false">
               <span data-i18n="nav_content">Contenido</span>
               <i class="ti ti-chevron-down" aria-hidden="true"></i>
             </button>
             <ul class="site-submenu">
-              <li><a class="site-nav__link" href="/FrontEnd/View/videos.html" data-i18n="nav_videos">Videos</a></li>
-              <li><a class="site-nav__link" href="/FrontEnd/View/Recetas.html" data-i18n="nav_recipes">Recetas</a></li>
-              <li><a class="site-nav__link site-nav__link--active" href="/FrontEnd/View/libros.html" data-i18n="nav_books">Libros</a></li>
+              <li><a class="site-nav__link" href="/videos" data-i18n="nav_videos">Videos</a></li>
+              <li><a class="site-nav__link" href="/recetas" data-i18n="nav_recipes">Recetas</a></li>
+              <li><a class="site-nav__link site-nav__link--active" href="/libros" data-i18n="nav_books">Libros</a></li>
             </ul>
           </li>
-          <li><a class="site-nav__link" href="/FrontEnd/View/About.html" data-i18n="nav_about">Acerca de</a></li>
-          <li><a class="site-nav__link" href="/FrontEnd/View/Contacto.html" data-i18n="nav_contact">Contacto</a></li>
+          <li><a class="site-nav__link" href="/about" data-i18n="nav_about">Acerca de</a></li>
+          <li><a class="site-nav__link" href="/contacto" data-i18n="nav_contact">Contacto</a></li>
 
           <!-- Login -->
           <li>
-            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/Login.html">
+            <a class="site-nav__link site-nav__icon" href="/login">
               <i class="ti ti-login"></i>
               <span data-i18n="nav_login">Login</span>
             </a>
@@ -85,7 +108,7 @@
 
           <!-- Register -->
           <li>
-            <a class="site-nav__link site-nav__icon" href="/FrontEnd/View/registro.html">
+            <a class="site-nav__link site-nav__icon" href="/registro">
               <i class="ti ti-user-circle"></i>
               <span data-i18n="nav_register">Register</span>
             </a>
@@ -96,9 +119,10 @@
   </header>
 
   <main>
-    <section class="section hero--recipes">
+    
+      <h1 class="sr-only">Cookbooks & E-books - Foodanielee</h1>
       <div class="container">
-        <h1 class="section__title" data-i18n="nav_books">Libros</h1>
+        <h2 class="section__title" data-i18n="nav_books">Libros</h2>
         <p class="section__subtitle">
           <span data-i18n="books_subtitle">Una selección de e-books y recursos prácticos para mejorar tu cocina paso a paso.</span>
         </p>

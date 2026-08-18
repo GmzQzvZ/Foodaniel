@@ -1,6 +1,6 @@
 window.FoodanieleeI18n = (function () {
   const STORAGE_KEY = 'foodaniell_lang';
-  const DEFAULT_LANG = 'es';
+  const DEFAULT_LANG = 'en';
   const SUPPORTED = ['es', 'en'];
 
   const texts = {
@@ -12,6 +12,7 @@ window.FoodanieleeI18n = (function () {
       nav_login: 'Login',
       nav_register: 'Register',
       nav_content: 'Contenido',
+      nav_content_all: 'Mis Recomendados',
       nav_recipes: 'Recetas',
       nav_books: 'Libros',
       nav_videos: 'Videos',
@@ -112,6 +113,13 @@ window.FoodanieleeI18n = (function () {
       index_btn_videos: 'Videos',
       index_btn_ebook: 'E-book',
       index_btn_recetas: 'Recetas',
+      index_btn_recommendations: 'Mis recomendados de la cocina',
+      content_title: 'Mis Recomendados de la Cocina',
+      content_subtitle: 'Una selección de 4 recetas, e-books y videos prácticos pensados para que disfrutes y aprendas en casa.',
+      content_section_recipes: 'Recetas Recomendadas',
+      content_section_books: 'E-books y Libros',
+      content_section_videos: 'Videos Destacados',
+      content_view_all: 'Ver todos',
 
       // Recetas page
       recipes_subtitle: 'Una colección de ideas para cocinar en casa, con ingredientes sencillos y resultados llenos de sabor.',
@@ -225,6 +233,7 @@ window.FoodanieleeI18n = (function () {
       nav_login: 'Login',
       nav_register: 'Register',
       nav_content: 'Content',
+      nav_content_all: 'My Recommendations',
       nav_recipes: 'Recipes',
       nav_books: 'Books',
       nav_videos: 'Videos',
@@ -365,6 +374,13 @@ window.FoodanieleeI18n = (function () {
       index_card_videos_text: 'Discover the story behind Foodanielee and my passion for cooking.',
       index_card_about_title: 'About Me',
       index_card_about_text: 'Discover the story behind Foodanielee and my passion for cooking.',
+      index_btn_recommendations: 'My kitchen recommendations',
+      content_title: 'My Kitchen Recommendations',
+      content_subtitle: 'A selection of 4 practical recipes, e-books, and videos designed for you to enjoy and learn at home.',
+      content_section_recipes: 'Recommended Recipes',
+      content_section_books: 'E-books & Books',
+      content_section_videos: 'Featured Videos',
+      content_view_all: 'View all',
       index_btn_learn_more: 'Learn More',
 
       // Index cook section
@@ -453,6 +469,9 @@ window.FoodanieleeI18n = (function () {
   }
 
   function updateUI() {
+    const currentLang = getCurrentLang();
+    document.documentElement.lang = currentLang;
+
     // Actualizar todos los elementos con data-i18n
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');

@@ -1,4 +1,4 @@
-const configuredApiBase =
+﻿const configuredApiBase =
   typeof window !== 'undefined' && typeof window.__API_BASE_URL === 'string'
     ? window.__API_BASE_URL.trim()
     : '';
@@ -71,7 +71,7 @@ function initLoginForm() {
     }
 
     saveSession(data);
-    window.location.href = '/FrontEnd/View/dashborard.html';
+    window.location.href = '/dashboard';
   });
 }
 
@@ -83,11 +83,96 @@ function initRegisterForm() {
   const emailInput = document.getElementById('registerEmail');
   const passwordInput = document.getElementById('registerPassword');
   const message = document.getElementById('registerMessage');
+  const submitBtn = document.getElementById('registerSubmitBtn') || form.querySelector('button[type="submit"]');
+
+  const btnOpenPrivacy = document.getElementById('btnOpenPrivacy');
+  const acceptPrivacy = document.getElementById('acceptPrivacy');
+  const privacyStatus = document.getElementById('privacyStatus');
+  const privacyModal = document.getElementById('privacyModal');
+  const btnClosePrivacyModal = document.getElementById('btnClosePrivacyModal');
+  const btnAcceptPrivacyModal = document.getElementById('btnAcceptPrivacyModal');
+
+  function updatePrivacyState() {
+    const isRead = sessionStorage.getItem('privacy_policy_read') === 'true';
+
+    if (isRead) {
+      if (acceptPrivacy) {
+        acceptPrivacy.disabled = false;
+        acceptPrivacy.checked = true;
+      }
+      if (privacyStatus) {
+        privacyStatus.textContent = '✅ Política de privacidad leída y aceptada.';
+        privacyStatus.style.color = '#166534';
+      }
+      if (submitBtn) {
+        submitBtn.disabled = !(acceptPrivacy ? acceptPrivacy.checked : true);
+      }
+    } else {
+      if (acceptPrivacy) {
+        acceptPrivacy.disabled = true;
+        acceptPrivacy.checked = false;
+      }
+      if (privacyStatus) {
+        privacyStatus.textContent = '⚠️ Debes abrir la Política de Privacidad para poder registrarte.';
+        privacyStatus.style.color = '#c92a2a';
+      }
+      if (submitBtn) {
+        submitBtn.disabled = true;
+      }
+    }
+  }
+
+  // Verificar estado inicial
+  updatePrivacyState();
+
+  if (btnOpenPrivacy && privacyModal) {
+    btnOpenPrivacy.addEventListener('click', () => {
+      privacyModal.style.display = 'flex';
+      sessionStorage.setItem('privacy_policy_read', 'true');
+      updatePrivacyState();
+    });
+  }
+
+  if (btnClosePrivacyModal && privacyModal) {
+    btnClosePrivacyModal.addEventListener('click', () => {
+      privacyModal.style.display = 'none';
+    });
+  }
+
+  if (btnAcceptPrivacyModal && privacyModal) {
+    btnAcceptPrivacyModal.addEventListener('click', () => {
+      sessionStorage.setItem('privacy_policy_read', 'true');
+      updatePrivacyState();
+      privacyModal.style.display = 'none';
+    });
+  }
+
+  if (acceptPrivacy) {
+    acceptPrivacy.addEventListener('change', () => {
+      const isRead = sessionStorage.getItem('privacy_policy_read') === 'true';
+      if (!isRead) {
+        acceptPrivacy.checked = false;
+        alert('Debes abrir la Política de Privacidad primero.');
+        return;
+      }
+      if (submitBtn) {
+        submitBtn.disabled = !acceptPrivacy.checked;
+      }
+    });
+  }
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+
+    const isRead = sessionStorage.getItem('privacy_policy_read') === 'true';
+    if (!isRead || (acceptPrivacy && !acceptPrivacy.checked)) {
+      showFormMessage(message, 'Debes abrir y aceptar la Política de Privacidad para registrarte.');
+      return;
+    }
+
     showFormMessage(message, '');
     message.style.display = 'none';
+    if (submitBtn) submitBtn.disabled = true;
 
     let result;
     try {
@@ -98,6 +183,7 @@ function initRegisterForm() {
       });
     } catch (_) {
       showFormMessage(message, 'No se pudo conectar con el servidor');
+      if (submitBtn) submitBtn.disabled = false;
       return;
     }
 
@@ -105,13 +191,14 @@ function initRegisterForm() {
 
     if (!response.ok) {
       showFormMessage(message, data?.error || 'No se pudo completar el registro');
+      if (submitBtn) submitBtn.disabled = false;
       return;
     }
 
     saveSession(data);
     showFormMessage(message, 'Registro exitoso. Redirigiendo...', false);
     setTimeout(() => {
-      window.location.href = '/FrontEnd/View/dashborard.html';
+      window.location.href = '/dashboard';
     }, 600);
   });
 }
@@ -231,7 +318,7 @@ function initRecoveryForm() {
 
       showFormMessage(message, 'Contrasena actualizada. Redirigiendo al login...', false);
       setTimeout(() => {
-        window.location.href = '/FrontEnd/View/Login.html';
+        window.location.href = '/login';
       }, 1200);
       return;
     }
