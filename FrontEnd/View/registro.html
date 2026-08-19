@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -104,18 +104,21 @@
 
       <!-- SECCIÓN REGLA POLÍTICA DE PRIVACIDAD -->
       <div class="privacy-box-trigger">
-        <button type="button" id="btnOpenPrivacy" class="btn btn--outline" style="width:100%; border-color: #f28f3b; color: #d97706;">
-          <i class="ti ti-shield-check"></i> Abrir Política de Privacidad
+        <button type="button" id="btnOpenPrivacy" class="btn btn--outline" style="width:100%; border-color: #f28f3b; color: #000000;">
+          <i class="ti ti-shield-check"></i> <span data-i18n="register_open_privacy">Abrir Política de Privacidad</span>
         </button>
 
         <div style="margin-top: 0.8rem; text-align: left;">
           <label style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.88rem; cursor: pointer;">
             <input type="checkbox" id="acceptPrivacy" disabled required style="margin-top: 3px;" />
-            <span>He leído y acepto la <a href="/privacy-policy" target="_blank" style="color: #f28f3b; text-decoration: underline;">Política de Privacidad</a></span>
+            <span>
+              <span data-i18n="register_accept_privacy_prefix">He leído y acepto la </span>
+              <a href="/privacy-policy" target="_blank" style="color: #f28f3b; text-decoration: underline;" data-i18n="register_privacy_policy">Política de Privacidad</a>
+            </span>
           </label>
         </div>
 
-        <p id="privacyStatus" class="privacy-status" style="color: #c92a2a;">
+        <p id="privacyStatus" class="privacy-status" style="color: #c92a2a;" data-i18n="register_privacy_status">
           ⚠️ Debes abrir la Política de Privacidad para poder registrarte.
         </p>
       </div>
@@ -135,7 +138,7 @@
   <div id="privacyModal" class="modal-overlay">
     <div class="modal-content">
       <header class="modal-header">
-        <h3><i class="ti ti-file-certificate" style="color: #f28f3b;"></i> Política de Privacidad Internacional</h3>
+        <h3><i class="ti ti-file-certificate" style="color: #f28f3b;"></i> <span data-i18n="register_privacy_modal_title">Política de Privacidad Internacional</span></h3>
         <button type="button" id="btnClosePrivacyModal" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #666;">&times;</button>
       </header>
       <div class="modal-body">
@@ -143,10 +146,10 @@
       </div>
       <footer class="modal-footer">
         <a href="/privacy-policy" target="_blank" class="btn btn--ghost" style="font-size: 0.9rem; color: #555;">
-          <i class="ti ti-external-link"></i> Abrir en nueva pestaña
+          <i class="ti ti-external-link"></i> <span data-i18n="register_privacy_modal_open_new">Abrir en nueva pestaña</span>
         </a>
         <button type="button" id="btnAcceptPrivacyModal" class="btn" style="background: #f28f3b;">
-          <i class="ti ti-check"></i> He leído y acepto la Política
+          <i class="ti ti-check"></i> <span data-i18n="register_privacy_modal_accept">He leído y acepto la Política</span>
         </button>
       </footer>
     </div>
