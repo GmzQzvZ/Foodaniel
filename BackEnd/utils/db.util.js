@@ -3,85 +3,47 @@ const dbConfig = require('../config/db');
 
 function toPgPlaceholders(sql) {
   let index = 0;
-  return sql.replace(/\?/g, () => {
-    index += 1;
-    return `$${index}`;
-  });
-}
-
-function normalizeSql(sql) {
-  return String(sql || '')
-    .replace(/\s+AFTER\s+[a-zA-Z0-9_]+/gi, '')
-    .replace(/\s+ENGINE=InnoDB/gi, '')
-    .replace(/INT\s+UNSIGNED\s+AUTO_INCREMENT/gi, 'BIGSERIAL')
-    .replace(/\s+AUTO_INCREMENT/gi, '')
-    .replace(/INT\s+UNSIGNED/gi, 'BIGINT')
-    .replace(/TINYINT\(1\)/gi, 'BOOLEAN')
-    .replace(/ENUM\s*\(\s*'admin'\s*,\s*'user'\s*\)/gi, 'VARCHAR(10)')
-    .replace(/DATETIME/gi, 'TIMESTAMPTZ')
-    .replace(/,\s*KEY\s+[a-zA-Z0-9_]+\s*\([^)]+\)/gi, '');
+  return sql.replace(/\?/g, () => `$${++index}`);
 }
 
 function buildPoolConfig() {
-  if (dbConfig.DATABASE_URL) {
-    return {
-      connectionString: dbConfig.DATABASE_URL,
-      ssl: dbConfig.SSL ? { rejectUnauthorized: false } : false,
-      max: dbConfig.pool.max,
-      idleTimeoutMillis: dbConfig.pool.idle,
-      connectionTimeoutMillis: dbConfig.pool.acquire
-    };
-  }
-
-  return {
-    host: dbConfig.HOST,
-    port: dbConfig.PORT,
-    user: dbConfig.USER,
-    password: dbConfig.PASSWORD,
-    database: dbConfig.DB,
+  const config = {
     ssl: dbConfig.SSL ? { rejectUnauthorized: false } : false,
     max: dbConfig.pool.max,
     idleTimeoutMillis: dbConfig.pool.idle,
     connectionTimeoutMillis: dbConfig.pool.acquire
   };
+  if (dbConfig.DATABASE_URL) config.connectionString = dbConfig.DATABASE_URL;
+  else Object.assign(config, {
+    host: dbConfig.HOST,
+    port: dbConfig.PORT,
+    user: dbConfig.USER,
+    password: dbConfig.PASSWORD,
+    database: dbConfig.DB
+  });
+  return config;
 }
 
 const pool = new Pool(buildPoolConfig());
 
 async function runQuery(sql, params = []) {
-  let normalized = normalizeSql(sql);
-  const trimmedOriginal = String(sql || '').trim();
-
-  if (/^SHOW\s+COLUMNS\s+FROM\s+users\s+LIKE\s+\?/i.test(trimmedOriginal)) {
-    normalized = 'SELECT column_name AS Field FROM information_schema.columns WHERE table_name = \'users\' AND column_name = $1';
-    const result = await pool.query(normalized, params);
-    return [result.rows, { rowCount: result.rowCount }];
+  let normalizedSql = String(sql || '');
+  const isInsert = /^\s*INSERT\s+/i.test(normalizedSql);
+  if (isInsert && !/\bRETURNING\b/i.test(normalizedSql)) {
+    normalizedSql = `${normalizedSql} RETURNING id`;
   }
-
-  const isInsert = /^\s*INSERT\s+/i.test(normalized);
-  const isSelectLike = /^\s*(SELECT|WITH|SHOW|DESCRIBE)\s+/i.test(normalized);
-  const hasReturning = /\bRETURNING\b/i.test(normalized);
-  if (isInsert && !hasReturning) {
-    normalized = `${normalized} RETURNING id`;
-  }
-
-  const finalSql = toPgPlaceholders(normalized);
+  const finalSql = toPgPlaceholders(normalizedSql);
   const result = await pool.query(finalSql, params);
-
+  const rows = result.rows || [];
   const meta = {
     rowCount: result.rowCount,
     affectedRows: result.rowCount,
-    insertId: result.rows && result.rows[0] && result.rows[0].id ? result.rows[0].id : null
+    insertId: rows[0]?.id ?? null
   };
-
-  if (isSelectLike) {
-    return [result.rows, { rowCount: result.rowCount }];
+  if (/^\s*(SELECT|WITH|SHOW|DESCRIBE)\s+/i.test(finalSql)) {
+    return [rows, { rowCount: result.rowCount }];
   }
-
   return [meta, { rowCount: result.rowCount }];
 }
 
-module.exports = {
-  query: runQuery,
-  pool
-};
+module.exports = { query: runQuery, pool };

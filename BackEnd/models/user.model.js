@@ -1,10 +1,9 @@
 const db = require('../utils/db.util');
 const bcrypt = require('bcryptjs');
-
 class User {
   static async findById(id) {
     const [rows] = await db.query(
-      'SELECT id, name, email, password_hash, profile_image_url, receive_emails FROM users WHERE id = ? LIMIT 1',
+      'SELECT id, name, email, password_hash, profile_image_url, receive_emails, role FROM users WHERE id = ? LIMIT 1',
       [id]
     );
     return rows[0];
@@ -12,7 +11,7 @@ class User {
 
   static async findByEmail(email) {
     const [rows] = await db.query(
-      'SELECT id, name, email, password_hash, profile_image_url, receive_emails FROM users WHERE email = ? LIMIT 1',
+      'SELECT id, name, email, password_hash, profile_image_url, receive_emails, role FROM users WHERE email = ? LIMIT 1',
       [email]
     );
     return rows[0];
@@ -31,11 +30,11 @@ class User {
     const hashedPassword = await bcrypt.hash(password, 10);
     
     const [result] = await db.query(
-      'INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)',
+      'INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?) RETURNING id',
       [name, email, hashedPassword]
     );
     
-    return { id: result.insertId, name, email, profileImageUrl: null, receiveEmails: false };
+    return { id: result.insertId, name, email, role: 'user', profileImageUrl: null, receiveEmails: false };
   }
 
   static async updateProfile(userId, payload) {

@@ -1,31 +1,32 @@
 const express = require('express');
 const adminController = require('../controllers/admin.controller');
-const { authenticateToken } = require('../middleware/auth.middleware');
+const { authenticateToken, requireAdmin } = require('../middleware/auth.middleware');
 
 const router = express.Router();
+router.use(authenticateToken, requireAdmin);
 
-router.get('/bootstrap', authenticateToken, adminController.getBootstrapData);
+router.get('/bootstrap', adminController.getBootstrapData);
 
-router.post('/books', authenticateToken, adminController.createBook);
-router.put('/books/:id', authenticateToken, adminController.updateBook);
-router.delete('/books/:id', authenticateToken, adminController.deleteBook);
+router.post('/books', adminController.createBook);
+router.put('/books/:id', adminController.updateBook);
+router.delete('/books/:id', adminController.deleteBook);
 
-router.post('/recipes', authenticateToken, adminController.createRecipe);
-router.put('/recipes/:id', authenticateToken, adminController.updateRecipe);
-router.delete('/recipes/:id', authenticateToken, adminController.deleteRecipe);
-router.get('/recipes/:id', authenticateToken, adminController.getRecipeById);
+router.post('/recipes', adminController.createRecipe);
+router.put('/recipes/:id', adminController.updateRecipe);
+router.delete('/recipes/:id', adminController.deleteRecipe);
+router.get('/recipes/:id', adminController.getRecipeById);
 
-router.post('/videos', authenticateToken, adminController.createVideo);
-router.put('/videos/:id', authenticateToken, adminController.updateVideo);
-router.delete('/videos/:id', authenticateToken, adminController.deleteVideo);
+router.post('/videos', adminController.createVideo);
+router.put('/videos/:id', adminController.updateVideo);
+router.delete('/videos/:id', adminController.deleteVideo);
 
-router.post('/users', authenticateToken, adminController.createUser);
-router.put('/users/:id', authenticateToken, adminController.updateUser);
-router.delete('/users/:id', authenticateToken, adminController.deleteUser);
+router.post('/users', adminController.createUser);
+router.put('/users/:id', adminController.updateUser);
+router.delete('/users/:id', adminController.deleteUser);
 
-router.post('/tasks', authenticateToken, adminController.createTask);
-router.put('/tasks/:id', authenticateToken, adminController.updateTask);
-router.delete('/tasks/:id', authenticateToken, adminController.deleteTask);
-router.post('/emails/notify', authenticateToken, adminController.sendNotificationEmails);
+router.post('/tasks', adminController.createTask);
+router.put('/tasks/:id', adminController.updateTask);
+router.delete('/tasks/:id', adminController.deleteTask);
+router.post('/emails/notify', adminController.sendNotificationEmails);
 
 module.exports = router;

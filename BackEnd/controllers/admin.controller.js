@@ -17,12 +17,8 @@ const imageMimeToExtension = {
 };
 
 async function safeQuery(sql, params = []) {
-  try {
-    const [rows] = await db.query(sql, params);
-    return rows;
-  } catch (_) {
-    return [];
-  }
+  const [rows] = await db.query(sql, params);
+  return rows;
 }
 
 async function ensureUsersAdminColumns() {
@@ -59,6 +55,7 @@ async function ensureRecipeNutritionTable() {
       recipe_id BIGINT NOT NULL REFERENCES recipes(id)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
+      CONSTRAINT uq_recipe_nutrition_recipe UNIQUE (recipe_id),
       calories DECIMAL(8,2) NULL,
       proteins DECIMAL(8,2) NULL,
       carbs DECIMAL(8,2) NULL,
@@ -100,16 +97,21 @@ async function saveRecipeNutrition(recipeId, nutritionData) {
       servings: parseOptionalInteger(nutritionData && nutritionData.servings)
     };
 
-    await db.query('DELETE FROM recipe_nutrition WHERE recipe_id = ?', [recipeId]);
-
     const hasAnyNutritionValue = Object.values(normalizedNutrition).some((value) => value !== null);
     if (!hasAnyNutritionValue) {
+      await db.query('DELETE FROM recipe_nutrition WHERE recipe_id = ?', [recipeId]);
       return null;
     }
 
-    const [result] = await db.query(`
+    const [rows] = await db.query(`
       INSERT INTO recipe_nutrition (recipe_id, calories, proteins, carbs, fats, fiber, sugar, sodium, servings)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT (recipe_id) DO UPDATE SET
+        calories = EXCLUDED.calories, proteins = EXCLUDED.proteins,
+        carbs = EXCLUDED.carbs, fats = EXCLUDED.fats, fiber = EXCLUDED.fiber,
+        sugar = EXCLUDED.sugar, sodium = EXCLUDED.sodium, servings = EXCLUDED.servings,
+        updated_at = NOW()
+      RETURNING id
     `, [
       recipeId,
       normalizedNutrition.calories,
@@ -122,7 +124,7 @@ async function saveRecipeNutrition(recipeId, nutritionData) {
       normalizedNutrition.servings
     ]);
 
-    return result;
+    return rows[0];
   } catch (error) {
     console.error('Error saving recipe nutrition:', error);
     // No lanzar el error para que no falle la creación/edición de la receta
@@ -143,7 +145,7 @@ async function getRecipeNutrition(recipeId) {
 }
 
 async function hasUsersColumn(columnName) {
-  const rows = await safeQuery(`SHOW COLUMNS FROM users LIKE ?`, [columnName]);
+  const [rows] = await db.query(`SELECT column_name FROM information_schema.columns WHERE table_schema = current_schema() AND table_name = 'users' AND column_name = ?`, [columnName]);
   return rows.length > 0;
 }
 
@@ -394,7 +396,7 @@ exports.createUser = async (req, res) => {
       sql += ', receive_emails';
       values.push(normalizedReceiveEmails);
     }
-    sql += ') VALUES (' + new Array(values.length).fill('?').join(', ') + ')';
+    sql += ') VALUES (' + new Array(values.length).fill('?').join(', ') + ') RETURNING id';
 
     const [result] = await db.query(sql, values);
     await sendWelcomeEmailSafe({

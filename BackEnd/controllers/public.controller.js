@@ -10,12 +10,8 @@ function normalizeRequiredString(value) {
 }
 
 async function safeQuery(sql, params = []) {
-  try {
-    const [rows] = await db.query(sql, params);
-    return rows;
-  } catch (_) {
-    return [];
-  }
+  const [rows] = await db.query(sql, params);
+  return rows;
 }
 
 function parseImageArray(imageUrlValue) {
@@ -148,7 +144,7 @@ async function findOrCreateRecipeTypeId(typeName) {
     return rows[0].id;
   }
 
-  const [result] = await db.query('INSERT INTO recipe_types (name) VALUES (?)', [normalizedType]);
+  const [result] = await db.query('INSERT INTO recipe_types (name) VALUES (?) RETURNING id', [normalizedType]);
   return result.insertId;
 }
 

@@ -34,7 +34,7 @@ function isValidCredentialsFormat(email, password) {
 
 function signUserToken(user) {
   return jwt.sign(
-    { id: user.id, email: user.email },
+    { id: user.id, email: user.email, role: user.role || 'user' },
     JWT_SECRET,
     { expiresIn: JWT_EXPIRES_IN }
   );
@@ -152,18 +152,7 @@ async function sendWelcomeEmailSafe(user) {
 }
 
 async function sendRecoveryEmailSafe(user, rawToken, req) {
-  console.log('Debug - Recuperación de contraseña:', {
-    user: user ? '✓' : '✗',
-    email: user?.email ? '✓' : '✗',
-    token: rawToken ? '✓' : '✗',
-    mailConfigured: isMailConfigured() ? '✓' : '✗',
-    baseUrl: getFrontendBaseUrl(req)
-  });
-  
-  if (!isMailConfigured() || !user || !user.email || !rawToken) {
-    console.log('Error: No se puede enviar correo de recuperación - SMTP no configurado o faltan datos');
-    return;
-  }
+  if (!isMailConfigured() || !user || !user.email || !rawToken) return;
   try {
     const resetLink = `${getFrontendBaseUrl(req)}/FrontEnd/View/recovery.html?token=${encodeURIComponent(rawToken)}`;
     const html = renderTemplate('recovery.html', {
@@ -252,7 +241,6 @@ exports.register = async (req, res) => {
 };
 
 exports.forgotPassword = async (req, res) => {
-  console.log('Debug - forgotPassword llamado con:', req.body);
   try {
     const { email } = req.body || {};
     if (typeof email !== 'string' || !emailRegex.test(email.trim())) {

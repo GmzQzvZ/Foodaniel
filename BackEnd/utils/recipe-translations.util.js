@@ -51,7 +51,7 @@ async function getRecipeTranslations(recipeIds, lang) {
   if (!lang || !Array.isArray(recipeIds) || !recipeIds.length) return {};
   await ensureRecipeTranslationsTable();
   const [rows] = await db.query(
-    `SELECT recipe_id, title, ingredients, steps, notes FROM recipe_translations WHERE lang = ? AND recipe_id = ANY(?)`,
+    `SELECT recipe_id, title, ingredients, steps, notes FROM recipe_translations WHERE lang = ? AND recipe_id = ANY(?::bigint[])`,
     [lang, recipeIds]
   );
 
